@@ -6,6 +6,7 @@
 <title>VOOB — трекер тренировок, в котором приятно жить</title>
 <meta name="description" content="VOOB — трекер тренировок прямо в Telegram. Уровни, достижения, анимированные рамки, фоны, значки и друзья. Запиши первую тренировку.">
 <meta name="theme-color" content="#07080c">
+<script>try{var _t=localStorage.getItem("voob_theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");document.documentElement.setAttribute("data-theme",_t)}catch(e){}</script>
 <meta property="og:title" content="VOOB — трекер тренировок, в котором приятно жить">
 <meta property="og:description" content="Тренировки превращаются в уровни, достижения и твой стиль. Прямо в Telegram.">
 <meta property="og:type" content="website">
@@ -18,8 +19,19 @@
 :root{
   --bg:#07080c; --card:rgba(255,255,255,.04); --line:rgba(255,255,255,.09);
   --tx:#f4f6fb; --mut:#8d94a6; --a:#22d3ee; --b:#8b5cf6; --c:#f472b6;
-  --r:24px;
+  --r:24px;--hdr:rgba(7,8,12,.55);--hov:rgba(255,255,255,.08);--chip:rgba(18,20,30,.78);--menu:rgba(14,16,24,.92);color-scheme:dark;
 }
+html[data-theme=light]{--bg:#f3f4f9;--card:rgba(255,255,255,.72);--line:rgba(20,24,44,.12);--tx:#14151c;--mut:#5d6477;--hdr:rgba(243,244,249,.72);--hov:rgba(20,24,44,.07);--chip:rgba(255,255,255,.86);--menu:rgba(255,255,255,.94);color-scheme:light}
+html[data-theme=light] .bgfx i{opacity:.2}
+html[data-theme=light] .bgfx i:nth-child(3){opacity:.12}
+html[data-theme=light] .card:hover,html[data-theme=light] .igc:hover,html[data-theme=light] .opt:hover{border-color:rgba(20,24,44,.3)}
+html[data-theme=light] .opt{background:rgba(255,255,255,.6)}
+html[data-theme=light] .card{box-shadow:0 10px 30px -18px rgba(30,40,80,.25)}
+html[data-theme=light] input[type=range]::-webkit-slider-thumb{border:2px solid var(--b);box-shadow:0 4px 12px rgba(30,40,80,.3)}
+html[data-theme=light] .btn.dis i{background:rgba(20,24,44,.08)}
+html[data-theme=light] .lm button:hover{background:rgba(20,24,44,.06)}
+html[data-theme=light] .lm button.on{background:rgba(20,24,44,.05)}
+html[data-theme=light] .pro{background:linear-gradient(135deg,rgba(255,255,255,.8),rgba(255,255,255,.5))}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--tx);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -40,7 +52,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .prog{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--a),var(--b),var(--c));z-index:50}
 
 /* ---------- шапка ---------- */
-header{position:sticky;top:0;z-index:40;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(7,8,12,.55);border-bottom:1px solid transparent;transition:border-color .3s}
+header{position:sticky;top:0;z-index:40;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:var(--hdr);border-bottom:1px solid transparent;transition:border-color .3s}
 header.sc{border-color:var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:14px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.12em;font-size:18px}
@@ -52,7 +64,7 @@ header.sc{border-color:var(--line)}
 .ig svg{width:19px;height:19px}
 .ig.tgb:hover{background:linear-gradient(135deg,#37aee2,#1e96c8);transform:translateY(-2px) rotate(6deg)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:48px;padding:0 26px;border-radius:999px;font-weight:700;font-size:15px;border:1px solid var(--line);background:var(--card);transition:transform .25s,box-shadow .25s,background .25s;white-space:nowrap;will-change:transform}
-.btn:hover{background:rgba(255,255,255,.08)}
+.btn:hover{background:var(--hov)}
 .btn.pri{border:0;color:#04121a;background:linear-gradient(110deg,var(--a),#7dd3fc 25%,var(--b) 50%,#7dd3fc 75%,var(--a));background-size:200% 100%;box-shadow:0 10px 40px -10px color-mix(in srgb,var(--a) 70%,transparent);animation:shine 5s linear infinite}
 .btn.pri:hover{box-shadow:0 14px 50px -8px color-mix(in srgb,var(--b) 75%,transparent)}
 @keyframes shine{to{background-position:-200% 0}}
@@ -89,7 +101,7 @@ h1 em{font-style:normal;background:linear-gradient(100deg,var(--a),var(--b) 55%,
 .tabs{display:flex;gap:6px;padding:5px;border:1px solid var(--line);border-radius:999px;background:var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .tabs button{position:relative;padding:8px 16px;border-radius:999px;font-size:13px;font-weight:700;color:var(--mut);transition:color .3s,background .3s}
 .tabs button.on{color:#07080c;background:#f1f2f6}
-.chips{position:absolute;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(18,20,30,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:13px;font-weight:600;box-shadow:0 20px 40px -18px #000;animation:float 6s ease-in-out infinite;z-index:3}
+.chips{position:absolute;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:14px;border:1px solid var(--line);background:var(--chip);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:13px;font-weight:600;box-shadow:0 20px 40px -18px #000;animation:float 6s ease-in-out infinite;z-index:3}
 .chips.c1{left:-6%;top:13%;animation-delay:-1s}
 .chips.c2{right:-4%;top:48%;animation-delay:-3s}
 .chips.c3{left:-2%;bottom:20%;animation-delay:-5s}
@@ -125,7 +137,7 @@ h2{font-size:clamp(30px,4.4vw,50px);line-height:1.06;font-weight:900;letter-spac
 .pv{position:relative;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;min-height:480px;display:grid;place-items:center;padding:30px;isolation:isolate}
 .pv-bg{position:absolute;inset:0;z-index:-1;transition:opacity .6s;opacity:0}
 .pv-bg.on{opacity:1}
-.pv-in{text-align:center;transform:translateY(54px)}
+.pv-in{color:#f4f6fb;text-align:center;transform:translateY(54px)}
 .av{position:relative;width:130px;height:130px;margin:0 auto}
 .av>span{position:absolute;inset:0;border-radius:50%;background:#efeff3;color:#14151c;display:grid;place-items:center;font-size:52px;font-weight:900;z-index:2}
 @keyframes ring{0%{transform:scale(.92);opacity:1}100%{transform:scale(1.28);opacity:0}}
@@ -143,7 +155,7 @@ h2{font-size:clamp(30px,4.4vw,50px);line-height:1.06;font-weight:900;letter-spac
 .sw{width:36px;height:36px;padding:0;border-radius:50%;border:2px solid transparent;position:relative;transition:transform .25s}
 .sw i{position:absolute;inset:3px;border-radius:50%}
 .sw:hover{transform:scale(1.12)}
-.sw.on{border-color:#fff}
+.sw.on{border-color:var(--tx)}
 
 /* ---------- калькулятор очков ---------- */
 .calc{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -152,13 +164,13 @@ h2{font-size:clamp(30px,4.4vw,50px);line-height:1.06;font-weight:900;letter-spac
 .rng{margin-top:22px}
 .rng label{display:flex;justify-content:space-between;font-weight:700;font-size:15px;margin-bottom:12px}
 .rng label b{color:var(--a)}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--a),var(--b)) 0/var(--p,50%) 100% no-repeat,rgba(255,255,255,.1);outline:0}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--a),var(--b)) 0/var(--p,50%) 100% no-repeat,var(--line);outline:0}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.5);cursor:grab;transition:transform .2s}
 input[type=range]::-webkit-slider-thumb:active{transform:scale(1.2);cursor:grabbing}
 input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.5);cursor:grab}
-.xp{font-size:clamp(56px,9vw,92px);font-weight:900;letter-spacing:-.05em;line-height:1;background:linear-gradient(120deg,#fff,var(--a));-webkit-background-clip:text;background-clip:text;color:transparent}
+.xp{font-size:clamp(56px,9vw,92px);font-weight:900;letter-spacing:-.05em;line-height:1;background:linear-gradient(120deg,var(--tx),var(--a));-webkit-background-clip:text;background-clip:text;color:transparent}
 .xp small{font-size:.28em;letter-spacing:0;margin-left:8px;-webkit-text-fill-color:var(--mut);color:var(--mut)}
-.lvbar{height:14px;border-radius:14px;background:rgba(255,255,255,.1);margin-top:26px;overflow:hidden;position:relative}
+.lvbar{height:14px;border-radius:14px;background:var(--line);margin-top:26px;overflow:hidden;position:relative}
 .lvbar i{display:block;height:100%;width:0;border-radius:14px;background:linear-gradient(90deg,var(--a),var(--b),var(--c));transition:width .7s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
 .lvbar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-100%);animation:sweep 2.4s infinite}
 .lvt{display:flex;justify-content:space-between;margin-top:12px;font-size:14px;color:var(--mut)}
@@ -170,7 +182,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 /* ---------- числа ---------- */
 .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .num{border-top:1px solid var(--line);padding-top:22px}
-.num b{font-size:clamp(40px,5.4vw,64px);font-weight:900;letter-spacing:-.04em;background:linear-gradient(120deg,#fff,var(--a));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1}
+.num b{font-size:clamp(40px,5.4vw,64px);font-weight:900;letter-spacing:-.04em;background:linear-gradient(120deg,var(--tx),var(--a));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1}
 .num span{display:block;margin-top:10px;color:var(--mut);font-size:15px}
 
 /* ---------- PRO ---------- */
@@ -305,15 +317,40 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);fon
 .lang{position:relative}
 .lb{display:flex;align-items:center;gap:6px;height:40px;padding:0 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--tx);font:inherit;font-weight:800;font-size:13px;letter-spacing:.04em;cursor:pointer;transition:background .25s,border-color .25s}
 .lb:hover{border-color:color-mix(in srgb,var(--b) 60%,transparent)}
-.lm{position:absolute;right:0;top:calc(100% + 8px);min-width:150px;padding:6px;border-radius:18px;border:1px solid var(--line);background:rgba(14,16,24,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 20px 50px rgba(0,0,0,.45);opacity:0;transform:translateY(-6px) scale(.97);filter:blur(6px);pointer-events:none;transition:opacity .22s,transform .22s,filter .22s;z-index:60}
+.lm{position:absolute;right:0;top:calc(100% + 8px);min-width:150px;padding:6px;border-radius:18px;border:1px solid var(--line);background:var(--menu);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 20px 50px rgba(0,0,0,.45);opacity:0;transform:translateY(-6px) scale(.97);filter:blur(6px);pointer-events:none;transition:opacity .22s,transform .22s,filter .22s;z-index:60}
 .lang.open .lm{opacity:1;transform:none;filter:none;pointer-events:auto}
 .lm button{display:block;width:100%;text-align:left;padding:10px 14px;border:0;border-radius:12px;background:none;color:var(--tx);font:inherit;font-weight:650;font-size:14px;cursor:pointer}
-.lm button:hover{background:rgba(255,255,255,.07)}
+.lm button:hover{background:var(--hov)}
 .lm button.on{color:var(--b);background:rgba(255,255,255,.05)}
-body.lsw main,body.lsw footer{animation:lsw .45s cubic-bezier(.2,.8,.2,1)}
-@keyframes lsw{0%{opacity:.25;filter:blur(10px);transform:translateY(6px)}100%{opacity:1;filter:none;transform:none}}
 @media(max-width:720px){.lb{height:36px;padding:0 10px;gap:5px}.lb svg{display:none}}
 @media(max-width:440px){.logo .lt{display:none}}
+.thb svg{position:absolute;transition:transform .5s cubic-bezier(.3,1.4,.5,1),opacity .35s}
+.thb{position:relative;cursor:pointer;color:var(--tx)}
+.thb .sun{opacity:0;transform:rotate(-70deg) scale(.4)}
+html[data-theme=light] .thb .sun{opacity:1;transform:none}
+html[data-theme=light] .thb .moon{opacity:0;transform:rotate(70deg) scale(.4)}
+.thb:hover{transform:translateY(-2px);background:var(--hov);border-color:color-mix(in srgb,var(--b) 55%,transparent)}
+.ig.thb:hover{background:var(--hov)}
+@media(max-width:560px){header .ig.tgb,header .ig:not(.thb){display:none}}
+/* смена языка: как в приложении */
+#lgo{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;opacity:0;pointer-events:all;background:color-mix(in srgb,var(--bg) 95%,transparent);-webkit-backdrop-filter:blur(26px);backdrop-filter:blur(26px)}
+.lgo-cols{position:absolute;inset:0;display:flex;justify-content:space-evenly;align-items:flex-start;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 22%,#000 78%,transparent)}
+.lgo-col{height:100%;overflow:visible;flex:0 0 auto}
+.lgo-col>div{margin-top:100vh;display:flex;flex-direction:column;gap:30px;align-items:center;will-change:transform}
+.lgo-col span{opacity:0;animation:lgw 700ms cubic-bezier(.22,.8,.24,1) both;font-size:var(--sz);font-weight:700;letter-spacing:-.3px;white-space:nowrap;color:var(--tx)}
+@keyframes lgh{0%{opacity:0;filter:blur(16px);transform:translateY(46px) scale(.94)}100%{opacity:var(--op);filter:blur(0);transform:translateY(0) scale(1)}}
+.lgo-col span.lgo-hi{animation:lgh 750ms cubic-bezier(.22,.8,.24,1) both;font-size:calc(var(--sz) * 1.15)}
+@keyframes lgw{0%{opacity:0;filter:blur(12px);transform:scale(.94)}100%{opacity:var(--op);filter:blur(0);transform:scale(1)}}
+.lgo-col:nth-child(odd) span{color:var(--b)}
+/* смена темы: «Горизонт» */
+:root.thz-go *{transition:none!important}
+:root.thz-go::view-transition-old(root),:root.thz-go::view-transition-new(root){animation:none;mix-blend-mode:normal}
+:root.thz-go::view-transition-new(root){animation:thzMask 1600ms cubic-bezier(.5,.05,.25,1) both;-webkit-mask-image:linear-gradient(to top,#000 0,#000 40%,transparent 46%);mask-image:linear-gradient(to top,#000 0,#000 40%,transparent 46%);-webkit-mask-size:100% 300%;mask-size:100% 300%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+@keyframes thzMask{from{-webkit-mask-position:0 32.5%;mask-position:0 32.5%}to{-webkit-mask-position:0 95%;mask-position:0 95%}}
+#thz{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:99999;opacity:0;filter:blur(7px);will-change:transform,opacity}
+#thz.dusk{background:linear-gradient(to bottom,rgba(255,206,140,0) 0,rgba(255,196,120,.8) 3%,rgba(255,98,142,.72) 11%,rgba(98,82,255,.55) 19%,transparent 27%)}
+#thz.dawn{background:linear-gradient(to bottom,rgba(255,240,196,0) 0,rgba(255,240,196,.8) 3%,rgba(255,176,128,.75) 11%,rgba(120,164,255,.5) 19%,transparent 27%)}
+@media(prefers-reduced-motion:reduce){#lgo{display:none}}
 </style>
 </head>
 <body style="--ac:#8b5cf6">
@@ -327,7 +364,7 @@ body.lsw main,body.lsw footer{animation:lsw .45s cubic-bezier(.2,.8,.2,1)}
     <clipPath id="up"><rect x="0" y="0" width="100" height="30"/></clipPath>
     <symbol id="rings" viewBox="0 0 100 60">
       <circle cx="37" cy="30" r="20" fill="none" stroke="url(#gA)" stroke-width="8"/>
-      <circle cx="63" cy="30" r="20" fill="none" stroke="#fff" stroke-width="8"/>
+      <circle cx="63" cy="30" r="20" fill="none" style="stroke:var(--tx)" stroke-width="8"/>
       <circle cx="37" cy="30" r="20" fill="none" stroke="url(#gA)" stroke-width="8" clip-path="url(#up)"/>
     </symbol>
     <symbol id="tgram" viewBox="0 0 24 24"><path fill="currentColor" d="M20.7 4.3 2.9 11.2c-1.2.5-1.2 1.2-.2 1.5l4.6 1.4 1.7 5.4c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.2-2.1 4.6 3.4c.8.5 1.4.2 1.6-.8l3-14.1c.3-1.3-.5-1.9-1.5-1.4ZM9.1 14l9-5.7c.4-.3.8-.1.5.2l-7.7 7-.3 3.2L9.1 14Z"/></symbol>
@@ -344,6 +381,7 @@ body.lsw main,body.lsw footer{animation:lsw .45s cubic-bezier(.2,.8,.2,1)}
     <a class="logo" href="#top" aria-label="VOOB"><svg><use href="#rings"/></svg><span class="lt">VOOB</span></a>
     <div class="navr">
       <div class="lang" id="lang"><button type="button" class="lb" id="lb2" aria-haspopup="true" aria-expanded="false" aria-label="Language"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg><span id="lcur">RU</span></button><div class="lm" role="menu"><button type="button" data-l="ru">Русский</button><button type="button" data-l="kk">Қазақша</button><button type="button" data-l="en">English</button></div></div>
+      <button type="button" class="ig thb" id="thb" aria-label="Тема"><svg class="sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg></button>
       <a class="ig tgb" href="https://t.me/voobkz" target="_blank" rel="noopener" aria-label="Telegram-канал VOOB"><svg><use href="#tgram"/></svg></a>
       <a class="ig" href="https://www.instagram.com/voob.kz/" target="_blank" rel="noopener" aria-label="Instagram VOOB"><svg><use href="#insta"/></svg></a>
       <a class="btn sm" href="https://app.voob.kz/" target="_blank" rel="noopener" title="Веб-версия: вход через Telegram по QR"><span class="w-f">WEB приложение</span><span class="w-s">WEB</span></a>
@@ -499,6 +537,7 @@ body.lsw main,body.lsw footer{animation:lsw .45s cubic-bezier(.2,.8,.2,1)}
     <div>© <span id="yr">2026</span> VOOB</div>
     <div class="fl">
       <a href="https://t.me/voobkz_bot">Telegram: @voobkz_bot</a>
+      <a href="https://t.me/voobkz" target="_blank" rel="noopener">Telegram: @voobkz</a>
       <a href="https://www.instagram.com/voob.kz/" target="_blank" rel="noopener">Instagram: @voob.kz</a>
     </div>
   </div>
@@ -546,11 +585,42 @@ body.lsw main,body.lsw footer{animation:lsw .45s cubic-bezier(.2,.8,.2,1)}
      ['meta[property="og:description"]','Тренировки превращаются в уровни, достижения и твой стиль. Прямо в Telegram.']].forEach(function(m){
       var el=$(m[0]);if(el)el.setAttribute('content',LANG==='ru'?m[1]:DT[m[1]][LANG])});
   }
+  var HELLOS=['Hello','Привет','Сәлем','Bonjour','Hola','こんにちは','Ciao','안녕하세요','Hallo','你好','Merhaba','Olá','Γειά σου','שלום','Namaste','Salve','Hej','Aloha','Sawubona','مرحبا','Jambo','Привіт','Szia','Ahoj','Selam','Xin chào','Sawasdee','Kia ora','Dia duit','Salam','Shalom','Bula','Habari','Tere','Moi','Hei','Witaj','Salut'];
+  var HELLO_MAIN={ru:'Привет',kk:'Сәлем',en:'Hello'};
+  function langWave(l,change){
+    var old=document.getElementById('lgo');if(old)old.remove();
+    var pick=function(n,off){var a=[];for(var i=0;i<n;i++)a.push(HELLOS[(off+i*7)%HELLOS.length]);return a};
+    var cols=[[26,.6,2900,3],[34,1,2000,11],[22,.5,3000,19],[30,.8,2700,5],[24,.55,2950,23]],MC=1,hello=HELLO_MAIN[l]||'Hello';
+    if(innerWidth<560){cols=[cols[1],cols[3],cols[0]];MC=0}
+    var ov=document.createElement('div');ov.id='lgo';
+    ov.innerHTML='<div class="lgo-cols">'+cols.map(function(c,ci){var w=pick(12,c[3]);return '<div class="lgo-col" style="--sz:'+c[0]+'px;--op:'+c[1]+'"><div>'+w.concat(w).map(function(x,k){
+      var main=ci===MC&&k===9;return '<span'+(main?' class="lgo-hi" style="animation-delay:900ms"':' style="animation-delay:'+Math.round(Math.random()*520)+'ms"')+'>'+(main?hello:(x===hello?'Hi':x))+'</span>'}).join('')+'</div></div>'}).join('')+'</div>';
+    document.body.appendChild(ov);
+    var ease='cubic-bezier(.22,.8,.24,1)',vh=innerHeight;
+    ov.animate([{opacity:0},{opacity:1}],{duration:380,easing:ease,fill:'forwards'});
+    var hi=ov.querySelector('.lgo-hi'),hr=hi.getBoundingClientRect();
+    [].slice.call(ov.querySelectorAll('.lgo-col')).forEach(function(c,i){
+      var dist=i===MC?Math.round(hr.top+hr.height/2-46-vh/2):Math.round(vh*1.3);
+      c.firstElementChild.animate([{transform:'translateY(0)'},{transform:'translateY(-'+dist+'px)'}],{duration:cols[i][2],easing:'cubic-bezier(.3,.55,.3,1)',fill:'forwards'})});
+    setTimeout(change,500);
+    var fade=[{opacity:1,filter:'blur(0) brightness(1)',offset:0},{opacity:.85,filter:'blur(3px) brightness(.88)',offset:.25},{opacity:.55,filter:'blur(6px) brightness(.68)',offset:.5},{opacity:0,filter:'blur(12px) brightness(.45)',offset:1}];
+    setTimeout(function(){[].slice.call(ov.querySelectorAll('.lgo-col')).forEach(function(c,i){
+      if(i!==MC){c.animate(fade,{duration:2000,easing:'cubic-bezier(.3,0,.5,1)',fill:'forwards'});return}
+      [].slice.call(c.querySelectorAll('span:not(.lgo-hi)')).forEach(function(x){x.animate(fade,{duration:2000,easing:'cubic-bezier(.3,0,.5,1)',fill:'forwards'})})})},1000);
+    setTimeout(function(){var r=hi.getBoundingClientRect(),dx=Math.round(innerWidth/2-(r.left+r.width/2));
+      hi.animate([{transform:'translateX(0) scale(1)'},{transform:'translateX('+dx+'px) scale(1.6)'}],{duration:1100,easing:'cubic-bezier(.4,.05,.2,1)',fill:'forwards'})},1700);
+    setTimeout(function(){hi.animate([{opacity:1,filter:'blur(0)'},{opacity:0,filter:'blur(16px)'}],{duration:500,easing:'cubic-bezier(.4,0,.6,1)',fill:'forwards',composite:'replace'})},2450);
+    setTimeout(function(){var o=ov.animate([{opacity:1},{opacity:0}],{duration:450,easing:'ease-in-out',fill:'forwards'});o.onfinish=function(){ov.remove()}},2550);
+  }
   function setLang(l,anim){
     if(l!=='ru'&&l!=='kk'&&l!=='en')l='ru';
+    if(anim&&!reduce&&document.body.animate&&l!==LANG){if(busyL)return;busyL=true;setTimeout(function(){busyL=false},3000);langWave(l,function(){applyLang(l)});return}
+    applyLang(l);
+  }
+  var busyL=false;
+  function applyLang(l){
     LANG=l;try{localStorage.setItem('voob_lang',l)}catch(e){}
     document.documentElement.lang=l;
-    if(anim&&!reduce){document.body.classList.remove('lsw');void document.body.offsetWidth;document.body.classList.add('lsw')}
     trAll();dyn.forEach(function(f){f()});
     $('#lcur').textContent=l==='kk'?'KZ':l.toUpperCase();
     $$('.lm button').forEach(function(b){b.classList.toggle('on',b.dataset.l===l)});
@@ -666,6 +736,28 @@ body.lsw main,body.lsw footer{animation:lsw .45s cubic-bezier(.2,.8,.2,1)}
   function anim(to){var from=shown,t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/450);shown=Math.round(from+(to-from)*(1-Math.pow(1-p,3)));$('#xp').textContent=shown;if(p<1)requestAnimationFrame(f)})(t0)}
   [r1,r2].forEach(function(el){el.addEventListener('input',function(){fillRange(el);calc()})});
   setup();calc();dyn.push(function(){setup();calc()});
+
+  /* тема: тёмная / светлая, смена «Горизонт» как в приложении */
+  var TH='dark';
+  function applyTheme(t){TH=t;document.documentElement.setAttribute('data-theme',t);var m=$('meta[name=theme-color]');if(m)m.setAttribute('content',t==='light'?'#f3f4f9':'#07080c');try{localStorage.setItem('voob_theme',t)}catch(e){}$('#thb').setAttribute('aria-label',t==='light'?'Dark theme':'Light theme')}
+  function themeWave(go,toDark){
+    var root=document.documentElement;
+    if(reduce||!document.startViewTransition){go();return}
+    var ln=document.createElement('div');ln.id='thz';ln.className=toDark?'dusk':'dawn';
+    root.classList.add('thz-go');var vt=null;
+    try{vt=document.startViewTransition(function(){go();document.body.appendChild(ln)})}catch(e){root.classList.remove('thz-go');go();return}
+    var gone=false;function done(){if(gone)return;gone=true;ln.remove();root.classList.remove('thz-go')}
+    var ease='cubic-bezier(.5,.05,.25,1)';
+    vt.ready.then(function(){
+      ln.animate([{transform:'translateY(115%)'},{transform:'translateY(-10%)'}],{duration:1600,delay:-70,easing:ease,fill:'both'});
+      ln.animate([{opacity:0,offset:0},{opacity:1,offset:.1},{opacity:1,offset:.78},{opacity:0,offset:.93},{opacity:0,offset:1}],{duration:1600,delay:-70,easing:'linear',fill:'both'});
+    },done);
+    vt.finished.then(done,done);
+  }
+  var T0='dark';try{T0=localStorage.getItem('voob_theme')||''}catch(e){}
+  if(!T0)T0=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+  applyTheme(T0);
+  $('#thb').addEventListener('click',function(){var to=TH==='dark'?'light':'dark';themeWave(function(){applyTheme(to)},to==='dark')});
   var L0='ru';try{L0=new URLSearchParams(location.search).get('lang')||localStorage.getItem('voob_lang')||''}catch(e){}
   if(!L0){var nl=(navigator.language||'ru').slice(0,2).toLowerCase();L0=nl==='kk'?'kk':nl==='en'?'en':'ru'}
   if(L0!=='ru')setLang(L0,false);else document.documentElement.lang='ru';
