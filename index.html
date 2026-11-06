@@ -483,6 +483,7 @@ html[data-theme=light] .thb .moon{opacity:0;transform:rotate(70deg) scale(.4)}
 .fa{padding-left:14px}
 .fa i{font-style:normal;width:64px;height:64px;margin-left:-14px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:24px;color:#fff;background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 55%,#000));border:3px solid var(--bg);box-shadow:0 10px 24px -10px var(--c);transition:transform .4s cubic-bezier(.2,.9,.3,1.3)}
 .fa i[style*="url("]{background-size:cover;background-position:center;box-shadow:0 10px 24px -10px #000a}
+.fa i{position:relative;will-change:transform}.fa i:nth-child(1){z-index:1}.fa i:nth-child(2){z-index:2}.fa i:nth-child(3){z-index:3}.fa i.more{z-index:4}
 .fa i.more{background:var(--card);color:var(--tx);border:1px solid var(--line);font-size:17px}
 .card:hover .fa i:nth-child(1){transform:translateX(-10px) rotate(-8deg)}.card:hover .fa i:nth-child(3){transform:translateX(10px) rotate(8deg)}.card:hover .fa i.more{transform:translateX(18px)}
 .gifts b{font-size:78px;font-weight:400;filter:drop-shadow(0 18px 24px color-mix(in srgb,var(--b) 50%,transparent));animation:float 5s ease-in-out infinite}
