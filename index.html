@@ -386,7 +386,7 @@ html[data-theme=light] .thb .moon{opacity:0;transform:rotate(70deg) scale(.4)}
 #pt b{position:absolute;top:calc(50% + 70px);font-size:13px;letter-spacing:.5em;font-weight:800;color:#f1f2f6;opacity:0;padding-left:.5em}
 
 .story{height:520vh;position:relative}
-.sty{position:sticky;top:0;height:100svh;width:min(1120px,100% - 40px);margin-inline:auto;display:grid;grid-template-columns:1fr auto;align-items:center;gap:70px}
+.sty{position:sticky;top:0;height:100svh;width:min(1120px,100% - 40px);margin-inline:auto;display:grid;grid-template-columns:minmax(0,470px) auto;justify-content:center;align-items:center;gap:clamp(50px,6vw,100px)}
 .sk{display:block;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--a);margin-bottom:26px}
 .sts{position:relative;height:300px}
 .st{position:absolute;inset:0 auto auto 0;max-width:470px;opacity:0;transform:translateY(34px);filter:blur(10px);transition:opacity .6s,transform .7s cubic-bezier(.2,.7,.2,1),filter .6s;pointer-events:none}
@@ -399,7 +399,7 @@ html[data-theme=light] .thb .moon{opacity:0;transform:rotate(70deg) scale(.4)}
 .sdots i.on{width:54px;background:linear-gradient(90deg,var(--a),var(--b))}
 .sph{position:relative;display:grid;place-items:center;padding-right:30px}
 .sph::before{content:"";position:absolute;inset:-20%;background:radial-gradient(closest-side,color-mix(in srgb,var(--b) 40%,transparent),transparent);filter:blur(30px);opacity:.7;transition:background 1s}
-.sph .phone{width:min(290px,34vw,calc(78svh*.4875));animation:none;transform:perspective(1300px) rotateY(calc(-16deg + var(--sp,0)*32deg)) rotateX(4deg)}
+.sph .phone{width:min(330px,36vw,calc(80svh*.4875));animation:none;transform:perspective(1300px) rotateY(calc(-16deg + var(--sp,0)*32deg)) rotateX(4deg)}
 .ss{position:absolute;inset:0;opacity:0;transform:scale(1.05);filter:blur(8px);transition:opacity .6s,transform .8s cubic-bezier(.2,.7,.2,1),filter .6s}
 .ss.on{opacity:1;transform:none;filter:none}
 .ss img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
@@ -429,6 +429,10 @@ html[data-theme=light] .thb .moon{opacity:0;transform:rotate(70deg) scale(.4)}
   .sk{margin-bottom:10px}.sdots{justify-content:center;margin-top:8px}
   .qc{grid-template-columns:1fr;gap:30px;padding:32px 24px;text-align:center;justify-items:center}.qt p{margin-inline:auto}.qt .cta{justify-content:center}
 }
+.sph::after{content:"";position:absolute;left:50%;top:50%;width:150%;aspect-ratio:1;margin:-75% 0 0 -75%;border-radius:50%;border:1px dashed color-mix(in srgb,var(--b) 35%,transparent);animation:orb 60s linear infinite;pointer-events:none;z-index:-1}
+@keyframes orb{to{transform:rotate(360deg)}}
+@media(min-width:1500px){.wrap,.sty{width:min(1240px,100% - 80px)}}
+@media(max-width:900px){.sph::after{display:none}}
 /* premium touches */
 .hero>*{min-width:0}html,body{overflow-x:clip}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
