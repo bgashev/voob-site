@@ -56,6 +56,10 @@ header.sc{border-color:var(--line)}
 .btn.pri:hover{box-shadow:0 14px 50px -8px color-mix(in srgb,var(--b) 75%,transparent)}
 @keyframes shine{to{background-position:-200% 0}}
 .btn.sm{height:40px;padding:0 18px;font-size:14px}
+.btn.dis{cursor:not-allowed;color:var(--mut);background:rgba(255,255,255,.02);border-style:dashed;gap:8px;user-select:none;-webkit-user-select:none}
+.btn.dis:hover{background:rgba(255,255,255,.02);transform:none}
+.btn.dis i{font-style:normal;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--tx)}
+.w-s{display:none}
 .arr{transition:transform .25s}.btn:hover .arr{transform:translateX(4px)}
 
 /* ---------- hero ---------- */
@@ -219,6 +223,9 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);fon
   .cta{flex-direction:column}
   .hide-m{display:none}
   .btn.sm{padding:0 14px}
+  .w-f{display:none}.w-s{display:inline}
+  .btn.dis i{display:none}
+  .navr{gap:8px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
 </style>
@@ -250,7 +257,8 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);fon
     <a class="logo" href="#top" aria-label="VOOB"><svg><use href="#rings"/></svg>VOOB</a>
     <div class="navr">
       <a class="ig" href="https://www.instagram.com/voob.kz/" target="_blank" rel="noopener" aria-label="Instagram VOOB"><svg><use href="#insta"/></svg></a>
-      <a class="btn pri sm mag" href="https://t.me/voobkz_bot/VOOB">Открыть в Telegram</a>
+      <span class="btn sm dis" role="button" aria-disabled="true" tabindex="-1" title="Веб-версия приложения ещё в разработке"><span class="w-f">WEB приложение</span><span class="w-s">WEB</span><i>скоро</i></span>
+      <a class="btn pri sm mag" href="https://t.me/voobkz_bot/VOOB"><span>Открыть<span class="w-f"> в Telegram</span></span></a>
     </div>
   </div>
 </header>
