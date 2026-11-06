@@ -429,10 +429,9 @@ html[data-theme=light] .thb .moon{opacity:0;transform:rotate(70deg) scale(.4)}
 @keyframes qokp{0%,70%{transform:scale(0);opacity:0}82%{transform:scale(1.2);opacity:1}92%,100%{transform:scale(1);opacity:1}}
 .qc:hover .qq{transform:rotate(0) scale(1.04)}
 .qq svg{display:block;width:100%;height:auto;border-radius:20px}
-.qq::before,.qq::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;opacity:0;background:linear-gradient(135deg,var(--a),var(--b) 55%,var(--c));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;filter:drop-shadow(0 0 6px color-mix(in srgb,var(--b) 60%,transparent));animation:qqw 2s cubic-bezier(.15,.6,.3,1) infinite}
-.qq::after{animation-name:qqw2}
-@keyframes qqw{0%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1.7)}}
-@keyframes qqw2{0%,100%{opacity:0}}
+.qq::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;opacity:0;background:color-mix(in srgb,var(--tx) 85%,transparent);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;filter:drop-shadow(0 0 5px color-mix(in srgb,var(--tx) 35%,transparent));animation:qqs 2s cubic-bezier(.22,.55,.2,1) infinite,qqo 2s ease-out infinite;will-change:transform,opacity}
+@keyframes qqs{0%{transform:scale(.98)}100%{transform:scale(1.75)}}
+@keyframes qqo{0%{opacity:0}14%{opacity:.7}100%{opacity:0}}
 .qt small{display:block;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--a);margin-bottom:12px}
 .qt h2{font-size:clamp(30px,4.4vw,52px);letter-spacing:-.04em;margin:0 0 12px}
 .qt p{color:var(--mut);font-size:17px;line-height:1.55;max-width:520px;margin:0 0 24px}
