@@ -4,153 +4,229 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>VOOB — трекер тренировок, в котором приятно жить</title>
-<meta name="description" content="VOOB — трекер тренировок прямо в Telegram. Уровни, достижения, рамки, фоны, значки и друзья. Запиши первую тренировку.">
+<meta name="description" content="VOOB — трекер тренировок прямо в Telegram. Уровни, достижения, анимированные рамки, фоны, значки и друзья. Запиши первую тренировку.">
 <meta name="theme-color" content="#07080c">
 <meta property="og:title" content="VOOB — трекер тренировок, в котором приятно жить">
 <meta property="og:description" content="Тренировки превращаются в уровни, достижения и твой стиль. Прямо в Telegram.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://voob.kz/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'%3E%3Ccircle cx='38' cy='30' r='20' fill='none' stroke='%2322d3ee' stroke-width='8'/%3E%3Ccircle cx='62' cy='30' r='20' fill='none' stroke='%23fff' stroke-width='8'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'%3E%3Ccircle cx='37' cy='30' r='20' fill='none' stroke='%2322d3ee' stroke-width='8'/%3E%3Ccircle cx='63' cy='30' r='20' fill='none' stroke='%23fff' stroke-width='8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07080c; --bg2:#0c0e14; --card:rgba(255,255,255,.04); --line:rgba(255,255,255,.09);
+  --bg:#07080c; --card:rgba(255,255,255,.04); --line:rgba(255,255,255,.09);
   --tx:#f4f6fb; --mut:#8d94a6; --a:#22d3ee; --b:#8b5cf6; --c:#f472b6;
-  --r:22px;
+  --r:24px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--tx);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+::selection{background:var(--b);color:#fff}
 
-/* фон: мягкие пятна + сетка */
-.bgfx{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.bgfx i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.34;will-change:transform}
+/* ---------- фон ---------- */
+.bgfx{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+.bgfx i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.32;will-change:transform;transition:background .8s}
 .bgfx i:nth-child(1){width:520px;height:520px;background:var(--b);left:-140px;top:-120px;animation:drift 22s ease-in-out infinite alternate}
 .bgfx i:nth-child(2){width:460px;height:460px;background:var(--a);right:-120px;top:240px;animation:drift 26s ease-in-out infinite alternate-reverse}
-.bgfx i:nth-child(3){width:380px;height:380px;background:var(--c);left:30%;bottom:-160px;opacity:.2;animation:drift 30s ease-in-out infinite alternate}
-.bgfx::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.18;mask-image:radial-gradient(ellipse at 50% 20%,#000 0,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 20%,#000 0,transparent 70%)}
+.bgfx i:nth-child(3){width:380px;height:380px;background:var(--c);left:30%;bottom:-160px;opacity:.18;animation:drift 30s ease-in-out infinite alternate}
+.bgfx::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.16;mask-image:radial-gradient(ellipse at 50% 15%,#000 0,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 15%,#000 0,transparent 70%)}
 @keyframes drift{to{transform:translate(90px,70px) scale(1.15)}}
+.glow{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle,rgba(139,92,246,.16),transparent 60%);opacity:0;transition:opacity .4s;will-change:transform}
+.prog{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--a),var(--b),var(--c));z-index:50}
 
-/* шапка */
-header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(7,8,12,.55);border-bottom:1px solid transparent;transition:border-color .3s}
+/* ---------- шапка ---------- */
+header{position:sticky;top:0;z-index:40;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(7,8,12,.55);border-bottom:1px solid transparent;transition:border-color .3s}
 header.sc{border-color:var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:14px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.12em;font-size:18px}
-.logo svg{width:38px;height:23px}
-.btn{display:inline-flex;align-items:center;gap:9px;height:46px;padding:0 24px;border-radius:999px;font-weight:700;font-size:15px;border:1px solid var(--line);background:var(--card);transition:transform .25s,box-shadow .25s,background .25s;cursor:pointer;white-space:nowrap}
-.btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.08)}
-.btn.pri{border:0;color:#04121a;background:linear-gradient(110deg,var(--a),#7dd3fc 25%,var(--b) 50%,#7dd3fc 75%,var(--a));background-size:200% 100%;box-shadow:0 10px 40px -10px rgba(34,211,238,.6);animation:shine 5s linear infinite}
-.btn.pri:hover{box-shadow:0 14px 50px -8px rgba(139,92,246,.7);background-color:transparent}
+.logo svg{width:38px;height:23px;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.logo:hover svg{transform:rotate(180deg) scale(1.1)}
+.navr{display:flex;align-items:center;gap:10px}
+.ig{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);transition:transform .25s,background .25s,border-color .25s}
+.ig:hover{transform:translateY(-2px) rotate(-6deg);background:linear-gradient(135deg,#f9a03f,#e1306c 55%,#833ab4);border-color:transparent}
+.ig svg{width:19px;height:19px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:48px;padding:0 26px;border-radius:999px;font-weight:700;font-size:15px;border:1px solid var(--line);background:var(--card);transition:transform .25s,box-shadow .25s,background .25s;white-space:nowrap;will-change:transform}
+.btn:hover{background:rgba(255,255,255,.08)}
+.btn.pri{border:0;color:#04121a;background:linear-gradient(110deg,var(--a),#7dd3fc 25%,var(--b) 50%,#7dd3fc 75%,var(--a));background-size:200% 100%;box-shadow:0 10px 40px -10px color-mix(in srgb,var(--a) 70%,transparent);animation:shine 5s linear infinite}
+.btn.pri:hover{box-shadow:0 14px 50px -8px color-mix(in srgb,var(--b) 75%,transparent)}
 @keyframes shine{to{background-position:-200% 0}}
-.btn.sm{height:38px;padding:0 18px;font-size:14px}
+.btn.sm{height:40px;padding:0 18px;font-size:14px}
+.arr{transition:transform .25s}.btn:hover .arr{transform:translateX(4px)}
 
-/* hero */
-.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:70px 0 90px;min-height:calc(100svh - 64px)}
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:56px 0 80px;min-height:calc(100svh - 64px)}
 .tag{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:13px;color:var(--mut);margin-bottom:22px}
 .tag b{width:7px;height:7px;border-radius:50%;background:var(--a);box-shadow:0 0 12px var(--a);animation:pulse 2s infinite}
 @keyframes pulse{50%{opacity:.3}}
 h1{font-size:clamp(40px,6.4vw,76px);line-height:1.02;font-weight:900;letter-spacing:-.035em}
-h1 em{font-style:normal;background:linear-gradient(100deg,var(--a),var(--b) 55%,var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 em{font-style:normal;background:linear-gradient(100deg,var(--a),var(--b) 55%,var(--c));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s linear infinite}
 .lead{margin-top:22px;font-size:clamp(17px,2vw,20px);color:var(--mut);max-width:520px}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
 .note{margin-top:16px;font-size:13px;color:var(--mut)}
 
-/* телефон */
-.stage{position:relative;display:grid;place-items:center;perspective:1200px}
-.phone{position:relative;width:min(310px,78vw);aspect-ratio:9/18.4;border-radius:44px;padding:11px;background:linear-gradient(160deg,#2a2f3d,#10131b);box-shadow:0 50px 120px -30px rgba(139,92,246,.55),0 0 0 1px rgba(255,255,255,.1) inset;transform:rotateY(-12deg) rotateX(5deg);transition:transform .25s ease-out;animation:float 7s ease-in-out infinite}
+/* ---------- телефон ---------- */
+.stage{position:relative;display:grid;place-items:center;perspective:1300px;gap:22px}
+.phone{position:relative;width:min(300px,76vw);aspect-ratio:390/800;border-radius:46px;padding:10px;background:linear-gradient(160deg,#343a4b,#10131b);box-shadow:0 50px 120px -30px color-mix(in srgb,var(--b) 65%,transparent),0 0 0 1px rgba(255,255,255,.12) inset;transform:rotateY(-12deg) rotateX(5deg);transition:transform .25s ease-out;animation:float 7s ease-in-out infinite;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 @keyframes float{50%{translate:0 -14px}}
-.scr{height:100%;border-radius:34px;overflow:hidden;position:relative;background:linear-gradient(180deg,#141029,#0a0b12 55%);padding:22px 18px}
-.scr::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 18%,rgba(139,92,246,.55),transparent 55%);animation:glow 6s ease-in-out infinite alternate}
-@keyframes glow{to{opacity:.55;transform:scale(1.15)}}
-.scr>*{position:relative}
-.ava{width:92px;height:92px;margin:26px auto 0;position:relative}
-.ava::before{content:"";position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(from 0deg,var(--a),var(--b),var(--c),var(--a));animation:spin 5s linear infinite;-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 4px));mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 4px))}
-.ava::after{content:"";position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(from 0deg,var(--a),var(--b),var(--c),var(--a));filter:blur(14px);opacity:.55;animation:spin 5s linear infinite;z-index:-1}
-.ava span{display:block;width:100%;height:100%;border-radius:50%;background:linear-gradient(145deg,#3b3f58,#1b1d2b);display:grid;place-items:center;font-weight:800;font-size:34px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.nm{text-align:center;margin-top:16px;font-weight:800;font-size:18px;display:flex;justify-content:center;align-items:center;gap:7px}
-.bdg{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:7px;background:linear-gradient(135deg,var(--a),var(--b));font-size:11px}
-.lv{text-align:center;color:var(--mut);font-size:12px;margin-top:3px}
-.bar{height:9px;border-radius:9px;background:rgba(255,255,255,.1);margin:18px 6px 0;overflow:hidden}
-.bar i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--a),var(--b));animation:fill 2.4s .6s cubic-bezier(.2,.8,.2,1) forwards}
-@keyframes fill{to{width:72%}}
-.tiles{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px}
-.tiles div{border:1px solid var(--line);background:rgba(255,255,255,.05);border-radius:16px;padding:12px}
-.tiles b{display:block;font-size:20px;font-weight:800}
-.tiles small{color:var(--mut);font-size:11px}
-.chips{position:absolute;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(18,20,30,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:13px;font-weight:600;box-shadow:0 20px 40px -18px #000;animation:float 6s ease-in-out infinite}
-.chips.c1{left:-4%;top:16%;animation-delay:-1s}
-.chips.c2{right:-2%;top:46%;animation-delay:-3s}
-.chips.c3{left:2%;bottom:10%;animation-delay:-5s}
+.phone::before{content:"";position:absolute;top:18px;left:50%;width:84px;height:22px;margin-left:-42px;border-radius:14px;background:#000;z-index:5}
+.scr{position:relative;height:100%;border-radius:37px;overflow:hidden;background:#0c0d12}
+.slide{position:absolute;inset:0;opacity:0;transform:scale(1.04) translateX(30px);filter:blur(6px);transition:opacity .7s,transform .8s cubic-bezier(.2,.7,.2,1),filter .7s;pointer-events:none}
+.slide.on{opacity:1;transform:none;filter:none}
+.slide.prev{transform:scale(.96) translateX(-30px)}
+.slide img{width:100%;height:calc(100% - 22px);margin-top:22px;object-fit:cover;object-position:top;display:block;-webkit-user-drag:none}
+.shine{position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.07) 50%,transparent 60%);transform:translateX(-100%);animation:sweep 6s ease-in-out infinite;pointer-events:none;z-index:4}
+@keyframes sweep{60%,100%{transform:translateX(100%)}}
+.tabs{display:flex;gap:6px;padding:5px;border:1px solid var(--line);border-radius:999px;background:var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.tabs button{position:relative;padding:8px 16px;border-radius:999px;font-size:13px;font-weight:700;color:var(--mut);transition:color .3s,background .3s}
+.tabs button.on{color:#07080c;background:#f1f2f6}
+.chips{position:absolute;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(18,20,30,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:13px;font-weight:600;box-shadow:0 20px 40px -18px #000;animation:float 6s ease-in-out infinite;z-index:3}
+.chips.c1{left:-6%;top:13%;animation-delay:-1s}
+.chips.c2{right:-4%;top:48%;animation-delay:-3s}
+.chips.c3{left:-2%;bottom:20%;animation-delay:-5s}
 
-/* секции */
-section{padding:90px 0}
-.sec-h{max-width:640px;margin-bottom:46px}
+/* ---------- бегущая строка ---------- */
+.mq{border-block:1px solid var(--line);overflow:hidden;padding:18px 0;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.mq div{display:flex;gap:46px;width:max-content;animation:mq 38s linear infinite}
+.mq:hover div{animation-play-state:paused}
+.mq span{display:flex;align-items:center;gap:46px;font-weight:800;font-size:20px;letter-spacing:-.01em;color:var(--mut);white-space:nowrap}
+.mq span::after{content:"✦";color:var(--b);font-size:14px}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- секции ---------- */
+section{padding:96px 0}
+.sec-h{max-width:660px;margin-bottom:46px}
 .sec-h small{display:block;color:var(--a);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:12px;margin-bottom:12px}
-h2{font-size:clamp(30px,4.4vw,48px);line-height:1.08;font-weight:900;letter-spacing:-.03em}
+h2{font-size:clamp(30px,4.4vw,50px);line-height:1.06;font-weight:900;letter-spacing:-.03em}
 .sec-h p{margin-top:14px;color:var(--mut);font-size:17px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{position:relative;border:1px solid var(--line);background:var(--card);border-radius:var(--r);padding:26px;overflow:hidden;transition:transform .35s,border-color .35s}
-.card::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(139,92,246,.22),transparent 45%);opacity:0;transition:opacity .3s}
-.card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.2)}
+.card{position:relative;border:1px solid var(--line);background:var(--card);border-radius:var(--r);padding:26px;overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s;transform-style:preserve-3d}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--b) 30%,transparent),transparent 45%);opacity:0;transition:opacity .3s}
+.card:hover{border-color:rgba(255,255,255,.2)}
 .card:hover::before{opacity:1}
 .card>*{position:relative}
-.ic{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;font-size:24px;margin-bottom:18px;background:linear-gradient(135deg,rgba(34,211,238,.2),rgba(139,92,246,.2));border:1px solid var(--line)}
+.ic{width:52px;height:52px;border-radius:17px;display:grid;place-items:center;font-size:25px;margin-bottom:18px;background:linear-gradient(135deg,color-mix(in srgb,var(--a) 22%,transparent),color-mix(in srgb,var(--b) 22%,transparent));border:1px solid var(--line);transition:transform .5s cubic-bezier(.2,.9,.3,1.4)}
+.card:hover .ic{transform:rotate(-8deg) scale(1.12)}
 .card h3{font-size:19px;font-weight:800;margin-bottom:8px}
 .card p{color:var(--mut);font-size:15px}
 .card.wide{grid-column:span 2}
 
-/* числа */
+/* ---------- конструктор стиля ---------- */
+.lab{display:grid;grid-template-columns:.9fr 1.1fr;gap:16px}
+.pv{position:relative;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;min-height:430px;display:grid;place-items:center;padding:30px;isolation:isolate}
+.pv-bg{position:absolute;inset:0;z-index:-1;transition:opacity .6s;opacity:0}
+.pv-bg.on{opacity:1}
+.pv-in{text-align:center}
+.av{position:relative;width:130px;height:130px;margin:0 auto}
+.av>span{position:absolute;inset:0;border-radius:50%;background:#efeff3;color:#14151c;display:grid;place-items:center;font-size:52px;font-weight:900;z-index:2}
+.fr{position:absolute;inset:-12px;border-radius:50%;z-index:1;transition:opacity .4s}
+.fr[data-f="neon"]{background:conic-gradient(from 0deg,var(--ac),#fff,var(--ac));animation:spin 4s linear infinite;-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 7px),#000 calc(100% - 6px));mask:radial-gradient(farthest-side,transparent calc(100% - 7px),#000 calc(100% - 6px));filter:drop-shadow(0 0 10px var(--ac))}
+.fr[data-f="aurora"]{background:conic-gradient(from 0deg,#22d3ee,#8b5cf6,#f472b6,#22d3ee);animation:spin 6s linear infinite;-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 10px),#000 calc(100% - 9px));mask:radial-gradient(farthest-side,transparent calc(100% - 10px),#000 calc(100% - 9px));filter:drop-shadow(0 0 14px #8b5cf6)}
+.fr[data-f="flame"]{background:conic-gradient(from 0deg,#ff3d00,#ffb300,#ff3d00,#ffea00,#ff3d00);animation:spin 2.2s linear infinite;-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 9px),#000 calc(100% - 8px));mask:radial-gradient(farthest-side,transparent calc(100% - 9px),#000 calc(100% - 8px));filter:drop-shadow(0 0 16px #ff6a00)}
+.fr[data-f="dash"]{border:5px dashed var(--ac);animation:spin 14s linear infinite;filter:drop-shadow(0 0 8px var(--ac))}
+.fr[data-f="pulse"]{border:3px solid var(--ac);animation:ring 1.8s ease-out infinite}
+.fr[data-f="pulse"]::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:3px solid var(--ac);animation:ring 1.8s .9s ease-out infinite}
+@keyframes ring{0%{transform:scale(.92);opacity:1}100%{transform:scale(1.28);opacity:0}}
+.fr[data-f="none"]{opacity:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pv-name{margin-top:26px;font-weight:900;font-size:24px;display:flex;align-items:center;justify-content:center;gap:9px}
+.pv-b{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:9px;background:linear-gradient(135deg,var(--ac),color-mix(in srgb,var(--ac) 50%,#000));font-size:14px;transition:transform .4s cubic-bezier(.2,.9,.3,1.5)}
+.pv-b.pop{transform:scale(1.5) rotate(-12deg)}
+.pv-lv{color:rgba(255,255,255,.7);font-size:14px;margin-top:4px}
+.ctl{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:26px;display:flex;flex-direction:column;gap:22px;justify-content:center}
+.ctl h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:10px;font-weight:700}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-weight:700;font-size:14px;transition:all .25s;display:inline-flex;align-items:center;gap:8px}
+.opt:hover{border-color:rgba(255,255,255,.3);transform:translateY(-2px)}
+.opt.on{background:#f1f2f6;color:#07080c;border-color:transparent}
+.sw{width:36px;height:36px;padding:0;border-radius:50%;border:2px solid transparent;position:relative;transition:transform .25s}
+.sw i{position:absolute;inset:3px;border-radius:50%}
+.sw:hover{transform:scale(1.12)}
+.sw.on{border-color:#fff}
+
+/* ---------- калькулятор очков ---------- */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cbox{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:28px}
+.cbox h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:12px;font-weight:700}
+.rng{margin-top:22px}
+.rng label{display:flex;justify-content:space-between;font-weight:700;font-size:15px;margin-bottom:12px}
+.rng label b{color:var(--a)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--a),var(--b)) 0/var(--p,50%) 100% no-repeat,rgba(255,255,255,.1);outline:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.5);cursor:grab;transition:transform .2s}
+input[type=range]::-webkit-slider-thumb:active{transform:scale(1.2);cursor:grabbing}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.5);cursor:grab}
+.xp{font-size:clamp(56px,9vw,92px);font-weight:900;letter-spacing:-.05em;line-height:1;background:linear-gradient(120deg,#fff,var(--a));-webkit-background-clip:text;background-clip:text;color:transparent}
+.xp small{font-size:.28em;letter-spacing:0;margin-left:8px;-webkit-text-fill-color:var(--mut);color:var(--mut)}
+.lvbar{height:14px;border-radius:14px;background:rgba(255,255,255,.1);margin-top:26px;overflow:hidden;position:relative}
+.lvbar i{display:block;height:100%;width:0;border-radius:14px;background:linear-gradient(90deg,var(--a),var(--b),var(--c));transition:width .7s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
+.lvbar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-100%);animation:sweep 2.4s infinite}
+.lvt{display:flex;justify-content:space-between;margin-top:12px;font-size:14px;color:var(--mut)}
+.lvt b{color:var(--tx)}
+.lvup{margin-top:16px;min-height:26px;font-weight:800;color:var(--a);opacity:0;transform:translateY(8px);transition:all .4s}
+.lvup.on{opacity:1;transform:none}
+.calc-note{margin-top:16px;font-size:13px;color:var(--mut)}
+
+/* ---------- числа ---------- */
 .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .num{border-top:1px solid var(--line);padding-top:22px}
 .num b{font-size:clamp(40px,5.4vw,64px);font-weight:900;letter-spacing:-.04em;background:linear-gradient(120deg,#fff,var(--a));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1}
 .num span{display:block;margin-top:10px;color:var(--mut);font-size:15px}
 
-/* PRO */
-.pro{border:1px solid var(--line);border-radius:32px;padding:clamp(28px,5vw,60px);position:relative;overflow:hidden;background:linear-gradient(140deg,rgba(139,92,246,.18),rgba(34,211,238,.07) 60%,transparent)}
+/* ---------- PRO ---------- */
+.pro{border:1px solid var(--line);border-radius:32px;padding:clamp(28px,5vw,60px);position:relative;overflow:hidden;background:linear-gradient(140deg,color-mix(in srgb,var(--b) 20%,transparent),color-mix(in srgb,var(--a) 8%,transparent) 60%,transparent)}
 .pro::after{content:"";position:absolute;width:420px;height:420px;right:-120px;top:-160px;border-radius:50%;background:conic-gradient(var(--a),var(--b),var(--c),var(--a));filter:blur(80px);opacity:.28;animation:spin 18s linear infinite}
 .pro>*{position:relative;z-index:1}
 .pro ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;margin:28px 0 34px;max-width:640px}
 .pro li{display:flex;gap:10px;font-size:16px}
 .pro li::before{content:"✦";color:var(--a)}
 
-/* финал */
-.final{text-align:center;padding:110px 0 80px}
-.final h2{font-size:clamp(34px,6vw,64px)}
+/* ---------- финал + соцсети ---------- */
+.final{text-align:center;padding:110px 0 70px}
+.final h2{font-size:clamp(34px,6vw,66px)}
 .final p{color:var(--mut);margin:16px 0 32px;font-size:18px}
+.soc{display:flex;justify-content:center;margin-top:34px}
+.igc{display:inline-flex;align-items:center;gap:14px;padding:14px 22px 14px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);transition:transform .3s,border-color .3s}
+.igc:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.25)}
+.igc .ig{width:46px;height:46px;background:linear-gradient(135deg,#f9a03f,#e1306c 55%,#833ab4);border:0}
+.igc b{display:block;font-size:16px;text-align:left}
+.igc small{color:var(--mut);font-size:13px;display:block;text-align:left}
 footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);font-size:14px}
-.fr{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;align-items:center}
+.fr2{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;align-items:center}
 .fl{display:flex;flex-wrap:wrap;gap:8px 22px}
 .fl a:hover{color:var(--tx)}
 
-/* появление */
+/* ---------- появление ---------- */
 .rv{opacity:0;transform:translateY(26px);filter:blur(8px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),filter .9s}
 .rv.in{opacity:1;transform:none;filter:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 
 @media(max-width:900px){
-  .hero{grid-template-columns:1fr;padding-top:40px;min-height:0;gap:60px}
+  .hero{grid-template-columns:1fr;padding-top:36px;min-height:0;gap:60px}
   .grid{grid-template-columns:1fr 1fr}.card.wide{grid-column:span 2}
   .nums{grid-template-columns:1fr 1fr;gap:30px 16px}
+  .lab,.calc{grid-template-columns:1fr}
   .chips.c1{left:0}.chips.c2{right:0}
 }
 @media(max-width:600px){
   .grid{grid-template-columns:1fr}.card.wide{grid-column:auto}
   .pro ul{grid-template-columns:1fr}
   section{padding:64px 0}
-  .btn:not(.sm){width:100%;justify-content:center}
+  .cta .btn{width:100%}
   .cta{flex-direction:column}
   .hide-m{display:none}
+  .btn.sm{padding:0 14px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
 </style>
 </head>
-<body>
+<body style="--ac:#8b5cf6">
+<div class="prog" id="prog"></div>
 <div class="bgfx"><i></i><i></i><i></i></div>
+<div class="glow" id="glow"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -161,13 +237,21 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);fon
       <circle cx="63" cy="30" r="20" fill="none" stroke="#fff" stroke-width="8"/>
       <circle cx="37" cy="30" r="20" fill="none" stroke="url(#gA)" stroke-width="8" clip-path="url(#up)"/>
     </symbol>
+    <symbol id="insta" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="5.2" fill="none" stroke="currentColor" stroke-width="2"/>
+      <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="2"/>
+      <circle cx="17.4" cy="6.6" r="1.25" fill="currentColor"/>
+    </symbol>
   </defs>
 </svg>
 
 <header id="hd">
   <div class="wrap nav">
     <a class="logo" href="#top" aria-label="VOOB"><svg><use href="#rings"/></svg>VOOB</a>
-    <a class="btn pri sm" href="https://t.me/voobkz_bot/VOOB">Открыть в Telegram</a>
+    <div class="navr">
+      <a class="ig" href="https://www.instagram.com/voob.kz/" target="_blank" rel="noopener" aria-label="Instagram VOOB"><svg><use href="#insta"/></svg></a>
+      <a class="btn pri sm mag" href="https://t.me/voobkz_bot/VOOB">Открыть в Telegram</a>
+    </div>
   </div>
 </header>
 
@@ -176,48 +260,96 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);fon
   <div>
     <div class="tag rv"><b></b> Прямо в Telegram · без установки</div>
     <h1 class="rv d1">Тренировки,<br>в которых <em>приятно жить</em></h1>
-    <p class="lead rv d2">VOOB превращает каждую тренировку в уровни, достижения и твой личный стиль. Запиши первую — и посмотри, как растёт профиль.</p>
+    <p class="lead rv d2">VOOB превращает каждую тренировку в уровни, достижения и твой личный стиль. Запиши первую и посмотри, как растёт профиль.</p>
     <div class="cta rv d3">
-      <a class="btn pri" href="https://t.me/voobkz_bot/VOOB">
-        Открыть VOOB
-      </a>
-      <a class="btn" href="#features">Что внутри</a>
+      <a class="btn pri mag" href="https://t.me/voobkz_bot/VOOB">Открыть VOOB <span class="arr">→</span></a>
+      <a class="btn mag" href="#lab">Собрать свой стиль</a>
     </div>
-    <p class="note rv d3">Бесплатно. PRO — по желанию, за Telegram Stars.</p>
+    <p class="note rv d3">Бесплатно. PRO по желанию, за Telegram Stars.</p>
   </div>
 
   <div class="stage rv d2">
     <div class="phone" id="ph">
-      <div class="scr">
-        <div class="ava"><span>V</span></div>
-        <div class="nm">Влад <i class="bdg">⚡</i></div>
-        <div class="lv">Уровень 12</div>
-        <div class="bar"><i></i></div>
-        <div class="tiles">
-          <div><b>48</b><small>тренировок</small></div>
-          <div><b>14</b><small>дней подряд</small></div>
-          <div><b>21 ч</b><small>в движении</small></div>
-          <div><b>9</b><small>достижений</small></div>
-        </div>
+      <div class="scr" id="scr">
+        <div class="slide on"><img src="img/s2.webp" alt="Главная: цель недели и серия тренировок" width="780" height="1600"></div>
+        <div class="slide"><img src="img/s1.webp" alt="Итоги: кольца по видам активности" width="780" height="1600"></div>
+        <div class="slide"><img src="img/s3.webp" alt="Вес и индекс массы тела" width="780" height="1600"></div>
+        <div class="shine"></div>
       </div>
     </div>
+    <div class="tabs" id="tabs" role="tablist">
+      <button class="on" role="tab">Главная</button><button role="tab">Итоги</button><button role="tab">Вес</button>
+    </div>
     <div class="chips c1">🏆 Новое достижение</div>
-    <div class="chips c2">⬆ Уровень 12</div>
+    <div class="chips c2">⬆ Новый уровень</div>
     <div class="chips c3 hide-m">🎁 Подарок от друга</div>
   </div>
 </div>
+
+<div class="mq" aria-hidden="true"><div id="mq"></div></div>
 
 <section id="features">
   <div class="wrap">
     <div class="sec-h rv"><small>Что внутри</small><h2>Трекер, который хочется открывать</h2><p>Всё, что нужно для регулярных тренировок, и много приятных мелочей поверх.</p></div>
     <div class="grid">
-      <div class="card wide rv"><div class="ic">📈</div><h3>Уровни и очки</h3><p>Каждая тренировка даёт очки. Бег, велосипед, силовые, йога — своя формула. Уровень растёт, звания меняются.</p></div>
-      <div class="card rv d1"><div class="ic">🏆</div><h3>Достижения</h3><p>Серии, рекорды, первые разы. Цели ставишь сам, а приложение отмечает победы.</p></div>
-      <div class="card rv"><div class="ic">🎨</div><h3>Твой стиль</h3><p>Анимированные рамки аватарки, парные фоны профиля, значки у имени, акцентные цвета и темы.</p></div>
-      <div class="card rv d1"><div class="ic">👥</div><h3>Друзья</h3><p>Смотри успехи друг друга, взбадривай друзей, делись профилем по ссылке.</p></div>
-      <div class="card rv d2"><div class="ic">🎁</div><h3>Подарки</h3><p>Дари друзьям подарки и даже PRO. Получатель берёт бонус к уровню.</p></div>
-      <div class="card wide rv"><div class="ic">📊</div><h3>Итоги и статистика</h3><p>Красивые итоги недели и месяца, кольца по видам активности, календарь, рекорды. Без таблиц и скуки.</p></div>
-      <div class="card rv d1"><div class="ic">🌍</div><h3>Твой язык</h3><p>Несколько языков интерфейса. Смена языка сделана так, что хочется переключать просто так.</p></div>
+      <div class="card wide rv tilt"><div class="ic">📈</div><h3>Уровни и очки</h3><p>Каждая тренировка даёт очки. Бег, велосипед, силовые, йога: у каждого вида своя формула. Уровень растёт, звания меняются.</p></div>
+      <div class="card rv d1 tilt"><div class="ic">🏆</div><h3>Достижения</h3><p>Серии, рекорды, первые разы. Цели ставишь сам, а приложение отмечает победы.</p></div>
+      <div class="card rv tilt"><div class="ic">🎨</div><h3>Твой стиль</h3><p>Анимированные рамки аватарки, парные фоны профиля, значки у имени, акцентные цвета и темы.</p></div>
+      <div class="card rv d1 tilt"><div class="ic">👥</div><h3>Друзья</h3><p>Смотри успехи друг друга, взбадривай друзей, делись профилем по ссылке.</p></div>
+      <div class="card rv d2 tilt"><div class="ic">🎁</div><h3>Подарки</h3><p>Дари друзьям подарки и даже PRO. Получатель берёт бонус к уровню.</p></div>
+      <div class="card wide rv tilt"><div class="ic">📊</div><h3>Итоги и статистика</h3><p>Красивые итоги недели и месяца, кольца по видам активности, календарь, рекорды. Без таблиц и скуки.</p></div>
+      <div class="card rv d1 tilt"><div class="ic">🌍</div><h3>Твой язык</h3><p>Несколько языков интерфейса. Смена языка сделана так, что хочется переключать просто так.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="lab">
+  <div class="wrap">
+    <div class="sec-h rv"><small>Попробуй сам</small><h2>Собери свой стиль</h2><p>Это маленькая демонстрация. В приложении рамок и фонов гораздо больше.</p></div>
+    <div class="lab rv">
+      <div class="pv" id="pv">
+        <div class="pv-bg on" data-b="night" style="background:radial-gradient(circle at 50% 20%,#2a1f55,#0a0b12 70%)"></div>
+        <div class="pv-bg" data-b="sunset" style="background:linear-gradient(160deg,#ff7a59,#c2306b 55%,#2a1048)"></div>
+        <div class="pv-bg" data-b="ocean" style="background:linear-gradient(160deg,#0ea5e9,#1e3a8a 60%,#07102b)"></div>
+        <div class="pv-bg" data-b="forest" style="background:linear-gradient(160deg,#16a34a,#14532d 60%,#04140a)"></div>
+        <div class="pv-in">
+          <div class="av"><div class="fr" id="fr" data-f="neon"></div><span>В</span></div>
+          <div class="pv-name">Влад <i class="pv-b" id="pvb">⚡</i></div>
+          <div class="pv-lv">Уровень 12</div>
+        </div>
+      </div>
+      <div class="ctl">
+        <div><h4>Рамка</h4><div class="opts" data-g="f">
+          <button class="opt on" data-v="neon">Неон</button><button class="opt" data-v="aurora">Аврора</button><button class="opt" data-v="flame">Пламя</button><button class="opt" data-v="dash">Орбита</button><button class="opt" data-v="pulse">Пульс</button><button class="opt" data-v="none">Без рамки</button></div></div>
+        <div><h4>Фон профиля</h4><div class="opts" data-g="b">
+          <button class="opt on" data-v="night">Ночь</button><button class="opt" data-v="sunset">Закат</button><button class="opt" data-v="ocean">Океан</button><button class="opt" data-v="forest">Лес</button></div></div>
+        <div><h4>Значок у имени</h4><div class="opts" data-g="g">
+          <button class="opt on" data-v="⚡">⚡</button><button class="opt" data-v="🔥">🔥</button><button class="opt" data-v="👑">👑</button><button class="opt" data-v="🌙">🌙</button><button class="opt" data-v="💎">💎</button><button class="opt" data-v="🚀">🚀</button></div></div>
+        <div><h4>Акцентный цвет (меняет весь сайт)</h4><div class="opts" data-g="a" id="sws"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-h rv"><small>Как считаются очки</small><h2>Посчитай свою тренировку</h2><p>Формулы те же, что в приложении. Подвигай ползунки и посмотри, сколько очков ты получишь.</p></div>
+    <div class="calc rv">
+      <div class="cbox">
+        <h4>Вид активности</h4>
+        <div class="opts" id="acts"></div>
+        <div class="rng"><label><span id="l1">Время</span><b id="v1">30 мин</b></label><input type="range" id="r1" min="5" max="120" value="30"></div>
+        <div class="rng" id="w2"><label><span id="l2">Скорость</span><b id="v2">8 км/ч</b></label><input type="range" id="r2" min="3" max="18" value="8"></div>
+        <p class="calc-note">В приложении есть разумные пределы на тренировку и на день, чтобы очки были честными.</p>
+      </div>
+      <div class="cbox">
+        <h4>Ты получишь</h4>
+        <div class="xp"><span id="xp">0</span><small>очков</small></div>
+        <div class="lvbar"><i id="lb"></i></div>
+        <div class="lvt"><span>Уровень <b id="lv">5</b></span><span id="lt">до следующего 0</span></div>
+        <div class="lvup" id="lu"></div>
+        <p class="calc-note">Пример: у тебя уже накоплено 460 очков, а эта тренировка добавляется сверху.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -228,7 +360,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);fon
       <div class="num rv"><b data-n="56">0</b><span>анимированных рамок</span></div>
       <div class="num rv d1"><b data-n="56">0</b><span>парных фонов профиля</span></div>
       <div class="num rv d2"><b data-n="24">0</b><span>значка у имени</span></div>
-      <div class="num rv d3"><b data-n="0">∞</b><span>поводов вернуться</span></div>
+      <div class="num rv d3"><b>∞</b><span>поводов вернуться</span></div>
     </div>
   </div>
 </section>
@@ -245,7 +377,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);fon
         <li>Больше подарков в месяц</li>
         <li>Оплата Telegram Stars</li>
       </ul>
-      <a class="btn pri" href="https://t.me/voobkz_bot/VOOB">Попробовать</a>
+      <a class="btn pri mag" href="https://t.me/voobkz_bot/VOOB">Попробовать</a>
     </div>
   </div>
 </section>
@@ -253,48 +385,140 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);fon
 <div class="wrap final">
   <h2 class="rv">Запиши первую тренировку</h2>
   <p class="rv d1">Это займёт минуту. Установка не нужна: всё работает прямо в Telegram.</p>
-  <a class="btn pri rv d2" href="https://t.me/voobkz_bot/VOOB">Открыть VOOB</a>
+  <a class="btn pri mag rv d2" href="https://t.me/voobkz_bot/VOOB">Открыть VOOB <span class="arr">→</span></a>
+  <div class="soc rv d3">
+    <a class="igc" href="https://www.instagram.com/voob.kz/" target="_blank" rel="noopener">
+      <span class="ig"><svg><use href="#insta"/></svg></span>
+      <span><b>@voob.kz</b><small>Новости и обновления в Instagram</small></span>
+    </a>
+  </div>
 </div>
 </main>
 
 <footer>
-  <div class="wrap fr">
+  <div class="wrap fr2">
     <div>© <span id="yr">2026</span> VOOB</div>
     <div class="fl">
-      <a href="https://t.me/voobkz_bot">@voobkz_bot</a>
+      <a href="https://t.me/voobkz_bot">Telegram: @voobkz_bot</a>
+      <a href="https://www.instagram.com/voob.kz/" target="_blank" rel="noopener">Instagram: @voob.kz</a>
     </div>
   </div>
 </footer>
 
 <script>
 (function(){
-  var hd=document.getElementById('hd');
-  addEventListener('scroll',function(){hd.classList.toggle('sc',scrollY>8)},{passive:true});
-  document.getElementById('yr').textContent=new Date().getFullYear();
+  var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+  var fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  var hd=$('#hd'),prog=$('#prog');
+  function onScroll(){hd.classList.toggle('sc',scrollY>8);var h=document.documentElement.scrollHeight-innerHeight;prog.style.transform='scaleX('+(h>0?scrollY/h:0)+')'}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  $('#yr').textContent=new Date().getFullYear();
+
+  var words=['Уровни','Достижения','Рамки','Фоны профиля','Значки','Друзья','Подарки','Итоги','Серии','Цели недели','Telegram Stars','PRO'];
+  var mq=$('#mq'),html='';for(var k=0;k<2;k++)html+='<span>'+words.join('</span><span>')+'</span>';mq.innerHTML=html;
 
   var io=new IntersectionObserver(function(es){es.forEach(function(e){
-    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);
-      var n=e.target.querySelector&&e.target.querySelector('[data-n]');if(n)count(n)}})},{threshold:.15});
-  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);var n=e.target.querySelector('[data-n]');if(n)count(n)}})},{threshold:.15});
+  $$('.rv').forEach(function(el){io.observe(el)});
+  function count(el){var to=+el.dataset.n,t0=performance.now(),d=1400;
+    (function f(t){var p=Math.min(1,(t-t0)/d);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)}
 
-  function count(el){
-    var to=+el.dataset.n;if(!to){el.textContent='∞';return}
-    var t0=performance.now(),d=1400;
-    (function f(t){var p=Math.min(1,(t-t0)/d);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0);
+  var glow=$('#glow');
+  if(fine&&!reduce){
+    addEventListener('pointermove',function(e){glow.style.opacity=1;glow.style.transform='translate('+e.clientX+'px,'+e.clientY+'px)'},{passive:true});
+    $$('.mag').forEach(function(b){
+      b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.18)+'px,'+((e.clientY-r.top-r.height/2)*.3)+'px)'});
+      b.addEventListener('pointerleave',function(){b.style.transform=''});
+    });
+    $$('.tilt').forEach(function(c){
+      c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+        c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');
+        c.style.transform='perspective(800px) rotateX('+(-y*7)+'deg) rotateY('+(x*9)+'deg) translateY(-4px)'});
+      c.addEventListener('pointerleave',function(){c.style.transform=''});
+    });
   }
 
-  document.querySelectorAll('.card').forEach(function(c){
-    c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();
-      c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')});
+  var ph=$('#ph');
+  if(fine&&!reduce){addEventListener('pointermove',function(e){
+    var x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;
+    ph.style.transform='rotateY('+(-12+x*14)+'deg) rotateX('+(5-y*10)+'deg)'},{passive:true})}
+  var slides=$$('.slide'),tabs=$$('#tabs button'),cur=0,timer;
+  function go(i){
+    i=(i+slides.length)%slides.length;
+    slides.forEach(function(s,n){s.classList.toggle('on',n===i);s.classList.toggle('prev',n<i)});
+    tabs.forEach(function(t,n){t.classList.toggle('on',n===i)});cur=i;
+  }
+  function auto(){clearInterval(timer);if(!reduce)timer=setInterval(function(){go(cur+1)},4200)}
+  tabs.forEach(function(t,n){t.addEventListener('click',function(){go(n);auto()})});
+  var sx=null;
+  ph.addEventListener('pointerdown',function(e){sx=e.clientX});
+  addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx;sx=null;if(Math.abs(dx)>40){go(cur+(dx<0?1:-1));auto()}});
+  auto();
+
+  var ACC=[['#8b5cf6','Фиолетовый'],['#22d3ee','Бирюзовый'],['#f472b6','Розовый'],['#34d399','Зелёный'],['#fbbf24','Янтарный'],['#fb7185','Коралловый']];
+  var sws=$('#sws');
+  ACC.forEach(function(a,i){var b=document.createElement('button');b.className='sw'+(i?'':' on');b.title=a[1];b.setAttribute('aria-label',a[1]);b.innerHTML='<i style="background:'+a[0]+'"></i>';
+    b.addEventListener('click',function(){$$('.sw').forEach(function(x){x.classList.remove('on')});b.classList.add('on');setAccent(a[0])});sws.appendChild(b)});
+  function setAccent(c){
+    document.body.style.setProperty('--ac',c);
+    var r=document.documentElement.style;r.setProperty('--b',c);
+    var m=c.replace('#',''),rr=parseInt(m.substr(0,2),16),gg=parseInt(m.substr(2,2),16),bb=parseInt(m.substr(4,2),16);
+    r.setProperty('--a',c==='#22d3ee'?'#8b5cf6':'#22d3ee');
+    glow.style.background='radial-gradient(circle,rgba('+rr+','+gg+','+bb+',.18),transparent 60%)';
+  }
+  $$('.opts[data-g]').forEach(function(box){
+    var g=box.dataset.g;if(g==='a')return;
+    $$('.opt',box).forEach(function(o){o.addEventListener('click',function(){
+      $$('.opt',box).forEach(function(x){x.classList.remove('on')});o.classList.add('on');var v=o.dataset.v;
+      if(g==='f'){$('#fr').dataset.f=v}
+      if(g==='b'){$$('.pv-bg').forEach(function(b){b.classList.toggle('on',b.dataset.b===v)})}
+      if(g==='g'){var b=$('#pvb');b.textContent=v;b.classList.add('pop');setTimeout(function(){b.classList.remove('pop')},260)}
+    })});
   });
 
-  var ph=document.getElementById('ph');
-  if(ph&&matchMedia('(hover:hover)').matches){
-    addEventListener('pointermove',function(e){
-      var x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
-      ph.style.transform='rotateY('+(-12+x*14)+'deg) rotateX('+(5-y*10)+'deg)';
-    },{passive:true});
+  /* калькулятор очков: формулы как в приложении */
+  var A={
+    run:{n:'Бег',ic:'🏃',t:'time',sp:[3,18,8],f:function(m,s){return m*Math.pow(Math.max(1,s)/5,.8)}},
+    bike:{n:'Велосипед',ic:'🚴',t:'time',f:function(m){return m*.9}},
+    yoga:{n:'Йога',ic:'🧘',t:'time',f:function(m){return m*.6}},
+    swim:{n:'Плавание',ic:'🏊',t:'time',f:function(m){return m*1.0}},
+    rope:{n:'Скакалка',ic:'🪢',t:'time',f:function(m){return m*1.1}},
+    push:{n:'Отжимания',ic:'💪',t:'reps',rp:[10,200,40],f:function(r){return r*.5}},
+    squat:{n:'Приседания',ic:'🦵',t:'reps',rp:[10,300,60],f:function(r){return r*.35}}
+  };
+  var key='run',acts=$('#acts'),base=460;
+  Object.keys(A).forEach(function(k){var b=document.createElement('button');b.className='opt'+(k===key?' on':'');b.textContent=A[k].ic+' '+A[k].n;
+    b.addEventListener('click',function(){$$('.opt',acts).forEach(function(x){x.classList.remove('on')});b.classList.add('on');key=k;setup();calc()});acts.appendChild(b)});
+  var r1=$('#r1'),r2=$('#r2');
+  function need(l){return 120+40*(l-1)+2*(l-1)*(l-1)}
+  function lvOf(xp){var l=1,x=xp,n=need(1);while(x>=n){x-=n;l++;n=need(l)}return{l:l,into:x,need:n}}
+  function fillRange(el){el.style.setProperty('--p',((el.value-el.min)/(el.max-el.min)*100)+'%')}
+  function setup(){
+    var a=A[key];
+    if(a.t==='reps'){$('#l1').textContent='Повторы всего';r1.min=a.rp[0];r1.max=a.rp[1];r1.value=a.rp[2];$('#w2').style.display='none'}
+    else{$('#l1').textContent='Время';r1.min=5;r1.max=120;r1.value=30;
+      if(a.sp){$('#w2').style.display='';r2.min=a.sp[0];r2.max=a.sp[1];r2.value=a.sp[2]}else $('#w2').style.display='none'}
+    fillRange(r1);fillRange(r2);
   }
+  var shown=0;
+  function calc(){
+    var a=A[key],v=+r1.value,sp=+r2.value;
+    $('#v1').textContent=a.t==='reps'?v+' раз':v+' мин';
+    if(a.sp)$('#v2').textContent=sp+' км/ч';
+    var xp=Math.max(3,Math.min(150,Math.round(a.f(v,sp))));
+    var before=lvOf(base),after=lvOf(base+xp);
+    anim(xp);
+    $('#lv').textContent=after.l;
+    $('#lb').style.width=(after.into/after.need*100)+'%';
+    $('#lt').textContent='до следующего '+(after.need-after.into);
+    var lu=$('#lu');
+    if(after.l>before.l){lu.textContent='🎉 Новый уровень: '+after.l+'!';lu.classList.add('on')}else lu.classList.remove('on');
+  }
+  function anim(to){var from=shown,t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/450);shown=Math.round(from+(to-from)*(1-Math.pow(1-p,3)));$('#xp').textContent=shown;if(p<1)requestAnimationFrame(f)})(t0)}
+  [r1,r2].forEach(function(el){el.addEventListener('input',function(){fillRange(el);calc()})});
+  setup();calc();
 })();
 </script>
 </body>
