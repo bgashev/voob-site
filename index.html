@@ -429,6 +429,19 @@ html[data-theme=light] .thb .moon{opacity:0;transform:rotate(70deg) scale(.4)}
   .sk{margin-bottom:10px}.sdots{justify-content:center;margin-top:8px}
   .qc{grid-template-columns:1fr;gap:30px;padding:32px 24px;text-align:center;justify-items:center}.qt p{margin-inline:auto}.qt .cta{justify-content:center}
 }
+#rdbg{position:fixed;inset:0;z-index:-1;background:#07080c}
+#rd{position:fixed;inset:0;z-index:300;pointer-events:all}
+#rd .rl{position:absolute;left:0;right:0;top:calc(50% - 1.5px);height:3px;opacity:0;background:linear-gradient(90deg,transparent,var(--a),#fff,var(--b),transparent);box-shadow:0 0 24px 4px color-mix(in srgb,var(--b,#8b5cf6) 80%,transparent),0 0 90px 14px color-mix(in srgb,var(--a,#22d3ee) 40%,transparent)}
+#rd .rdash{position:absolute;left:0;right:0;top:calc(50% + 14px);height:3px;opacity:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.75) 0 38px,transparent 38px 92px);-webkit-mask:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);mask:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);border-radius:2px}
+#rd .rc{position:absolute;left:0;top:calc(50% - 5px);width:min(260px,40vw);height:10px;border-radius:10px;opacity:0;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--b,#8b5cf6) 70%,transparent) 55%,#fff);filter:blur(1.2px);box-shadow:0 0 22px 3px color-mix(in srgb,var(--a,#22d3ee) 55%,transparent)}
+#rd .rc.c2{top:calc(50% + 4px);height:6px;width:min(180px,30vw)}#rd .rc.c3{top:calc(50% - 14px);height:5px;width:min(220px,34vw)}
+#rd .rk{position:absolute;left:0;top:50%;margin-top:-44px;font-style:normal;font-weight:800;font-size:13px;letter-spacing:.14em;color:#f1f2f6;opacity:0;text-transform:uppercase;padding:0}
+#rd .rk:nth-of-type(even){margin-top:30px;color:color-mix(in srgb,var(--a,#22d3ee) 85%,#fff)}
+#rd .rp{position:absolute;inset:0;background:#07080c;display:grid;place-items:center;opacity:0;clip-path:inset(calc(50% - 2px) 0)}
+#rd .rp::before{content:"";position:absolute;inset:0;background:radial-gradient(60vmax circle at 50% 50%,color-mix(in srgb,var(--b,#8b5cf6) 34%,transparent),transparent 60%)}
+#rd svg{position:relative;width:min(200px,46vw);overflow:visible}
+#rd circle{fill:none;stroke-width:8;stroke-dasharray:126;stroke-dashoffset:126}
+#rd .r1{stroke:var(--b,#8b5cf6)}#rd .r2{stroke:#f1f2f6}
 /* premium touches */
 .hero>*{min-width:0}html,body{overflow-x:clip}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -774,37 +787,40 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   auto();
 
   $$('.ctl').forEach(function(c){c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')})});
-  /* телефон-в-телефон: мокап разворачивается в приложение */
+  /* «Дорога»: страница схлопывается в линию, по ней бегут огни, линия раскрывается в приложение */
   (function(){
     var links=$$('a[href^="https://app.voob.kz"]');if(!links.length||reduce||!document.body.animate)return;
-    var busy=false;
+    var busy=false,anims=[];
+    function an(el,k,o){var x=el.animate(k,o);anims.push(x);return x}
     links.forEach(function(a){a.addEventListener('click',function(e){
       if(e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;e.preventDefault();if(busy)return;busy=true;
-      var ph=$('#ph'),pr=ph.getBoundingClientRect(),W=innerWidth,H=innerHeight,
-          vis=pr.bottom>80&&pr.top<H-80&&pr.right>0&&pr.left<W,L,T,PW,PH,tilt=vis,
-          ar=a.getBoundingClientRect();
-      if(vis){PW=ph.offsetWidth;PH=ph.offsetHeight;L=pr.left+pr.width/2-PW/2;T=pr.top+pr.height/2-PH/2}
-      else{PW=96;PH=197;L=ar.left+ar.width/2-PW/2;T=ar.top+ar.height/2-PH/2}
-      var src=($('.slide.on img')||{}).src||'img/p_home.webp';
-      var pp=document.createElement('div');pp.id='pp';
-      pp.innerHTML='<div class="pps"><img src="'+src+'" alt=""><div class="ppl"><svg viewBox="0 0 100 60"><circle class="r1" cx="37" cy="30" r="20" pathLength="126"/><circle class="r2" cx="63" cy="30" r="20" pathLength="126"/></svg></div></div>';
-      var pps=pp.firstChild,PAD=vis?10:5,RAD=vis?46:18;
-      pp.style.cssText+=';left:'+L+'px;top:'+T+'px;width:'+PW+'px;height:'+PH+'px;padding:'+PAD+'px;border-radius:'+RAD+'px';
-      pps.style.borderRadius=(RAD-PAD)+'px';
-      document.body.appendChild(pp);
-      var rect=document.getElementById('ph');ph.style.visibility='hidden';
-      var E='cubic-bezier(.7,0,.15,1)',D=950;
-      pp.animate([{left:L+'px',top:T+'px',width:PW+'px',height:PH+'px',padding:PAD+'px',borderRadius:RAD+'px',transform:tilt?'perspective(1300px) rotateY(-12deg) rotateX(5deg)':'none'},
-                  {left:'0px',top:'0px',width:W+'px',height:H+'px',padding:'0px',borderRadius:'0px',transform:'perspective(1300px) rotateY(0) rotateX(0)'}],{duration:D,easing:E,fill:'forwards'});
-      pps.animate([{borderRadius:(RAD-PAD)+'px'},{borderRadius:'0px'}],{duration:D,easing:E,fill:'forwards'});
-      var im=pp.querySelector('img');
-      im.animate([{transform:'scale(1)'},{transform:'scale(1.12)'}],{duration:D+300,easing:'ease-out',fill:'forwards'});
-      var lg=pp.querySelector('.ppl');
-      lg.animate([{opacity:0},{opacity:1}],{duration:420,delay:520,easing:'ease-in',fill:'forwards'});
-      pp.querySelectorAll('circle').forEach(function(c,i){c.animate([{strokeDashoffset:126},{strokeDashoffset:0}],{duration:600,delay:900+i*130,easing:'cubic-bezier(.3,.6,.2,1)',fill:'forwards'})});
-      setTimeout(function(){location.href='https://app.voob.kz/?from=site'},1900);
+      var de=document.documentElement,H=innerHeight,W=innerWidth,cy=H/2;
+      var bgd=document.createElement('div');bgd.id='rdbg';de.appendChild(bgd);
+      var rd=document.createElement('div');rd.id='rd';
+      var dots='';for(var i=0;i<7;i++)dots+='<i class="rk">'+(i+1)+' км</i>';
+      rd.innerHTML='<div class="rl"></div><div class="rdash"></div>'+dots+'<i class="rc c1"></i><i class="rc c2"></i><i class="rc c3"></i><div class="rp"><svg viewBox="0 0 100 60"><circle class="r1" cx="37" cy="30" r="20" pathLength="126"/><circle class="r2" cx="63" cy="30" r="20" pathLength="126"/></svg></div>';
+      de.appendChild(rd);
+      var bd=document.body;bd.style.transformOrigin='50% '+(scrollY+cy)+'px';bd.style.willChange='transform';
+      var E='cubic-bezier(.76,0,.24,1)';
+      /* 1. схлопывание */
+      an(bd,[{transform:'scaleY(1)',filter:'brightness(1)'},{transform:'scaleY(.004)',filter:'brightness(1.8)'}],{duration:700,easing:E,fill:'forwards'});
+      var rl=rd.querySelector('.rl');
+      an(rl,[{opacity:0,transform:'scaleX(.15)'},{opacity:1,transform:'scaleX(1)'}],{duration:700,delay:300,easing:'cubic-bezier(.2,.7,.2,1)',fill:'forwards'});
+      /* 2. бег: пунктир, огни, километры */
+      var ds=rd.querySelector('.rdash');
+      an(ds,[{opacity:0},{opacity:.9}],{duration:250,delay:650,fill:'forwards'});
+      an(ds,[{backgroundPosition:'0 0'},{backgroundPosition:'-1400px 0'}],{duration:1200,delay:650,easing:'cubic-bezier(.3,0,.6,1)',fill:'forwards'});
+      rd.querySelectorAll('.rc').forEach(function(c,i){an(c,[{transform:'translateX(-30vw)',opacity:0},{opacity:1,offset:.15},{transform:'translateX('+(W+200)+'px)',opacity:1}],{duration:560+i*110,delay:760+i*190,easing:'cubic-bezier(.4,0,.7,1)',fill:'forwards'})});
+      rd.querySelectorAll('.rk').forEach(function(k,i){an(k,[{transform:'translateX('+(W+60)+'px)',opacity:0},{opacity:.85,offset:.12},{opacity:.85,offset:.8},{transform:'translateX(-120px)',opacity:0}],{duration:1150,delay:700+i*95,easing:'linear',fill:'forwards'})});
+      /* 3. линия раскрывается в окно, внутри собираются кольца */
+      var rp=rd.querySelector('.rp');
+      an(rp,[{clipPath:'inset(calc(50% - 2px) 0)',opacity:1},{clipPath:'inset(0)',opacity:1}],{duration:650,delay:1500,easing:E,fill:'forwards'});
+      an(rl,[{opacity:1},{opacity:0}],{duration:200,delay:1650,fill:'forwards'});
+      an(ds,[{opacity:.9},{opacity:0}],{duration:250,delay:1500,fill:'forwards'});
+      rp.querySelectorAll('circle').forEach(function(c,i){an(c,[{strokeDashoffset:126},{strokeDashoffset:0}],{duration:520,delay:1800+i*120,easing:'cubic-bezier(.3,.6,.2,1)',fill:'forwards'})});
+      setTimeout(function(){location.href='https://app.voob.kz/?from=site'},2550);
     })});
-    addEventListener('pageshow',function(ev){if(ev.persisted){busy=false;var o=document.getElementById('pp');if(o)o.remove();var p=$('#ph');if(p)p.style.visibility=''}});
+    addEventListener('pageshow',function(ev){if(ev.persisted){busy=false;anims.forEach(function(x){try{x.cancel()}catch(e){}});anims=[];['rd','rdbg'].forEach(function(i){var o=document.getElementById(i);if(o)o.remove()});document.body.style.transformOrigin='';document.body.style.willChange=''}});
   })();
 
   /* сторис-секция по скроллу */
