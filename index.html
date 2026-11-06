@@ -508,6 +508,23 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
 .ctl:hover::before{opacity:1}
 .ctl>*{position:relative}
 .hero h1,.hero .btn.pri{will-change:transform}
+
+/* ---------- декор: крупная типографика и летающие объекты ---------- */
+.dz{position:relative;overflow:clip}
+.dz>.wrap{position:relative;z-index:1}
+.bgw{position:absolute;left:50%;top:var(--t,8%);z-index:0;font-weight:900;font-size:var(--fs,min(24vw,360px));line-height:.8;letter-spacing:-.06em;white-space:nowrap;color:transparent;background:linear-gradient(180deg,color-mix(in srgb,var(--b) 17%,transparent),color-mix(in srgb,var(--a) 2%,transparent) 88%);-webkit-background-clip:text;background-clip:text;transform:translateX(calc(-50% + var(--bx,0px)));user-select:none;pointer-events:none}
+.bgw.alt{background:linear-gradient(180deg,color-mix(in srgb,var(--c) 15%,transparent),color-mix(in srgb,var(--b) 2%,transparent) 88%);-webkit-background-clip:text;background-clip:text}
+.fo{position:absolute;z-index:0;width:var(--w,120px);pointer-events:none;translate:0 var(--py,0px)}
+.fo .fi{animation:foF var(--d,8s) ease-in-out infinite;animation-delay:var(--dl,0s);filter:drop-shadow(0 26px 22px rgba(70,40,150,.32)) drop-shadow(0 0 22px var(--g,rgba(139,92,246,.35)))}
+.fo svg{display:block;width:100%;height:auto;overflow:visible}
+.fo .fo-sp{transform-origin:70px 70px;animation:foS 18s linear infinite}
+@keyframes foF{0%,100%{transform:translateY(0) rotate(var(--r0,-8deg))}50%{transform:translateY(-22px) rotate(var(--r1,6deg))}}
+@keyframes foS{to{transform:rotate(360deg)}}
+.fo.sm{opacity:.8}
+.fo.bk{border-radius:50%;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--g1,#8b5cf6) 70%,#fff),var(--g1,#8b5cf6) 60%,transparent 72%);filter:blur(3px);opacity:.5;aspect-ratio:1}
+.hero{position:relative}
+@media(max-width:1100px){.fo{--w:calc(var(--w0,120px) * .62)!important}.bgw{--fs:min(30vw,240px)}}
+@media(max-width:700px){.fo.hm{display:none}.fo{opacity:.85}}
 </style>
 <script>try{if(/[?&]from=app\b/.test(location.search)){document.write('<style id="lu-g">html{background:#010206!important}body{visibility:hidden}</style>');setTimeout(function(){var g=document.getElementById("lu-g");if(g)g.remove()},4000)}}catch(e){}</script>
 </head>
@@ -549,7 +566,13 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
 </header>
 
 <main id="top">
-<div class="wrap hero">
+<div class="wrap hero"><div class="bgw" style="--t:8%;--fs:min(32vw,500px);left:66%" data-s="-90" aria-hidden="true">MOVE</div><div class="fo hm" style="--w:150px;--w0:150px;left:44%;top:7%;--r0:-14deg;--r1:-4deg;--d:9s" data-s="60" aria-hidden="true"><div class="fi"><svg viewBox="0 0 220 130"><defs><linearGradient id="fd1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#6d28d9"/></linearGradient><linearGradient id="fd2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#67e8f9"/><stop offset="1" stop-color="#0891b2"/></linearGradient><linearGradient id="fd3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6fb"/><stop offset=".5" stop-color="#aab1c4"/><stop offset="1" stop-color="#6b7388"/></linearGradient></defs>
+<rect x="66" y="56" width="88" height="18" rx="9" fill="url(#fd3)"/>
+<rect x="36" y="18" width="30" height="94" rx="12" fill="url(#fd1)"/><rect x="14" y="36" width="26" height="58" rx="10" fill="url(#fd2)"/>
+<rect x="154" y="18" width="30" height="94" rx="12" fill="url(#fd1)"/><rect x="180" y="36" width="26" height="58" rx="10" fill="url(#fd2)"/>
+<rect x="42" y="24" width="8" height="82" rx="4" fill="#fff" opacity=".28"/><rect x="160" y="24" width="8" height="82" rx="4" fill="#fff" opacity=".28"/></svg></div></div><div class="fo hm" style="--w:78px;--w0:78px;left:2%;bottom:6%;--g:rgba(251,146,60,.45);--d:7s;--dl:-2s;--r0:-6deg;--r1:5deg" data-s="30" aria-hidden="true"><div class="fi"><svg viewBox="0 0 100 124"><defs><linearGradient id="ff1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fde047"/><stop offset=".45" stop-color="#fb923c"/><stop offset="1" stop-color="#e11d48"/></linearGradient><linearGradient id="ff2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff7c2"/><stop offset="1" stop-color="#fbbf24"/></linearGradient></defs>
+<path d="M50 4C55 30 80 40 80 72c0 26-15 46-30 46S20 98 20 72c0-15 6-24 13-33 2 11 6 15 11 15C41 36 39 20 50 4Z" fill="url(#ff1)"/>
+<path d="M50 118c-11 0-19-9-19-21 0-13 9-19 15-30 2 9 6 11 9 15 3-4 4-8 4-12 7 8 10 17 10 27 0 12-8 21-19 21Z" fill="url(#ff2)"/></svg></div></div><div class="fo hm sm" style="--w:46px;--w0:46px;right:3%;top:13%;--g:rgba(250,204,21,.5);--d:6s;--dl:-1s" data-s="80" aria-hidden="true"><div class="fi"><svg viewBox="0 0 100 100"><defs><linearGradient id="fs1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs><path d="M50 6l13.2 28 30.8 4-22.6 21.2 5.8 30.4L50 74.6 22.8 89.6l5.8-30.4L6 38l30.8-4z" fill="url(#fs1)" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linejoin="round"/></svg></div></div>
   <div>
     <div class="tag rv"><b></b> Прямо в Telegram · без установки</div>
     <h1 class="rv d1">Тренировки,<br>в которых <em>приятно жить</em></h1>
@@ -584,7 +607,13 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
 
 <section class="story" id="story"><div class="sty"><div class="sty-t"><small class="sk">Один день с VOOB</small><div class="sts"><div class="st on"><b class="sn">01</b><h3>Запиши тренировку</h3><p>Пара касаний: вид активности, время, готово. Очки и серия обновятся сами.</p></div><div class="st"><b class="sn">02</b><h3>Смотри итоги</h3><p>Кольца по видам активности, календарь недели и рекорды на одном экране.</p></div><div class="st"><b class="sn">03</b><h3>Следи за весом</h3><p>График веса и индекс массы тела. Без лишних таблиц.</p></div><div class="st"><b class="sn">04</b><h3>Зови друзей</h3><p>Смотрите успехи друг друга, подбадривайте и дарите подарки.</p></div><div class="st"><b class="sn">05</b><h3>Собери профиль</h3><p>Рамка, фон и значок у имени: профиль выглядит так, как хочешь ты.</p></div></div><div class="sdots"><i class="on"></i><i></i><i></i><i></i><i></i></div></div><div class="sph"><div class="phone" id="ph2"><div class="scr"><div class="ss on"><img src="img/p_home.webp" alt="" width="780" height="1600" loading="lazy"></div><div class="ss"><img src="img/p_stats.webp" alt="" width="780" height="1600" loading="lazy"></div><div class="ss"><img src="img/p_weight.webp" alt="" width="780" height="1600" loading="lazy"></div><div class="ss"><img src="img/p_friends.webp" alt="" width="780" height="1600" loading="lazy"></div><div class="ss"><img src="img/p_me.webp" alt="" width="780" height="1600" loading="lazy"></div><div class="shine"></div></div></div></div></div></section>
 
-<section id="features">
+<section id="features" class="dz"><div class="bgw" style="--t:3%" data-s="-120" aria-hidden="true">TRACK</div><div class="fo " style="--w:170px;--w0:170px;right:3%;top:70px;--r0:-12deg;--r1:-2deg" data-s="50" aria-hidden="true"><div class="fi"><svg viewBox="0 0 220 130"><defs><linearGradient id="fd1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#6d28d9"/></linearGradient><linearGradient id="fd2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#67e8f9"/><stop offset="1" stop-color="#0891b2"/></linearGradient><linearGradient id="fd3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6fb"/><stop offset=".5" stop-color="#aab1c4"/><stop offset="1" stop-color="#6b7388"/></linearGradient></defs>
+<rect x="66" y="56" width="88" height="18" rx="9" fill="url(#fd3)"/>
+<rect x="36" y="18" width="30" height="94" rx="12" fill="url(#fd1)"/><rect x="14" y="36" width="26" height="58" rx="10" fill="url(#fd2)"/>
+<rect x="154" y="18" width="30" height="94" rx="12" fill="url(#fd1)"/><rect x="180" y="36" width="26" height="58" rx="10" fill="url(#fd2)"/>
+<rect x="42" y="24" width="8" height="82" rx="4" fill="#fff" opacity=".28"/><rect x="160" y="24" width="8" height="82" rx="4" fill="#fff" opacity=".28"/></svg></div></div><div class="fo hm" style="--w:70px;--w0:70px;left:3%;bottom:9%;--g:rgba(251,146,60,.45);--d:7s;--dl:-3s" data-s="35" aria-hidden="true"><div class="fi"><svg viewBox="0 0 100 124"><defs><linearGradient id="ff1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fde047"/><stop offset=".45" stop-color="#fb923c"/><stop offset="1" stop-color="#e11d48"/></linearGradient><linearGradient id="ff2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff7c2"/><stop offset="1" stop-color="#fbbf24"/></linearGradient></defs>
+<path d="M50 4C55 30 80 40 80 72c0 26-15 46-30 46S20 98 20 72c0-15 6-24 13-33 2 11 6 15 11 15C41 36 39 20 50 4Z" fill="url(#ff1)"/>
+<path d="M50 118c-11 0-19-9-19-21 0-13 9-19 15-30 2 9 6 11 9 15 3-4 4-8 4-12 7 8 10 17 10 27 0 12-8 21-19 21Z" fill="url(#ff2)"/></svg></div></div>
   <div class="wrap">
     <div class="sec-h rv"><small>Что внутри</small><h2>Трекер, который хочется открывать</h2><p>Всё, что нужно для регулярных тренировок, и много приятных мелочей поверх.</p></div>
     <div class="grid fgrid">
@@ -601,7 +630,8 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   </div>
 </section>
 
-<section id="lab">
+<section id="lab" class="dz"><div class="bgw alt" style="--t:2%" data-s="-120" aria-hidden="true">STYLE</div><div class="fo " style="--w:190px;--w0:190px;right:3%;top:30px;--d:10s" data-s="45" aria-hidden="true"><div class="fi"><svg viewBox="0 0 140 140"><defs><linearGradient id="fr1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f472b6"/><stop offset=".5" stop-color="#8b5cf6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<circle cx="70" cy="70" r="46" fill="none" stroke="url(#fr1)" stroke-width="11"/><circle cx="70" cy="70" r="62" fill="none" stroke="url(#fr1)" stroke-width="2.5" stroke-dasharray="3 9" stroke-linecap="round" class="fo-sp"/><circle cx="70" cy="70" r="34" fill="url(#fr1)" opacity=".18"/><circle cx="116" cy="70" r="8" fill="#fff"/><circle cx="116" cy="70" r="14" fill="#fff" opacity=".25"/></svg></div></div><div class="fo hm sm" style="--w:50px;--w0:50px;right:6%;bottom:12%;--g:rgba(250,204,21,.5);--d:7s;--dl:-2s" data-s="70" aria-hidden="true"><div class="fi"><svg viewBox="0 0 100 100"><defs><linearGradient id="fs1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs><path d="M50 6l13.2 28 30.8 4-22.6 21.2 5.8 30.4L50 74.6 22.8 89.6l5.8-30.4L6 38l30.8-4z" fill="url(#fs1)" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linejoin="round"/></svg></div></div>
   <div class="wrap">
     <div class="sec-h rv"><small>Попробуй сам</small><h2>Собери свой стиль</h2><p>Это маленькая демонстрация. В приложении рамок и фонов гораздо больше.</p></div>
     <div class="lab rv">
@@ -633,7 +663,10 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   </div>
 </section>
 
-<section>
+<section class="dz"><div class="bgw" style="--t:1%" data-s="-120" aria-hidden="true">SCORE</div><div class="fo " style="--w:150px;--w0:150px;right:4%;top:56px;--g:rgba(34,211,238,.4);--d:9s;--r0:8deg;--r1:-6deg" data-s="50" aria-hidden="true"><div class="fi"><svg viewBox="0 0 120 134"><defs><linearGradient id="fw1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a5f3fc"/><stop offset="1" stop-color="#7c3aed"/></linearGradient><linearGradient id="fw2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e5e7ef"/><stop offset="1" stop-color="#7b8398"/></linearGradient></defs>
+<rect x="46" y="2" width="28" height="12" rx="5" fill="url(#fw2)"/><rect x="54" y="12" width="12" height="12" fill="url(#fw2)"/>
+<circle cx="60" cy="76" r="50" fill="url(#fw1)"/><circle cx="60" cy="76" r="40" fill="#0b0d16" opacity=".88"/><circle cx="60" cy="76" r="40" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-dasharray="2 8.2"/>
+<path d="M60 76V50" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M60 76l18 10" stroke="#22d3ee" stroke-width="4" stroke-linecap="round"/><circle cx="60" cy="76" r="5" fill="#f472b6"/></svg></div></div>
   <div class="wrap">
     <div class="sec-h rv"><small>Как считаются очки</small><h2>Посчитай свою тренировку</h2><p>Формулы те же, что в приложении. Подвигай ползунки и посмотри, сколько очков ты получишь.</p></div>
     <div class="calc rv">
@@ -656,7 +689,10 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   </div>
 </section>
 
-<section>
+<section class="dz"><div class="bgw alt" style="--t:12%;--fs:min(20vw,300px)" data-s="-120" aria-hidden="true">LEVEL UP</div><div class="fo " style="--w:105px;--w0:105px;right:4%;top:2%;--g:rgba(245,158,11,.45);--d:8s;--r0:-10deg;--r1:7deg" data-s="55" aria-hidden="true"><div class="fi"><svg viewBox="0 0 100 134"><defs><linearGradient id="fm1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset=".55" stop-color="#f59e0b"/><stop offset="1" stop-color="#b45309"/></linearGradient><linearGradient id="fm2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<path d="M26 2h20l14 44H40z" fill="url(#fm2)"/><path d="M74 2H54L40 46h20z" fill="url(#fm2)" opacity=".75"/>
+<circle cx="50" cy="86" r="40" fill="url(#fm1)"/><circle cx="50" cy="86" r="31" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.5" stroke-dasharray="3 5"/>
+<path d="M50 62l7.5 15.2 16.8 2.4-12.1 11.8 2.9 16.7L50 100.2l-15.1 7.9 2.9-16.7-12.1-11.8 16.8-2.4z" fill="#fff" opacity=".92"/></svg></div></div><div class="fo hm" style="--w:54px;--w0:54px;left:6%;bottom:6%;--g:rgba(250,204,21,.5);--d:6s;--dl:-1s" data-s="80" aria-hidden="true"><div class="fi"><svg viewBox="0 0 100 100"><defs><linearGradient id="fs1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs><path d="M50 6l13.2 28 30.8 4-22.6 21.2 5.8 30.4L50 74.6 22.8 89.6l5.8-30.4L6 38l30.8-4z" fill="url(#fs1)" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linejoin="round"/></svg></div></div>
   <div class="wrap">
     <div class="nums">
       <div class="num rv"><b data-n="56">0</b><span>анимированных рамок</span></div>
@@ -1101,6 +1137,15 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   if(!L0){var nl=(navigator.language||'ru').slice(0,2).toLowerCase();L0=nl==='kk'?'kk':nl==='en'?'en':'ru'}
   if(L0!=='ru')setLang(L0,false);else document.documentElement.lang='ru';
   $('#lcur').textContent=LANG==='kk'?'KZ':LANG.toUpperCase();$$('.lm button').forEach(function(b){b.classList.toggle('on',b.dataset.l===LANG)});
+
+  /* параллакс декора: крупные слова плывут вбок, объекты — по вертикали */
+  (function(){
+    var els=[].slice.call(document.querySelectorAll('.bgw,.fo')),tk=false;
+    if(!els.length||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    function upd(){tk=false;var vh=innerHeight;els.forEach(function(e){var h=e.closest('section,.hero');if(!h)return;var r=h.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)return;var p=(r.top+r.height/2-vh/2)/vh,k=parseFloat(e.dataset.s)||40;
+      if(e.classList.contains('bgw'))e.style.setProperty('--bx',(p*k*-3).toFixed(1)+'px');else e.style.setProperty('--py',(p*k).toFixed(1)+'px')})}
+    addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(upd)}},{passive:true});addEventListener('resize',upd);upd();
+  })();
 })();
 </script>
 </body>
