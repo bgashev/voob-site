@@ -589,9 +589,9 @@ html[data-theme=light] .thb .moon{opacity:0;transform:rotate(70deg) scale(.4)}
 .po-glow{position:absolute;inset:8%;border-radius:50%;background:conic-gradient(from 0deg,var(--a),var(--b),var(--c),var(--a));filter:blur(46px);opacity:.5;animation:spin 14s linear infinite}
 .pro>.pro-hit{position:absolute;right:0;top:0;bottom:0;width:48%;z-index:0}
 .po-waves{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;pointer-events:none}
-.po-waves i{position:absolute;left:19%;top:19%;width:62%;aspect-ratio:1;border-radius:50%;border:1px solid color-mix(in srgb,var(--b) 70%,#fff);box-shadow:0 0 14px color-mix(in srgb,var(--b) 45%,transparent);opacity:0;animation:powave 4.4s cubic-bezier(.2,.6,.3,1) infinite}
-.po-waves i:nth-child(2){animation-delay:1.1s}.po-waves i:nth-child(3){animation-delay:2.2s}.po-waves i:nth-child(4){animation-delay:3.3s}
-@keyframes powave{0%{transform:scale(1);opacity:.85}70%{opacity:.18}100%{transform:scale(2.5);opacity:0}}
+.po-waves i{position:absolute;left:19%;top:19%;width:62%;aspect-ratio:1;border-radius:50%;border:1px solid color-mix(in srgb,var(--b) 70%,#fff);box-shadow:0 0 8px color-mix(in srgb,var(--b) 45%,transparent);opacity:0;animation:powave 7.2s cubic-bezier(.2,.6,.3,1) infinite}
+.po-waves i:nth-child(2){animation-delay:1.8s}.po-waves i:nth-child(3){animation-delay:3.6s}.po-waves i:nth-child(4){animation-delay:5.4s}
+@keyframes powave{0%{transform:scale(1);opacity:.6}70%{opacity:.18}100%{transform:scale(1.75);opacity:0}}
 .pro:has(.pro-hit:hover) .po-waves,.pro-obj:hover .po-waves{opacity:1}
 @media(max-width:900px){.pro>.pro-hit{display:none}.po-waves{opacity:.7}}
 .po-ring{position:absolute;border-radius:50%;border:1px dashed color-mix(in srgb,var(--tx) 22%,transparent);animation:spin 40s linear infinite}
