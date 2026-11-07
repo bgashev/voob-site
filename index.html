@@ -1093,6 +1093,15 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   function count(el){var to=+el.dataset.n,t0=performance.now(),d=1400;
     (function f(t){var p=Math.min(1,(t-t0)/d);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)}
 
+  /* карточка «Уровни и очки»: при наведении +44 растёт до +71, кольцо дозаполняется; при уходе возвращается */
+  (function(){var card=document.querySelector('.ringv');if(!card)return;card=card.closest('.card');var b=card.querySelector('.plus'),rp=card.querySelector('.rp'),cur=44,raf=0;
+    function go(to){cancelAnimationFrame(raf);var from=cur,t0=performance.now(),d=Math.max(500,Math.abs(to-from)*40);
+      (function f(t){var p=Math.min(1,(t-t0)/d),e=1-Math.pow(1-p,3);cur=from+(to-from)*e;b.textContent=Math.round(cur);
+        rp.style.transition='none';rp.style.strokeDashoffset=(339*(1-(.77+(cur-44)/(71-44)*.19))).toFixed(1);
+        if(p<1)raf=requestAnimationFrame(f)})(t0)}
+    card.addEventListener('mouseenter',function(){if(card.classList.contains('in')&&!reduce)go(71)});
+    card.addEventListener('mouseleave',function(){if(card.classList.contains('in')&&!reduce)go(44)});
+  })();
   var glow=$('#glow');
   if(fine&&!reduce){
     addEventListener('pointermove',function(e){glow.style.opacity=1;glow.style.transform='translate('+e.clientX+'px,'+e.clientY+'px)'},{passive:true});
