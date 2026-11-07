@@ -383,7 +383,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);fon
 @keyframes gShake{0%,100%{rotate:0deg}20%{rotate:-12deg}40%{rotate:10deg}60%{rotate:-7deg}80%{rotate:4deg}}
 .hand{position:absolute;left:0;top:0;width:300px;transform-origin:50% 100%;transform:translate(-50%,-100%) scale(.06);opacity:0;z-index:9998;pointer-events:none;will-change:transform}
 
-.hand svg{display:block;width:100%;height:auto;overflow:visible}
+.hand svg{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 4px 6px rgba(18,10,48,.38)) drop-shadow(0 22px 30px rgba(18,10,48,.5)) drop-shadow(0 0 1px rgba(18,10,48,.5))}
 .hand .it{position:absolute;left:50%;top:-4%;transform:translateX(-50%) rotate(var(--r,-8deg));font-size:clamp(84px,24vw,120px);line-height:1;filter:drop-shadow(0 10px 14px #0006)}
 .hand .cap{position:absolute;left:50%;top:-30%;translate:-50% 0;white-space:nowrap;background:var(--card,#16161d);color:var(--tx,#fff);border:1px solid var(--line,#ffffff22);padding:8px 16px;border-radius:999px;font-weight:800;font-size:14px;box-shadow:0 10px 30px #0005;opacity:0;transition:opacity .3s .35s}
 .hand.on .cap{opacity:1}
