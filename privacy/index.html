@@ -16,6 +16,7 @@
 html[data-theme=light]{--bg:#f3f4f9;--card:rgba(255,255,255,.72);--line:rgba(20,24,44,.12);--tx:#14151c;--mut:#5d6477;color-scheme:light}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 body{background:var(--bg);color:var(--tx);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
 .wrap{width:min(760px,100% - 40px);margin-inline:auto}
@@ -47,13 +48,24 @@ th{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
 td:first-child{font-weight:600;white-space:nowrap}
 .note{padding:16px 18px;border:1px solid var(--line);border-left:3px solid var(--c);border-radius:14px;background:var(--card);font-size:14.5px;margin:6px 0 14px}
 .mail{font-weight:700;color:var(--a);text-decoration:none;border-bottom:1px solid currentColor}
+.l{display:none}
+html[data-lang=ru] .l.ru,html[data-lang=kk] .l.kk,html[data-lang=en] .l.en{display:block}
+.back .l.ru,.back .l.kk,.back .l.en{display:none}
+html[data-lang=ru] .back .l.ru,html[data-lang=kk] .back .l.kk,html[data-lang=en] .back .l.en{display:inline}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.lsw{display:inline-flex;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--card)}
+.lsw button{font-size:12.5px;font-weight:700;letter-spacing:.04em;padding:7px 13px;border-radius:999px;color:var(--mut);transition:color .2s,background .2s}
+.lsw button:hover{color:var(--tx)}
+.lsw button.on{background:var(--tx);color:var(--bg)}
 footer{padding:26px 0 48px;border-top:1px solid var(--line);font-size:13px;color:var(--mut)}
 @media (max-width:640px){.sum{grid-template-columns:1fr}td:first-child{white-space:normal}.lead{font-size:16.5px}}
 </style>
 </head>
 <body>
-<header><div class="wrap"><a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>На главную</a></div></header>
+<header><div class="wrap bar"><a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg><span class="l ru">На главную</span><span class="l kk">Басты бетке</span><span class="l en">Back to home</span></a>
+<div class="lsw" role="group" aria-label="Language"><button type="button" data-lg="ru">RU</button><button type="button" data-lg="kk">ҚАЗ</button><button type="button" data-lg="en">EN</button></div></div></header>
 <div class="wrap">
+  <div class="l ru">
   <div class="hero">
     <span class="tag">VOOB · Конфиденциальность</span>
     <h1>Политика конфиденциальности</h1>
@@ -157,8 +169,221 @@ footer{padding:26px 0 48px;border-top:1px solid var(--line);font-size:13px;color
       <p>Если политика изменится, мы обновим дату и версию на этой странице. О важных изменениях сообщим в приложении или в Telegram-канале <a class="mail" href="https://t.me/voobkz" target="_blank" rel="noopener">@voobkz</a>.</p>
     </section>
   </main>
+  </div>
+  <div class="l kk" lang="kk">
+  <div class="hero">
+    <span class="tag">VOOB · Құпиялылық</span>
+    <h1>Құпиялылық саясаты</h1>
+    <p class="lead">Қысқа әрі түсінікті: VOOB қандай деректерді сақтайды, не үшін, оларды кім көре алады және оларды қалай жоюға болады.</p>
+    <p class="meta">2026 жылғы 7 қарашадан бастап күшінде · 1.0 нұсқа</p>
+    <div class="sum">
+      <div><b>Тек қажеттісі</b><span>Деректер жаттығулар, достар және PRO жұмыс істеуі үшін ғана қажет. Жарнама да, аналитика да жоқ.</span></div>
+      <div><b>Сатпаймыз</b><span>Ешкімнің деректері сатылмайды және жарнама желілеріне берілмейді.</span></div>
+      <div><b>Жойылады</b><span>Аккаунтты баптаулардан өшіруге немесе бізге поштаға жазуға болады.</span></div>
+    </div>
+  </div>
+  <main>
+    <section>
+      <h2><i>01</i>Деректерге кім жауап береді</h2>
+      <p>VOOB сервисінің (Telegram Mini App, app.voob.kz веб-нұсқасы және voob.kz сайты) операторы — жеке тұлға Бгашев Владислав Вадимович, Қазақстан Республикасы, Павлодар қ.</p>
+      <p>Деректерге қатысты кез келген сұрақ бойынша: <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a>.</p>
+    </section>
+    <section>
+      <h2><i>02</i>Біз қандай деректерді аламыз</h2>
+      <div class="tbl"><table>
+        <tr><th>Деректер</th><th>Қайдан және не үшін</th></tr>
+        <tr><td>Telegram ID, аты, @username</td><td>Кіру кезінде Telegram береді. Аккаунтты құру және тану үшін қажет.</td></tr>
+        <tr><td>Жаттығулар, салмақ, мақсаттар, баптаулар</td><td>Өзің енгізесің. Статистика, деңгейлер, жетістіктер және құрылғылар арасында синхрондау үшін қажет.</td></tr>
+        <tr><td>Аватар және профиль безендіру</td><td>Тек өзің жүктеген немесе таңдағаныңыз: аватар, жиек, фон, белгі, профиль @аты.</td></tr>
+        <tr><td>Достар, сұраныстар, сыйлықтар</td><td>Аккаунттар арасындағы байланыстар, жіберілген сыйлықтар және «жігерлендіру». Әлеуметтік бөлік үшін қажет.</td></tr>
+        <tr><td>Өтініштер</td><td>Қолданба арқылы жіберген идеялар мен шағымдар мәтіні.</td></tr>
+        <tr><td>PRO төлемі</td><td>Төлем Telegram Stars арқылы өтеді. Біз тек төлем фактісін және таңдалған тарифті көреміз. Төлем деректерін (карта және т.б.) алмаймыз және сақтамаймыз.</td></tr>
+        <tr><td>Google аккаунты (қалауыңызша)</td><td>Веб-нұсқаға кіру үшін Google-ды байласаң, оның идентификаторы мен e-mail сақталады. Google-дан басқа ештеңе сұралмайды.</td></tr>
+        <tr><td>Техникалық деректер</td><td>Соңғы кіру уақыты және кіру түрі (қолданба, веб, бағдарлама) — сессиялар мен аккаунт қорғанысы жұмыс істеуі үшін.</td></tr>
+      </table></div>
+      <p>Біз геолокацияға, байланыстарға, камераға және микрофонға рұқсат сұрамаймыз және мінез-құлық аналитикасын жүргізбейміз.</p>
+    </section>
+    <section>
+      <h2><i>03</i>Деректерді не үшін қолданамыз</h2>
+      <ul>
+        <li>статистикаңды көрсету және құрылғылар арасында синхрондау;</li>
+        <li>достар, лента, сыйлықтар және PRO-жазылым жұмысы;</li>
+        <li>бот чатына қызметтік хабарлар жіберу (растаулар, кодтар, жазылым күйі);</li>
+        <li>өтініштерге жауап беру және қателерді түзету;</li>
+        <li>сервисті теріс пайдаланудан қорғау.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>04</i>Деректеріңді кім көреді</h2>
+      <p><b>Достар</b> профиліңді және лентаңды құпиялылық баптауларыңа сәйкес көреді. Профильді жабуға және жаңалықтарыңды достар лентасынан жасыруға болады. Дос емес пайдаланушылар профиль ашық болса, оның тек жария бөлігін көреді.</p>
+      <p><b>Басқа пайдаланушылар</b> жаттығуларыңды, салмағыңды және мақсаттарыңды көрмейді.</p>
+      <p><b>Оператор</b> сервис жұмысы мен қолдауға қажет көлемде деректерге қол жеткізе алады.</p>
+    </section>
+    <section>
+      <h2><i>05</i>Деректерді кімге береміз</h2>
+      <p>Тек онсыз VOOB жұмыс істемейтін сервистерге. Деректер оларға қызмет көрсету үшін ғана қажет; біз ештеңе сатпаймыз және жарнама желілеріне бермейміз.</p>
+      <div class="tbl"><table>
+        <tr><th>Сервис</th><th>Не үшін</th></tr>
+        <tr><td>Telegram</td><td>Кіру, бот, Stars төлемі</td></tr>
+        <tr><td>Supabase</td><td>Деректерді сақтау және серверлік бөлік</td></tr>
+        <tr><td>GitHub Pages</td><td>Сайт пен веб-қолданбаны хостинг</td></tr>
+        <tr><td>Google</td><td>Google арқылы кіру, тек байлаған жағдайда</td></tr>
+      </table></div>
+      <div class="note"><b>Қазақстаннан тыс серверлер.</b> Деректер Supabase серверлерінде Оңтүстік-Шығыс Азия аймағында (Сингапур) сақталады. VOOB-ты пайдалана отырып, осындай өңдеуге келісім бересің.</div>
+      <p>Заң тікелей талап еткен жағдайда деректер мемлекеттік органдарға ашылуы мүмкін.</p>
+    </section>
+    <section>
+      <h2><i>06</i>Деректерді қанша уақыт сақтаймыз</h2>
+      <p>Аккаунтың бар болғанша. Жоюды сұраған кезде аккаунт қысқа күту кезеңімен жоюға қойылады: осы уақытта ойыңды өзгертіп, оны қайтаруға болады. Одан кейін деректер қайтарусыз жойылады. Резервтік көшірмелер шектеулі уақыт сақталады, содан кейін қайта жазылады.</p>
+    </section>
+    <section>
+      <h2><i>07</i>Құқықтарың</h2>
+      <ul>
+        <li>сен туралы қандай деректер сақталғанын білу және көшірмесін алу;</li>
+        <li>дәл емес деректерді түзету (көбін қолданбаның өзінде түзетуге болады);</li>
+        <li>аккаунтты жою: қолданбада Баптаулар → «Аккаунт» немесе поштаға хат;</li>
+        <li>деректерді өңдеуге келісімді қайтарып алу және Google-ды ажырату;</li>
+        <li>құқықтарың бұзылды деп есептесең, шағымдану.</li>
+      </ul>
+      <p><a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a> поштасына профиль байланған Telegram-аккаунттан немесе e-mail-дан жаз: осылайша бұл сен екеніңе көз жеткіземіз. Қазақстан Республикасы заңнамасында белгіленген мерзімде жауап береміз.</p>
+    </section>
+    <section>
+      <h2><i>08</i>Браузердегі файлдар</h2>
+      <p>Сайт пен веб-қолданба браузерде жұмысқа қажеттісін ғана сақтайды: таңдалған тақырып пен тіл, кіру сессиясы және желісіз жылдам жұмыс істеу үшін деректердің жергілікті көшірмесі. Жарнамалық және аналитикалық cookie жоқ.</p>
+    </section>
+    <section>
+      <h2><i>09</i>Балалар</h2>
+      <p>VOOB 14 жасқа дейінгі балаларға арналмаған. Егер баланың ата-анасының келісімінсіз сервисті пайдаланып жүргенін білсең, бізге жаз — біз аккаунтты жоямыз.</p>
+    </section>
+    <section>
+      <h2><i>10</i>Деректерді қорғау</h2>
+      <p>Байланыстар шифрланады (HTTPS), кіру Telegram арқылы расталады, дерекқорға қолжетім шектелген. Алайда ешбір сервис абсолютті қауіпсіздікке кепілдік бере алмайды, сондықтан Telegram және Google аккаунттарыңды қорғап ұста.</p>
+    </section>
+    <section>
+      <h2><i>11</i>Саясаттың өзгеруі</h2>
+      <p>Саясат өзгерсе, осы беттегі күн мен нұсқаны жаңартамыз. Маңызды өзгерістер туралы қолданбада немесе <a class="mail" href="https://t.me/voobkz" target="_blank" rel="noopener">@voobkz</a> Telegram-арнасында хабарлаймыз.</p>
+    </section>
+  </main>
+  </div>
+  <div class="l en" lang="en">
+  <div class="hero">
+    <span class="tag">VOOB · Privacy</span>
+    <h1>Privacy Policy</h1>
+    <p class="lead">Short and plain: what data VOOB stores, why, who can see it, and how to delete it.</p>
+    <p class="meta">In effect since 7 November 2026 · Version 1.0</p>
+    <div class="sum">
+      <div><b>Only what's needed</b><span>Data is used only to make workouts, friends and PRO work. No ads, no analytics.</span></div>
+      <div><b>We don't sell</b><span>Nobody's data is sold or passed to advertising networks.</span></div>
+      <div><b>Deletable</b><span>Delete your account in settings or just email us.</span></div>
+    </div>
+  </div>
+  <main>
+    <section>
+      <h2><i>01</i>Who is responsible for your data</h2>
+      <p>The operator of VOOB (the Telegram Mini App, the web version at app.voob.kz and the voob.kz website) is an individual, Vladislav Vadimovich Bgashev, Republic of Kazakhstan, Pavlodar.</p>
+      <p>For any questions about your data: <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a>.</p>
+    </section>
+    <section>
+      <h2><i>02</i>What data we receive</h2>
+      <div class="tbl"><table>
+        <tr><th>Data</th><th>Where it comes from and why</th></tr>
+        <tr><td>Telegram ID, name, @username</td><td>Provided by Telegram when you sign in. Needed to create and recognize your account.</td></tr>
+        <tr><td>Workouts, weight, goals, settings</td><td>Entered by you. Needed for statistics, levels, achievements and syncing between devices.</td></tr>
+        <tr><td>Avatar and profile look</td><td>Only what you uploaded or chose yourself: avatar, frame, background, badge, profile @name.</td></tr>
+        <tr><td>Friends, requests, gifts</td><td>Connections between accounts, gifts sent and “cheer-ups”. Needed for the social part.</td></tr>
+        <tr><td>Feedback</td><td>The text of ideas and complaints you send through the app.</td></tr>
+        <tr><td>PRO payments</td><td>Payment goes through Telegram Stars. We only see the fact of payment and the chosen plan. We never receive or store payment details (cards, etc.).</td></tr>
+        <tr><td>Google account (optional)</td><td>If you link Google to sign in to the web version, we store its identifier and e-mail. Nothing else is requested from Google.</td></tr>
+        <tr><td>Technical data</td><td>Last visit time and sign-in type (app, web, desktop program) so that sessions and account protection work.</td></tr>
+      </table></div>
+      <p>We do not request access to location, contacts, camera or microphone, and we do not run behavioral analytics.</p>
+    </section>
+    <section>
+      <h2><i>03</i>Why we use your data</h2>
+      <ul>
+        <li>show your statistics and sync them between devices;</li>
+        <li>run friends, the feed, gifts and PRO subscriptions;</li>
+        <li>send service messages in the bot chat (confirmations, codes, subscription status);</li>
+        <li>answer feedback and fix bugs;</li>
+        <li>protect the service from abuse.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>04</i>Who can see your data</h2>
+      <p><b>Friends</b> see your profile and feed according to your privacy settings. You can make your profile private and hide your news from friends' feeds. People who are not your friends see only the public part of your profile, if it is open.</p>
+      <p><b>Other users</b> do not see your workouts, weight or goals.</p>
+      <p><b>The operator</b> has access to data to the extent needed to run and support the service.</p>
+    </section>
+    <section>
+      <h2><i>05</i>Who we share data with</h2>
+      <p>Only to services without which VOOB cannot work. They need the data solely to provide their service; we sell nothing and share nothing with advertising networks.</p>
+      <div class="tbl"><table>
+        <tr><th>Service</th><th>Purpose</th></tr>
+        <tr><td>Telegram</td><td>Sign-in, bot, Stars payments</td></tr>
+        <tr><td>Supabase</td><td>Data storage and server side</td></tr>
+        <tr><td>GitHub Pages</td><td>Hosting of the website and web app</td></tr>
+        <tr><td>Google</td><td>Sign-in with Google, only if you linked it</td></tr>
+      </table></div>
+      <div class="note"><b>Servers outside Kazakhstan.</b> Data is stored on Supabase servers in the Southeast Asia region (Singapore). By using VOOB you agree to this processing.</div>
+      <p>Data may be disclosed to government authorities where the law expressly requires it.</p>
+    </section>
+    <section>
+      <h2><i>06</i>How long we keep data</h2>
+      <p>For as long as your account exists. When you request deletion, the account is scheduled for removal with a short waiting period during which you can change your mind and restore it. After that, data is deleted permanently. Backups are kept for a limited time and then overwritten.</p>
+    </section>
+    <section>
+      <h2><i>07</i>Your rights</h2>
+      <ul>
+        <li>find out what data is stored about you and get a copy;</li>
+        <li>correct inaccurate data (most of it can be edited right in the app);</li>
+        <li>delete your account: Settings → “Account” in the app, or by email;</li>
+        <li>withdraw your consent to data processing and unlink Google;</li>
+        <li>file a complaint if you believe your rights have been violated.</li>
+      </ul>
+      <p>Write to <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a> from the Telegram account or e-mail linked to your profile, so we can confirm it is you. We will reply within the time limits set by the legislation of the Republic of Kazakhstan.</p>
+    </section>
+    <section>
+      <h2><i>08</i>Files in your browser</h2>
+      <p>The website and web app store in your browser only what is needed to work: your chosen theme and language, your sign-in session and a local copy of your data for fast offline use. There are no advertising or analytics cookies.</p>
+    </section>
+    <section>
+      <h2><i>09</i>Children</h2>
+      <p>VOOB is not intended for children under 14. If you know a child is using the service without parental consent, write to us and we will delete the account.</p>
+    </section>
+    <section>
+      <h2><i>10</i>Data protection</h2>
+      <p>Connections are encrypted (HTTPS), sign-in is confirmed through Telegram, and access to the database is restricted. Still, no service can guarantee absolute security, so keep your Telegram and Google accounts well protected.</p>
+    </section>
+    <section>
+      <h2><i>11</i>Changes to this policy</h2>
+      <p>If the policy changes, we will update the date and version on this page. We will announce important changes in the app or in the Telegram channel <a class="mail" href="https://t.me/voobkz" target="_blank" rel="noopener">@voobkz</a>.</p>
+    </section>
+  </main>
+  </div>
   <footer>© <span id="yr">2026</span> VOOB · <a href="mailto:voob@ibvv.ru">voob@ibvv.ru</a></footer>
 </div>
+<script>
+(function(){
+  var T={ru:["Политика конфиденциальности — VOOB","Какие данные VOOB хранит, зачем, кому они видны и как их удалить."],
+         kk:["Құпиялылық саясаты — VOOB","VOOB қандай деректерді сақтайды, не үшін, оларды кім көреді және қалай жоюға болады."],
+         en:["Privacy Policy — VOOB","What data VOOB stores, why, who can see it and how to delete it."]};
+  function pick(){
+    var h=(location.hash||"").replace("#","").toLowerCase(); if(T[h]) return h;
+    try{var s=localStorage.getItem("voob_lang"); if(T[s]) return s;}catch(e){}
+    var n=((navigator.language||"ru")+"").slice(0,2).toLowerCase();
+    return n==="kk"?"kk":(n==="ru"||n==="be"||n==="uk")?"ru":"en";
+  }
+  function set(l,save){
+    document.documentElement.setAttribute("data-lang",l); document.documentElement.lang=l;
+    document.title=T[l][0]; var m=document.querySelector('meta[name=description]'); if(m) m.setAttribute("content",T[l][1]);
+    document.querySelectorAll(".lsw button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-lg")===l)});
+    if(save){try{localStorage.setItem("voob_lang",l)}catch(e){} try{history.replaceState(null,"","#"+l)}catch(e){}}
+  }
+  document.querySelectorAll(".lsw button").forEach(function(b){b.addEventListener("click",function(){set(b.getAttribute("data-lg"),true)})});
+  window.addEventListener("hashchange",function(){var h=location.hash.replace("#","");if(T[h])set(h,false)});
+  set(pick(),false);
+})();
+</script>
 <script>try{document.getElementById("yr").textContent=new Date().getFullYear()}catch(e){}</script>
 </body>
 </html>
