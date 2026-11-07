@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Правила сообщества — VOOB</title>
+<meta name="description" content="Правила сообщества VOOB: уважение, честные тренировки, приватность, жалобы и меры.">
+<meta name="theme-color" content="#07080c">
+<script>try{var _t=localStorage.getItem("voob_theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");document.documentElement.setAttribute("data-theme",_t)}catch(e){}</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'%3E%3Ccircle cx='37' cy='30' r='20' fill='none' stroke='%2322d3ee' stroke-width='8'/%3E%3Ccircle cx='63' cy='30' r='20' fill='none' stroke='%23f472b6' stroke-width='8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07080c;--card:rgba(255,255,255,.04);--line:rgba(255,255,255,.09);--tx:#f4f6fb;--mut:#9aa1b4;--a:#22d3ee;--b:#8b5cf6;--c:#f472b6;color-scheme:dark}
+html[data-theme=light]{--bg:#f3f4f9;--card:rgba(255,255,255,.72);--line:rgba(20,24,44,.12);--tx:#14151c;--mut:#5d6477;color-scheme:light}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+body{background:var(--bg);color:var(--tx);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.wrap{width:min(760px,100% - 40px);margin-inline:auto}
+header{padding:26px 0 0}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--mut);text-decoration:none;transition:color .2s}
+.back:hover{color:var(--tx)}
+.back svg{width:16px;height:16px}
+.hero{padding:44px 0 26px}
+.hero .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--a);margin-bottom:14px}
+h1{font-size:clamp(32px,6vw,48px);line-height:1.08;font-weight:800;letter-spacing:-.02em;text-wrap:balance}
+.lead{margin-top:16px;font-size:18px;color:var(--mut);max-width:60ch}
+.meta{margin-top:18px;font-size:13px;color:var(--mut)}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 10px}
+.sum div{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--card)}
+.sum b{display:block;font-size:15px;font-weight:700;margin-bottom:4px}
+.sum span{font-size:13.5px;color:var(--mut);line-height:1.45}
+main{padding-bottom:40px}
+section{padding:30px 0 6px;border-top:1px solid var(--line);margin-top:30px}
+section:first-of-type{margin-top:12px}
+h2{font-size:22px;font-weight:800;letter-spacing:-.01em;margin-bottom:14px;display:flex;gap:12px;align-items:baseline}
+h2 i{font-style:normal;font-size:13px;font-weight:700;color:var(--a);min-width:22px}
+p{margin-bottom:12px}
+ul{margin:0 0 12px 20px}li{margin-bottom:6px}
+.tbl{overflow-x:auto;margin:6px 0 14px;border:1px solid var(--line);border-radius:18px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14.5px}
+th,td{text-align:left;padding:12px 16px;vertical-align:top;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+td:first-child{font-weight:600;white-space:nowrap}
+.note{padding:16px 18px;border:1px solid var(--line);border-left:3px solid var(--c);border-radius:14px;background:var(--card);font-size:14.5px;margin:6px 0 14px}
+.mail{font-weight:700;color:var(--a);text-decoration:none;border-bottom:1px solid currentColor}
+.l{display:none}
+html[data-lang=ru] .l.ru,html[data-lang=kk] .l.kk,html[data-lang=en] .l.en{display:block}
+.back .l.ru,.back .l.kk,.back .l.en{display:none}
+html[data-lang=ru] .back .l.ru,html[data-lang=kk] .back .l.kk,html[data-lang=en] .back .l.en{display:inline}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.lsw{position:relative;display:inline-flex;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--card);isolation:isolate}
+.lsi{position:absolute;left:0;top:0;height:0;width:0;border-radius:999px;background:var(--tx);z-index:-1;pointer-events:none;opacity:0;transition:transform .5s cubic-bezier(.3,1.05,.35,1),width .5s cubic-bezier(.3,1.05,.35,1),height .3s,opacity .25s}
+.lsw button{font-size:12.5px;font-weight:700;letter-spacing:.04em;padding:7px 13px;border-radius:999px;color:var(--mut);transition:color .2s,background .2s}
+.lsw button:hover{color:var(--tx)}
+.lsw button{position:relative;transition:color .3s}
+.lsw button.on{color:var(--bg)}
+@media (prefers-reduced-motion:reduce){.lsi{transition:none}}
+footer{padding:26px 0 48px;border-top:1px solid var(--line);font-size:13px;color:var(--mut)}
+@media (max-width:640px){.sum{grid-template-columns:1fr}td:first-child{white-space:normal}.lead{font-size:16.5px}}
+</style>
+</head>
+<body>
+<header><div class="wrap bar"><a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg><span class="l ru">На главную</span><span class="l kk">Басты бетке</span><span class="l en">Back to home</span></a>
+<div class="lsw" role="group" aria-label="Language"><i class="lsi" aria-hidden="true"></i><button type="button" data-lg="ru">RU</button><button type="button" data-lg="kk">ҚАЗ</button><button type="button" data-lg="en">EN</button></div></div></header>
+<div class="wrap">
+  <div class="l ru">
+  <div class="hero">
+    <span class="tag">VOOB · Сообщество</span>
+    <h1>Правила сообщества</h1>
+    <p class="lead">VOOB — место, где приятно тренироваться и видеть успехи друзей. Эти правила нужны, чтобы так оставалось.</p>
+    <p class="meta">Действуют с 7 ноября 2026 · Версия 1.0</p>
+    <div class="sum">
+      <div><b>Уважай других</b><span>Без травли, оскорблений и давления. Друзья в VOOB для поддержки.</span></div>
+      <div><b>Честные тренировки</b><span>Рекорды и уровни имеют смысл, только когда они настоящие.</span></div>
+      <div><b>Пожаловаться просто</b><span>Кнопка «Идеи и жалобы» в приложении или письмо на почту.</span></div>
+    </div>
+  </div>
+  <main>
+    <section>
+      <h2><i>01</i>Зачем нужны правила</h2>
+      <p>VOOB — это тренировки, уровни, друзья, лента, подарки и оформление профиля. Всё социальное устроено так, чтобы мотивировать друг друга. Правила защищают это от тех, кто хочет всё испортить.</p>
+      <p>Пользуясь сервисом, ты соглашаешься с этими правилами. Они дополняют <a class="mail" href="/privacy/">Политику конфиденциальности</a> и <a class="mail" href="/offer/">Публичную оферту</a>.</p>
+    </section>
+    <section>
+      <h2><i>02</i>Главное: уважай людей</h2>
+      <ul>
+        <li>не оскорбляй, не унижай и не трави других пользователей;</li>
+        <li>не угрожай, не шантажируй и не пытайся давить на людей;</li>
+        <li>не дискриминируй по национальности, вере, полу, возрасту, внешности, здоровью или другим признакам;</li>
+        <li>не стыди за вес, тело и результаты: у каждого свой путь;</li>
+        <li>принимай «нет»: если человек не хочет общаться или удалил тебя из друзей, оставь его в покое.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>03</i>Профиль: имя, @ник, аватар</h2>
+      <p>Имя, @ник и аватар видят другие люди, поэтому в них нельзя:</p>
+      <ul>
+        <li>оскорбления, мат, призывы к насилию и ненависти;</li>
+        <li>контент для взрослых и шокирующие изображения;</li>
+        <li>выдавать себя за другого человека, за VOOB или за его команду;</li>
+        <li>чужие фото, логотипы и бренды, на которые у тебя нет прав;</li>
+        <li>личные данные других людей: телефоны, адреса, ссылки на личные страницы.</li>
+      </ul>
+      <p>Служебные ники (вроде admin или voob) зарезервированы. Мы можем попросить сменить ник или оформление, которые нарушают правила.</p>
+    </section>
+    <section>
+      <h2><i>04</i>Друзья, лента, подарки и «взбодрить»</h2>
+      <p>Эти функции созданы для поддержки, а не для навязчивости. Поэтому:</p>
+      <ul>
+        <li>не рассылай запросы в друзья массово и не спамь;</li>
+        <li>не используй «взбодрить» и подарки, чтобы надоедать или давить на человека;</li>
+        <li>не вымогай подарки, PRO и другие ценности;</li>
+        <li>не пытайся обойти лимиты (на друзей, подарки, «взбодрить»);</li>
+        <li>не размещай в ленте и профиле рекламу, ссылки на сторонние сервисы и мошеннические предложения.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>05</i>Честные тренировки</h2>
+      <p>Уровни, достижения и рейтинги работают, только если данные настоящие. Нельзя:</p>
+      <ul>
+        <li>вносить заведомо вымышленные тренировки, вес и результаты, чтобы набрать уровень или обогнать друзей;</li>
+        <li>использовать боты, скрипты и автоматизацию для накрутки;</li>
+        <li>обходить проверки данных: значения вне разумных пределов могут не засчитываться.</li>
+      </ul>
+      <p>Мы можем пересчитать или аннулировать накрученные результаты, достижения и баллы.</p>
+    </section>
+    <section>
+      <h2><i>06</i>Чужая приватность</h2>
+      <ul>
+        <li>не публикуй и не пересылай чужие данные и переписку без согласия человека;</li>
+        <li>уважай настройки приватности друзей: закрытые профили и скрытые ленты скрыты не случайно;</li>
+        <li>не пытайся выяснить личные данные других людей или добраться до чужих аккаунтов.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>07</i>Что запрещено технически</h2>
+      <ul>
+        <li>взлом, поиск и использование уязвимостей в ущерб людям или сервису (если нашёл уязвимость, напиши нам: <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a>);</li>
+        <li>нагрузка на серверы, автоматический сбор данных и «парсинг» профилей;</li>
+        <li>продажа, передача и обмен аккаунтами, PRO-доступом и подарками;</li>
+        <li>злоупотребление промокодами и акциями;</li>
+        <li>мошенничество и любые попытки обмана других пользователей или сервиса.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>08</i>Как пожаловаться</h2>
+      <p>Если кто-то нарушает правила, нажми «Идеи и жалобы» в приложении (Настройки) или напиши на <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a>. Укажи @ник человека и коротко опиши, что произошло. Скриншот поможет, но не присылай чужие личные данные, которых нет в самой ситуации.</p>
+      <p>Мы читаем жалобы вручную и не раскрываем жалобщика тому, на кого пожаловались.</p>
+    </section>
+    <section>
+      <h2><i>09</i>Что мы делаем в ответ</h2>
+      <p>Реакция зависит от серьёзности и повторяемости нарушения:</p>
+      <ul>
+        <li>предупреждение и просьба исправить;</li>
+        <li>сброс или скрытие нарушающего оформления, имени, @ника или аватара;</li>
+        <li>аннулирование накрученных результатов;</li>
+        <li>ограничение социальных функций (друзья, подарки, «взбодрить»);</li>
+        <li>закрытие аккаунта: за грубые, повторные нарушения, угрозы, травлю, мошенничество.</li>
+      </ul>
+      <p>Грубые нарушения могут привести к закрытию аккаунта сразу, без предупреждения. Условия возврата за PRO описаны в <a class="mail" href="/offer/">Публичной оферте</a>.</p>
+    </section>
+    <section>
+      <h2><i>10</i>Если ты не согласен</h2>
+      <p>Если считаешь, что ограничение наложено ошибочно, напиши на <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a> с Telegram-аккаунта, которого оно коснулось, и объясни ситуацию. Мы рассмотрим обращение в течение 10 рабочих дней и ответим.</p>
+    </section>
+    <section>
+      <h2><i>11</i>Угрозы и безопасность</h2>
+      <div class="note"><b>Если тебе или кому-то угрожает опасность,</b> не жди ответа от нас: звони в экстренные службы по номеру 112.</div>
+      <p>Угрозы жизни и здоровью, призывы к насилию и самоповреждению, материалы с участием детей и другие тяжёлые нарушения мы удаляем сразу и можем передать информацию правоохранительным органам, если этого требует закон.</p>
+    </section>
+    <section>
+      <h2><i>12</i>Изменения правил</h2>
+      <p>Мы можем обновлять правила. Новая редакция вступает в силу с даты публикации на этой странице; о существенных изменениях сообщим в приложении или в Telegram-канале <a class="mail" href="https://t.me/voobkz" target="_blank" rel="noopener">@voobkz</a>. Вопросы и предложения: <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a>.</p>
+    </section>
+  </main>
+  </div>
+  <div class="l kk" lang="kk">
+  <div class="hero">
+    <span class="tag">VOOB · Қауымдастық</span>
+    <h1>Қауымдастық ережелері</h1>
+    <p class="lead">VOOB — жаттығу жасап, достардың жетістігін көру қуанышты орын. Бұл ережелер солай қалуы үшін қажет.</p>
+    <p class="meta">2026 жылғы 7 қарашадан бастап күшінде · 1.0 нұсқа</p>
+    <div class="sum">
+      <div><b>Басқаларды сыйла</b><span>Қудалау, қорлау және қысым көрсету жоқ. VOOB-тағы достар қолдау көрсету үшін.</span></div>
+      <div><b>Адал жаттығулар</b><span>Рекордтар мен деңгейлердің мәні олар шынайы болғанда ғана бар.</span></div>
+      <div><b>Шағымдану оңай</b><span>Қолданбадағы «Идеялар мен шағымдар» түймесі немесе поштаға хат.</span></div>
+    </div>
+  </div>
+  <main>
+    <section>
+      <h2><i>01</i>Ережелер не үшін қажет</h2>
+      <p>VOOB — жаттығулар, деңгейлер, достар, лента, сыйлықтар және профильді безендіру. Барлық әлеуметтік бөлік бір-бірін жігерлендіру үшін жасалған. Ережелер мұны бәрін бұзғысы келетіндерден қорғайды.</p>
+      <p>Сервисті пайдалана отырып, сен осы ережелермен келісесің. Олар <a class="mail" href="/privacy/">Құпиялылық саясатын</a> және <a class="mail" href="/offer/">Жария офертаны</a> толықтырады.</p>
+    </section>
+    <section>
+      <h2><i>02</i>Басты ереже: адамдарды сыйла</h2>
+      <ul>
+        <li>басқа пайдаланушыларды қорлама, мұқатпа және қудалама;</li>
+        <li>қорқытпа, шантаж жасама және адамдарға қысым жасауға тырыспа;</li>
+        <li>ұлтына, дініне, жынысына, жасына, сыртқы келбетіне, денсаулығына немесе басқа белгілеріне қарай кемсітпе;</li>
+        <li>салмағы, денесі және нәтижелері үшін ұят етпе: әркімнің өз жолы бар;</li>
+        <li>«жоқ» дегенді қабылда: адам сөйлескісі келмесе немесе сені достықтан алып тастаса, оны қалдыр.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>03</i>Профиль: есім, @ник, аватар</h2>
+      <p>Есімді, @никті және аватарды басқа адамдар көреді, сондықтан оларға мыналарға болмайды:</p>
+      <ul>
+        <li>қорлау, балағат сөздер, зорлық-зомбылық пен жеккөрінішке шақыру;</li>
+        <li>ересектерге арналған және шошытатын контент;</li>
+        <li>өзін басқа адам, VOOB немесе оның командасы ретінде көрсету;</li>
+        <li>құқығың жоқ басқалардың фотолары, логотиптері мен брендтері;</li>
+        <li>басқа адамдардың жеке деректері: телефон, мекенжай, жеке беттерге сілтемелер.</li>
+      </ul>
+      <p>Қызметтік никтер (admin немесе voob сияқты) резервте. Біз ережені бұзатын ник немесе безендіруді ауыстыруды сұрауымыз мүмкін.</p>
+    </section>
+    <section>
+      <h2><i>04</i>Достар, лента, сыйлықтар және «жігерлендіру»</h2>
+      <p>Бұл функциялар қолдау көрсету үшін жасалған, мазалау үшін емес. Сондықтан:</p>
+      <ul>
+        <li>достыққа жаппай сұраныс жіберме және спам жасама;</li>
+        <li>«жігерлендіру» мен сыйлықтарды адамды мазалау немесе қысым жасау үшін қолданба;</li>
+        <li>сыйлықтарды, PRO-ны және басқа құндылықтарды қорқытып алма;</li>
+        <li>шектеулерді (достарға, сыйлықтарға, «жігерлендіруге») айналып өтуге тырыспа;</li>
+        <li>лентада мен профильде жарнама, үшінші жақ сервистеріне сілтемелер және алаяқтық ұсыныстар орналастырма.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>05</i>Адал жаттығулар</h2>
+      <p>Деңгейлер, жетістіктер мен рейтингтер деректер шынайы болғанда ғана жұмыс істейді. Болмайды:</p>
+      <ul>
+        <li>деңгей жинау немесе достардан озу үшін жалған жаттығуларды, салмақты және нәтижелерді енгізу;</li>
+        <li>жасанды өсіру үшін боттарды, скрипттерді және автоматтандыруды қолдану;</li>
+        <li>деректер тексерулерін айналып өту: ақылға сыйымды шектен тыс мәндер есептелмеуі мүмкін.</li>
+      </ul>
+      <p>Біз жасанды өсірілген нәтижелерді, жетістіктер мен ұпайларды қайта есептеуге немесе жоюға құқылымыз.</p>
+    </section>
+    <section>
+      <h2><i>06</i>Өзгелердің құпиялылығы</h2>
+      <ul>
+        <li>адамның келісімінсіз өзгелердің деректері мен хат алмасуын жарияла немесе жіберме;</li>
+        <li>достардың құпиялылық баптауларын құрметте: жабық профильдер мен жасырын лентелер кездейсоқ жасырылмаған;</li>
+        <li>басқа адамдардың жеке деректерін білуге немесе өзгенің аккаунттарына кіруге тырыспа.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>07</i>Техникалық тыйымдар</h2>
+      <ul>
+        <li>адамдарға немесе сервиске зиян келтіру үшін осалдықтарды іздеу, пайдалану және бұзу (осалдық тапсаң, бізге жаз: <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a>);</li>
+        <li>серверлерге жүктеме, деректерді автоматты жинау және профильдерді «парсинг» жасау;</li>
+        <li>аккаунттарды, PRO қолжетімділігін және сыйлықтарды сату, беру және айырбастау;</li>
+        <li>промокодтар мен акцияларды теріс пайдалану;</li>
+        <li>алаяқтық және басқа пайдаланушыларды немесе сервисті алдауға кез келген әрекет.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>08</i>Қалай шағымдануға болады</h2>
+      <p>Біреу ережелерді бұзса, қолданбада (Баптаулар) «Идеялар мен шағымдар» түймесін бас немесе <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a> поштасына жаз. Адамның @нигін көрсетіп, не болғанын қысқаша сипатта. Скриншот көмектеседі, бірақ жағдайда жоқ өзгенің жеке деректерін жіберме.</p>
+      <p>Біз шағымдарды қолмен оқимыз және шағымданушыны шағым жасалған адамға ашпаймыз.</p>
+    </section>
+    <section>
+      <h2><i>09</i>Жауап ретінде не істейміз</h2>
+      <p>Реакция бұзушылықтың ауырлығы мен қайталануына байланысты:</p>
+      <ul>
+        <li>ескерту және түзетуді сұрау;</li>
+        <li>ереже бұзатын безендіруді, есімді, @никті немесе аватарды қалпына келтіру немесе жасыру;</li>
+        <li>жасанды өсірілген нәтижелерді жою;</li>
+        <li>әлеуметтік функцияларды шектеу (достар, сыйлықтар, «жігерлендіру»);</li>
+        <li>аккаунтты жабу: дөрекі, қайталанған бұзушылықтар, қорқыту, қудалау, алаяқтық үшін.</li>
+      </ul>
+      <p>Ауыр бұзушылықтар аккаунттың ескертусіз бірден жабылуына әкелуі мүмкін. PRO үшін қайтару шарттары <a class="mail" href="/offer/">Жария офертада</a> сипатталған.</p>
+    </section>
+    <section>
+      <h2><i>10</i>Келіспесең</h2>
+      <p>Шектеу қате қойылды деп есептесең, ол қатысты Telegram-аккаунттан <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a> поштасына жазып, жағдайды түсіндір. Біз өтінішті 10 жұмыс күні ішінде қарап, жауап береміз.</p>
+    </section>
+    <section>
+      <h2><i>11</i>Қауіп және қауіпсіздік</h2>
+      <div class="note"><b>Саған немесе біреуге қауіп төніп тұрса,</b> бізден жауап күтпе: 112 нөмірімен шұғыл қызметтерге қоңырау шал.</div>
+      <p>Өмір мен денсаулыққа қауіп төндіру, зорлық-зомбылыққа және өзіне зиян келтіруге шақыру, балалар қатысқан материалдар және басқа ауыр бұзушылықтарды біз бірден жоямыз және заң талап етсе, ақпаратты құқық қорғау органдарына бере аламыз.</p>
+    </section>
+    <section>
+      <h2><i>12</i>Ережелердің өзгеруі</h2>
+      <p>Біз ережелерді жаңартуымыз мүмкін. Жаңа редакция осы бетте жарияланған күннен бастап күшіне енеді; елеулі өзгерістер туралы қолданбада немесе <a class="mail" href="https://t.me/voobkz" target="_blank" rel="noopener">@voobkz</a> Telegram-арнасында хабарлаймыз. Сұрақтар мен ұсыныстар: <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a>.</p>
+    </section>
+  </main>
+  </div>
+  <div class="l en" lang="en">
+  <div class="hero">
+    <span class="tag">VOOB · Community</span>
+    <h1>Community Guidelines</h1>
+    <p class="lead">VOOB is a place where it's nice to work out and see your friends' progress. These guidelines keep it that way.</p>
+    <p class="meta">In effect since 7 November 2026 · Version 1.0</p>
+    <div class="sum">
+      <div><b>Respect others</b><span>No bullying, insults or pressure. Friends in VOOB are there to support each other.</span></div>
+      <div><b>Honest workouts</b><span>Records and levels only mean something when they're real.</span></div>
+      <div><b>Easy to report</b><span>The “Ideas and complaints” button in the app, or an email.</span></div>
+    </div>
+  </div>
+  <main>
+    <section>
+      <h2><i>01</i>Why we have guidelines</h2>
+      <p>VOOB is workouts, levels, friends, a feed, gifts and profile customization. Everything social is built to help people motivate each other. These guidelines protect that from people who want to spoil it.</p>
+      <p>By using the service you agree to these guidelines. They complement the <a class="mail" href="/privacy/">Privacy Policy</a> and the <a class="mail" href="/offer/">Public Offer</a>.</p>
+    </section>
+    <section>
+      <h2><i>02</i>The main rule: respect people</h2>
+      <ul>
+        <li>don't insult, humiliate or bully other users;</li>
+        <li>don't threaten, blackmail or try to pressure people;</li>
+        <li>don't discriminate based on nationality, religion, gender, age, appearance, health or other traits;</li>
+        <li>don't shame anyone for weight, body or results: everyone has their own path;</li>
+        <li>accept “no”: if someone doesn't want to talk or removed you from friends, leave them alone.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>03</i>Profile: name, @handle, avatar</h2>
+      <p>Others see your name, @handle and avatar, so they must not contain:</p>
+      <ul>
+        <li>insults, profanity, calls for violence or hatred;</li>
+        <li>adult content or shocking images;</li>
+        <li>impersonation of another person, VOOB or its team;</li>
+        <li>other people's photos, logos and brands you have no rights to;</li>
+        <li>other people's personal data: phone numbers, addresses, links to private pages.</li>
+      </ul>
+      <p>Service handles (like admin or voob) are reserved. We may ask you to change a handle or look that breaks the guidelines.</p>
+    </section>
+    <section>
+      <h2><i>04</i>Friends, feed, gifts and “cheer-ups”</h2>
+      <p>These features exist to support people, not to nag them. So:</p>
+      <ul>
+        <li>don't send friend requests in bulk or spam;</li>
+        <li>don't use “cheer-ups” and gifts to pester or pressure someone;</li>
+        <li>don't extort gifts, PRO or other valuables;</li>
+        <li>don't try to bypass limits (on friends, gifts, cheer-ups);</li>
+        <li>don't post ads, links to third-party services or scam offers in the feed or your profile.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>05</i>Honest workouts</h2>
+      <p>Levels, achievements and rankings only work when the data is real. Do not:</p>
+      <ul>
+        <li>enter obviously made-up workouts, weight or results to gain levels or outdo friends;</li>
+        <li>use bots, scripts or automation to inflate numbers;</li>
+        <li>bypass data checks: values outside reasonable limits may not be counted.</li>
+      </ul>
+      <p>We may recalculate or cancel inflated results, achievements and points.</p>
+    </section>
+    <section>
+      <h2><i>06</i>Other people's privacy</h2>
+      <ul>
+        <li>don't post or forward other people's data or conversations without their consent;</li>
+        <li>respect friends' privacy settings: private profiles and hidden feeds are hidden for a reason;</li>
+        <li>don't try to find out other people's personal data or get into other people's accounts.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>07</i>What's forbidden technically</h2>
+      <ul>
+        <li>hacking, or finding and using vulnerabilities to harm people or the service (if you find one, tell us: <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a>);</li>
+        <li>loading our servers, automated data collection and “scraping” profiles;</li>
+        <li>selling, transferring or trading accounts, PRO access and gifts;</li>
+        <li>abusing promo codes and promotions;</li>
+        <li>fraud and any attempt to deceive other users or the service.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i>08</i>How to report</h2>
+      <p>If someone breaks the guidelines, tap “Ideas and complaints” in the app (Settings) or write to <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a>. Give the person's @handle and briefly describe what happened. A screenshot helps, but don't send other people's personal data that isn't part of the situation itself.</p>
+      <p>We read reports by hand and never reveal the reporter to the person reported.</p>
+    </section>
+    <section>
+      <h2><i>09</i>What we do in response</h2>
+      <p>The response depends on how serious and repeated the violation is:</p>
+      <ul>
+        <li>a warning and a request to fix it;</li>
+        <li>resetting or hiding the offending look, name, @handle or avatar;</li>
+        <li>cancelling inflated results;</li>
+        <li>restricting social features (friends, gifts, cheer-ups);</li>
+        <li>closing the account: for gross or repeated violations, threats, bullying, fraud.</li>
+      </ul>
+      <p>Gross violations may lead to immediate account closure without a warning. Refund terms for PRO are described in the <a class="mail" href="/offer/">Public Offer</a>.</p>
+    </section>
+    <section>
+      <h2><i>10</i>If you disagree</h2>
+      <p>If you think a restriction was applied by mistake, write to <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a> from the Telegram account it affects and explain the situation. We will review your request within 10 business days and reply.</p>
+    </section>
+    <section>
+      <h2><i>11</i>Threats and safety</h2>
+      <div class="note"><b>If you or someone else is in danger,</b> don't wait for our reply: call emergency services at 112.</div>
+      <p>Threats to life and health, calls for violence or self-harm, material involving children and other serious violations are removed immediately, and we may pass information to law enforcement if the law requires it.</p>
+    </section>
+    <section>
+      <h2><i>12</i>Changes to the guidelines</h2>
+      <p>We may update these guidelines. A new version takes effect on the date it is published on this page; we'll announce significant changes in the app or in the Telegram channel <a class="mail" href="https://t.me/voobkz" target="_blank" rel="noopener">@voobkz</a>. Questions and suggestions: <a class="mail" href="mailto:voob@ibvv.ru">voob@ibvv.ru</a>.</p>
+    </section>
+  </main>
+  </div>
+  <footer>© <span id="yr">2026</span> VOOB · <a href="mailto:voob@ibvv.ru">voob@ibvv.ru</a></footer>
+</div>
+<script>
+(function(){
+  var T={ru:["Правила сообщества — VOOB","Правила сообщества VOOB: уважение, честные тренировки, приватность, жалобы и меры."],
+         kk:["Қауымдастық ережелері — VOOB","VOOB қауымдастық ережелері: құрмет, адал жаттығулар, құпиялылық, шағымдар және шаралар."],
+         en:["Community Guidelines — VOOB","VOOB community guidelines: respect, honest workouts, privacy, reports and enforcement."]};
+  function pick(){
+    var h=(location.hash||"").replace("#","").toLowerCase(); if(T[h]) return h;
+    try{var s=localStorage.getItem("voob_lang"); if(T[s]) return s;}catch(e){}
+    var n=((navigator.language||"ru")+"").slice(0,2).toLowerCase();
+    return n==="kk"?"kk":(n==="ru"||n==="be"||n==="uk")?"ru":"en";
+  }
+  function slide(first){
+    var sw=document.querySelector(".lsw"),i=sw&&sw.querySelector(".lsi"),on=sw&&sw.querySelector("button.on"); if(!i||!on||!on.offsetWidth) return;
+    if(first){i.style.transition="none";}
+    i.style.width=on.offsetWidth+"px"; i.style.height=on.offsetHeight+"px"; i.style.transform="translate("+on.offsetLeft+"px,"+on.offsetTop+"px)"; i.style.opacity="1";
+    if(first){void i.offsetWidth; i.style.transition="";}
+  }
+  function set(l,save){
+    document.documentElement.setAttribute("data-lang",l); document.documentElement.lang=l;
+    document.title=T[l][0]; var m=document.querySelector('meta[name=description]'); if(m) m.setAttribute("content",T[l][1]);
+    document.querySelectorAll(".lsw button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-lg")===l)});
+    slide();
+    if(save){try{localStorage.setItem("voob_lang",l)}catch(e){} try{history.replaceState(null,"","#"+l)}catch(e){}}
+  }
+  document.querySelectorAll(".lsw button").forEach(function(b){b.addEventListener("click",function(){set(b.getAttribute("data-lg"),true)})});
+  window.addEventListener("hashchange",function(){var h=location.hash.replace("#","");if(T[h])set(h,false)});
+  set(pick(),false); slide(true);
+  window.addEventListener('resize',function(){slide(true)});
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){slide(true)});
+})();
+</script>
+<script>try{document.getElementById("yr").textContent=new Date().getFullYear()}catch(e){}</script>
+</body>
+</html>
