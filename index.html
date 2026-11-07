@@ -254,7 +254,8 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 .igc .ig{color:#fff;box-shadow:0 8px 18px -8px rgba(225,48,108,.6),inset 0 1px 0 rgba(255,255,255,.28)}.igc .ig.tgc{box-shadow:0 8px 18px -8px rgba(30,150,200,.7),inset 0 1px 0 rgba(255,255,255,.28)}.igc .ig svg{width:22px;height:22px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}.igc:hover .ig{transform:rotate(-6deg) scale(1.06)}
 .igc b{display:block;font-size:16px;text-align:left}
 .igc small{color:var(--mut);font-size:13px;display:block;text-align:left}
-footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);font-size:14px}
+footer{position:relative;border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);font-size:14px;background:rgba(3,4,8,.5);-webkit-backdrop-filter:blur(26px) saturate(.85);backdrop-filter:blur(26px) saturate(.85)}
+html[data-theme=light] footer{background:rgba(243,244,249,.55)}
 .fr2{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;align-items:center}
 .fl{display:flex;flex-wrap:wrap;gap:8px 22px}
 .fl a:hover{color:var(--tx)}
@@ -810,10 +811,10 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   </div>
 </section>
 
-<section class="dz"><div class="bgw alt" style="--t:12%;--fs:min(20vw,300px)" data-s="-120" aria-hidden="true">LEVEL UP</div><div class="fo " style="--w:105px;--w0:105px;right:4%;top:2%;--g:rgba(245,158,11,.45);--d:8s;--r0:-10deg;--r1:7deg" data-s="55" aria-hidden="true"><div class="fi"><svg viewBox="0 0 100 134"><defs><linearGradient id="fm1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset=".55" stop-color="#f59e0b"/><stop offset="1" stop-color="#b45309"/></linearGradient><linearGradient id="fm2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<section class="dz"><div class="bgw alt" style="--t:12%;--fs:min(20vw,300px)" data-s="-120" aria-hidden="true">LEVEL UP</div><div class="fo " style="--w:105px;--w0:105px;right:4%;top:8%;--g:rgba(245,158,11,.45);--d:8s;--r0:-10deg;--r1:7deg" data-s="55" aria-hidden="true"><div class="fi"><svg viewBox="0 0 100 134"><defs><linearGradient id="fm1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset=".55" stop-color="#f59e0b"/><stop offset="1" stop-color="#b45309"/></linearGradient><linearGradient id="fm2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
 <path d="M26 2h20l14 44H40z" fill="url(#fm2)"/><path d="M74 2H54L40 46h20z" fill="url(#fm2)" opacity=".75"/>
 <circle cx="50" cy="86" r="40" fill="url(#fm1)"/><circle cx="50" cy="86" r="31" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.5" stroke-dasharray="3 5"/>
-<path d="M50 62l7.5 15.2 16.8 2.4-12.1 11.8 2.9 16.7L50 100.2l-15.1 7.9 2.9-16.7-12.1-11.8 16.8-2.4z" fill="#fff" opacity=".92"/></svg></div></div><div class="fo hm" style="--w:54px;--w0:54px;left:6%;bottom:6%;--g:rgba(250,204,21,.5);--d:6s;--dl:-1s" data-s="80" aria-hidden="true"><div class="fi"><svg viewBox="0 0 100 100"><defs><linearGradient id="fs1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs><path d="M50 6l13.2 28 30.8 4-22.6 21.2 5.8 30.4L50 74.6 22.8 89.6l5.8-30.4L6 38l30.8-4z" fill="url(#fs1)" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linejoin="round"/></svg></div></div>
+<path d="M50 62l7.5 15.2 16.8 2.4-12.1 11.8 2.9 16.7L50 100.2l-15.1 7.9 2.9-16.7-12.1-11.8 16.8-2.4z" fill="#fff" opacity=".92"/></svg></div></div><div class="fo hm" style="--w:54px;--w0:54px;left:2.5%;bottom:58px;--g:rgba(250,204,21,.5);--d:6s;--dl:-1s" data-s="80" aria-hidden="true"><div class="fi"><svg viewBox="0 0 100 100"><defs><linearGradient id="fs1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs><path d="M50 6l13.2 28 30.8 4-22.6 21.2 5.8 30.4L50 74.6 22.8 89.6l5.8-30.4L6 38l30.8-4z" fill="url(#fs1)" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linejoin="round"/></svg></div></div>
   <div class="wrap">
     <div class="nums">
       <div class="num rv"><b data-n="56">0</b><span>анимированных рамок</span></div>
