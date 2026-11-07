@@ -654,6 +654,10 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
 .fo .fi{animation:foF var(--d,8s) ease-in-out infinite;animation-delay:var(--dl,0s);filter:drop-shadow(0 26px 22px rgba(70,40,150,.32)) drop-shadow(0 0 22px var(--g,rgba(139,92,246,.35)))}
 .fo svg{display:block;width:100%;height:auto;overflow:visible}
 .fo .fo-sp{transform-origin:70px 70px;animation:foS 18s linear infinite}
+.fo .kn{pointer-events:all;cursor:grab;touch-action:none}.fo .kn *{pointer-events:all}
+.fo .kn .kh{transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.3,1.4,.5,1),opacity .25s}
+.fo .kn:hover .kh,.fo.kdrag .kn .kh{transform:scale(1.5);opacity:.4}
+.fo.kdrag .kn{cursor:grabbing}
 @keyframes foF{0%,100%{transform:translateY(0) rotate(var(--r0,-8deg))}50%{transform:translateY(-22px) rotate(var(--r1,6deg))}}
 @keyframes foS{to{transform:rotate(360deg)}}
 .fo.sm{opacity:.8}
@@ -822,7 +826,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
 </section>
 
 <section id="lab" class="dz"><div class="bgw alt" style="--t:2%" data-s="-120" aria-hidden="true">STYLE</div><div class="fo " style="--w:190px;--w0:190px;right:3%;top:30px;--d:10s" data-s="45" aria-hidden="true"><div class="fi"><svg viewBox="0 0 140 140"><defs><linearGradient id="fr1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f472b6"/><stop offset=".5" stop-color="#8b5cf6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
-<circle cx="70" cy="70" r="46" fill="none" stroke="url(#fr1)" stroke-width="11"/><circle cx="70" cy="70" r="62" fill="none" stroke="url(#fr1)" stroke-width="2.5" stroke-dasharray="3 9" stroke-linecap="round" class="fo-sp"/><circle cx="70" cy="70" r="34" fill="url(#fr1)" opacity=".18"/><circle cx="116" cy="70" r="8" fill="#fff"/><circle cx="116" cy="70" r="14" fill="#fff" opacity=".25"/></svg></div></div><div class="fo hm sm" style="--w:50px;--w0:50px;right:6%;bottom:12%;--g:rgba(250,204,21,.5);--d:7s;--dl:-2s" data-s="70" aria-hidden="true"><div class="fi"><svg viewBox="0 0 100 100"><defs><linearGradient id="fs1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs><path d="M50 6l13.2 28 30.8 4-22.6 21.2 5.8 30.4L50 74.6 22.8 89.6l5.8-30.4L6 38l30.8-4z" fill="url(#fs1)" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linejoin="round"/></svg></div></div>
+<g id="ringk"><circle cx="70" cy="70" r="46" fill="none" stroke="url(#fr1)" stroke-width="11"/><circle cx="70" cy="70" r="62" fill="none" stroke="url(#fr1)" stroke-width="2.5" stroke-dasharray="3 9" stroke-linecap="round" class="fo-sp"/><circle cx="70" cy="70" r="34" fill="url(#fr1)" opacity=".18"/><g class="kn" id="ringkn"><circle class="kh" cx="116" cy="70" r="14" fill="#fff" opacity=".25"/><circle cx="116" cy="70" r="8" fill="#fff"/><circle cx="116" cy="70" r="22" fill="transparent"/></g></g></svg></div></div><div class="fo hm sm" style="--w:50px;--w0:50px;right:6%;bottom:12%;--g:rgba(250,204,21,.5);--d:7s;--dl:-2s" data-s="70" aria-hidden="true"><div class="fi"><svg viewBox="0 0 100 100"><defs><linearGradient id="fs1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs><path d="M50 6l13.2 28 30.8 4-22.6 21.2 5.8 30.4L50 74.6 22.8 89.6l5.8-30.4L6 38l30.8-4z" fill="url(#fs1)" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linejoin="round"/></svg></div></div>
   <div class="wrap">
     <div class="sec-h rv"><small>Попробуй сам</small><h2>Собери свой стиль</h2><p>Это маленькая демонстрация. В приложении рамок и фонов гораздо больше.</p></div>
     <div class="lab rv">
@@ -1255,6 +1259,38 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
     })});
     addEventListener('pageshow',function(ev){if(ev.persisted){var o=document.getElementById('luv');if(o)o.remove()}});
     if(/[?&]from=app\b/.test(location.search)){try{history.replaceState(null,'',location.pathname+location.hash)}catch(e){}VOOB_LU('in','')}
+  })();
+
+
+  /* кружок на декоративном кольце можно взять и покрутить по кругу — просто для забавы */
+  (function(){
+    var g=$('#ringk'),kn=$('#ringkn');if(!g||!kn)return;
+    var box=kn.closest('.fo'),ring=g.querySelector('circle'),rot=0,drag=false,a0=0,r0=0,v=0,lt=0,la=0,raf=0;
+    function center(){var b=ring.getBoundingClientRect();return[b.left+b.width/2,b.top+b.height/2]}
+    function ang(e){var c=center();return Math.atan2(e.clientY-c[1],e.clientX-c[0])*180/Math.PI}
+    function set(a){rot=a;g.setAttribute('transform','rotate('+a.toFixed(2)+' 70 70)')}
+    function diff(a,b){var d=a-b;while(d>180)d-=360;while(d<-180)d+=360;return d}
+    function glide(t){
+      if(drag)return;var dt=Math.min(.05,(t-lt)/1000||.016);lt=t;
+      set(rot+v*dt);v*=Math.pow(.04,dt);
+      if(Math.abs(v)>8)raf=requestAnimationFrame(glide);else raf=0;
+    }
+    kn.addEventListener('pointerdown',function(e){
+      e.preventDefault();drag=true;cancelAnimationFrame(raf);raf=0;v=0;
+      a0=ang(e);r0=rot;la=a0;lt=performance.now();box.classList.add('kdrag');
+      try{kn.setPointerCapture(e.pointerId)}catch(x){}
+    });
+    kn.addEventListener('pointermove',function(e){
+      if(!drag)return;var a=ang(e),now=performance.now(),d=diff(a,la);
+      set(rot+d);var dt=(now-lt)/1000;if(dt>0)v=v*.6+(d/dt)*.4;la=a;lt=now;
+    });
+    function end(){
+      if(!drag)return;drag=false;box.classList.remove('kdrag');
+      if(reduce||Math.abs(v)<20){v=0;return}
+      v=Math.max(-900,Math.min(900,v));lt=performance.now();raf=requestAnimationFrame(glide);
+    }
+    kn.addEventListener('pointerup',end);kn.addEventListener('pointercancel',end);
+    kn.addEventListener('touchstart',function(e){e.preventDefault()},{passive:false});
   })();
 
   /* сторис-секция по скроллу */
