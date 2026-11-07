@@ -721,12 +721,13 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
 .dm.open{visibility:visible}
 .dm-bd{position:absolute;inset:0;background:rgba(4,5,12,.55);-webkit-backdrop-filter:blur(0);backdrop-filter:blur(0);opacity:0;transition:opacity .4s,backdrop-filter .5s,-webkit-backdrop-filter .5s}
 .dm.open .dm-bd{opacity:1;-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2)}
-.dm-p{position:relative;width:min(440px,100%);max-height:calc(100svh - 32px);overflow:auto;overscroll-behavior:contain;border-radius:34px;padding:34px 24px 22px;text-align:center;color:var(--tx);isolation:isolate;
+.dm-p{position:relative;width:min(440px,100%);max-height:calc(100svh - 32px);overflow-x:hidden;overflow-y:auto;scrollbar-width:none;overscroll-behavior:contain;border-radius:34px;padding:34px 24px 22px;text-align:center;color:var(--tx);isolation:isolate;
   background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 88%,#f472b6),color-mix(in srgb,var(--bg) 94%,#8b5cf6));box-shadow:0 50px 120px -30px rgba(139,92,246,.55),0 0 0 1px var(--line);
   opacity:0;transform:translateY(40px) scale(.94);transition:opacity .35s,transform .6s cubic-bezier(.2,.9,.25,1.12)}
 .dm.open .dm-p{opacity:1;transform:none}
 .dm-p::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:linear-gradient(140deg,#f472b6,transparent 30%,transparent 62%,#22d3ee);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.9}
-.dm-g{position:absolute;z-index:-1;width:300px;height:300px;border-radius:50%;filter:blur(70px);opacity:.38;pointer-events:none}
+.dm-gl{position:absolute;inset:0;overflow:hidden;border-radius:inherit;z-index:-1;pointer-events:none}
+.dm-g{position:absolute;width:300px;height:300px;border-radius:50%;filter:blur(70px);opacity:.38;pointer-events:none}
 .dm-g.a{background:#f472b6;left:-110px;top:-120px}.dm-g.b{background:#8b5cf6;right:-120px;bottom:-110px;opacity:.32}
 .dm-x{position:absolute;right:16px;top:16px;z-index:2}
 .dm-hd>*{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .6s cubic-bezier(.2,.9,.25,1)}
@@ -758,6 +759,11 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
 .dm-cp.ok{background:linear-gradient(110deg,#34d399,#22d3ee);animation:none;box-shadow:0 12px 36px -10px #34d399}
 .dm-ft{margin-top:16px;font-size:13px;color:var(--mut);opacity:0;transition:opacity .5s .46s}.dm.open .dm-ft{opacity:1}
 .dm-hp{position:absolute;left:0;top:0;width:14px;height:14px;fill:#f472b6;pointer-events:none;z-index:5}
+.dm-p::-webkit-scrollbar{display:none}
+@media(max-height:820px){.dm-p{padding:26px 22px 18px}.dm-lg{width:72px;height:72px;margin-bottom:12px}.dm-lg span{width:62px;height:62px}.dm-lg span svg{width:38px;height:23px}.dm-lg em{width:25px;height:25px}.dm-lg em svg{width:12px;height:12px}
+  .dm-hd h2{font-size:clamp(21px,5.4vw,25px);margin-bottom:7px}.dm-hd p{font-size:13.5px;line-height:1.45}.dm-card{aspect-ratio:1.85;margin:16px 0 10px;padding:16px 20px}.dm-num{font-size:clamp(18px,5vw,22px)}.dm-cp{height:48px}.dm-ft{margin-top:11px}}
+@media(max-height:660px){.dm-hd p{display:none}.dm-card{aspect-ratio:2.2;margin:12px 0 8px}.dm-lg{width:60px;height:60px;margin-bottom:8px}.dm-lg span{width:52px;height:52px}.dm-p{padding-top:20px}}
+@media(max-height:540px){.dm-lg{display:none}.dm-x{top:10px;right:10px}}
 @media(max-width:560px){.dm{place-items:end center;padding:0}.dm-p{width:100%;border-radius:34px 34px 0 0;padding-bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateY(100%)}.dm.open .dm-p{transform:none}}
 @media(prefers-reduced-motion:reduce){.dm-r,.dm-sh,.dm-cp,.dm-lg em svg,.dm-bt svg{animation:none}.dm-p,.dm-bd,.dm-card,.dm-hd>*{transition:none}}
 </style>
@@ -1020,7 +1026,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
 <div class="dm" id="dm" role="dialog" aria-modal="true" aria-labelledby="dm-t" aria-hidden="true" hidden>
   <div class="dm-bd" data-dmx></div>
   <div class="dm-p" id="dm-p">
-    <i class="dm-g a"></i><i class="dm-g b"></i>
+    <div class="dm-gl" aria-hidden="true"><i class="dm-g a"></i><i class="dm-g b"></i></div>
     <button type="button" class="ig dm-x" data-dmx aria-label="Закрыть"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     <div class="dm-hd">
       <div class="dm-lg"><i class="dm-r"></i><i class="dm-r r2"></i><span><svg viewBox="0 0 100 60"><use href="#rings"/></svg></span><em><svg viewBox="0 0 24 24"><path d="M12 21l-1.5-1.3C5.4 15.1 2 12 2 8.5 2 5.4 4.4 3 7.5 3c1.7 0 3.4.8 4.5 2.1C13.1 3.8 14.8 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.5-3.4 6.6-8.5 11.2L12 21z"/></svg></em></div>
