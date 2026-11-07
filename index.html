@@ -1319,7 +1319,12 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   ['🎈','Шарик. Один. Ты рад?','Шар. Біреу. Қуаныштысың ба?','One balloon. Happy?'],
   ['🧀','Кусок сыра. Без мыши','Ірімшік. Тышқансыз','A piece of cheese. No mouse'],
   ['🦴','Косточка. Для друга','Сүйек. Досың үшін','A bone. For a friend'],
-  ['🪑','Табуретка. Присаживайся','Орындық. Отыр','A stool. Have a seat']];
+  ['🪑','Табуретка. Присаживайся','Орындық. Отыр','A stool. Have a seat'],
+  ['🧸','Плюшевый мишка. Обнимашки в комплекте','Ойыншық аю. Құшақтау қоса беріледі','A teddy bear. Hugs included'],
+  ['🥄','Ложка. Вилки нет','Қасық. Шанышқы жоқ','A spoon. No fork though'],
+  ['🧂','Соль. Щепотка удачи','Тұз. Бір уыс сәттілік','Salt. A pinch of luck'],
+  ['🪴','Кактус. Не обнимать','Кактус. Құшақтамаңыз','A cactus. Do not hug'],
+  ['🍩','Пончик. Дырка бесплатно','Пончик. Тесігі тегін','A donut. The hole is free']];
   var order=[],hand,lip,act=0,tm=0,tm2=0,lastIdx=-1;
   function follow(){
     if(!act)return;
@@ -1371,12 +1376,30 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   }
   var busy2=0;
   function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+  function ey(b){return{E:[].slice.call(b.querySelectorAll('.eyes ellipse')),P:[].slice.call(b.querySelectorAll('.eyes .pup circle'))}}
+  function an(els,kf,o){els.forEach(function(e){e.style.transformBox='fill-box';e.style.transformOrigin='50% 50%';try{e.animate(kf,o)}catch(x){}})}
+  var LOOKS=[
+    async function(b){ // 1: осматривается влево-вправо
+      b.classList.add('lr');await sleep(330);b.classList.remove('lr');b.classList.add('ll');await sleep(380);b.classList.remove('ll');await sleep(230)},
+    async function(b){ // 2: моргает дважды и подозрительно щурится
+      var o=ey(b),bl=[{transform:'scaleY(1)'},{transform:'scaleY(.08)',offset:.5},{transform:'scaleY(1)'}];
+      an(o.E.concat(o.P),bl,{duration:240});await sleep(420);an(o.E.concat(o.P),bl,{duration:240});await sleep(380);
+      an(o.P,[{translate:'0 0'},{translate:'0 -4px',offset:.3},{translate:'0 -4px',offset:.7},{translate:'0 3px'}],{duration:700,easing:'ease-in-out'});
+      an(o.E,[{transform:'scaleY(1)'},{transform:'scaleY(.55)',offset:.4},{transform:'scaleY(.55)',offset:.8},{transform:'scaleY(1)'}],{duration:700,easing:'ease-in-out'});await sleep(760)},
+    async function(b){ // 3: косит глазами, крутит зрачками и удивляется
+      var o=ey(b);
+      o.P.forEach(function(e,i){var d=i?-4:4;an([e],[{translate:'0 0'},{translate:d+'px 0',offset:.25},{translate:d+'px 0',offset:.45},
+        {translate:'0 -4px',offset:.58},{translate:(i?-4:4)+'px 0',offset:.7},{translate:'0 4px',offset:.82},{translate:(i?4:-4)+'px 0',offset:.92},{translate:'0 0'}],{duration:1100,easing:'ease-in-out'})});
+      await sleep(1100);
+      an(o.E,[{transform:'scale(1)'},{transform:'scale(1.22)',offset:.4},{transform:'scale(1)'}],{duration:380,easing:'cubic-bezier(.3,1.6,.5,1)'});
+      an(o.P,[{transform:'scale(1)'},{transform:'scale(.6)',offset:.4},{transform:'scale(1)'}],{duration:380});await sleep(420)}
+  ];
+  var lastLook=-1;
   async function peek(b){
     b.classList.add('open');await sleep(330);
     b.classList.add('eyes-on');await sleep(260);
-    b.classList.add('lr');await sleep(330);
-    b.classList.remove('lr');b.classList.add('ll');await sleep(380);
-    b.classList.remove('ll');await sleep(230);
+    var k;do{k=Math.floor(Math.random()*LOOKS.length)}while(k===lastLook);lastLook=k;
+    await LOOKS[k](b);
     b.classList.remove('eyes-on');await sleep(180);
     b.classList.remove('open');await sleep(1000);
     b.classList.add('open');await sleep(380);
