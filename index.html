@@ -1315,24 +1315,23 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   ['🪑','Табуретка. Присаживайся','Орындық. Отыр','A stool. Have a seat']];
   var order=[],hand,tm=0,lastIdx=-1;
   var SVG='<svg viewBox="0 0 220 360"><defs>'+
-  '<linearGradient id="hfg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffe3cf"/><stop offset=".55" stop-color="#fbc5a3"/><stop offset="1" stop-color="#ec9f7c"/></linearGradient>'+
-  '<linearGradient id="hfa" x1="0" x2="1"><stop offset="0" stop-color="#e99a77"/><stop offset=".45" stop-color="#fbc6a5"/><stop offset="1" stop-color="#e08f6c"/></linearGradient>'+
-  '<linearGradient id="hsl" x1="0" x2="1"><stop offset="0" stop-color="#6d58e8"/><stop offset=".5" stop-color="#8b78ff"/><stop offset="1" stop-color="#5442cf"/></linearGradient>'+
-  '<radialGradient id="hpm" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#fcd0b2"/><stop offset="1" stop-color="#e8987a"/></radialGradient></defs>'+
-  '<path d="M48 360Q56 300 66 250H154Q164 300 172 360Z" fill="url(#hsl)"/>'+
-  '<path d="M84 300Q92 270 88 252M136 310Q130 280 134 254M110 340Q112 300 108 262" stroke="#3b2cb0" stroke-opacity=".28" stroke-width="3" fill="none" stroke-linecap="round"/>'+
-  '<path d="M62 262Q110 276 158 262" stroke="#b6a9ff" stroke-opacity=".5" stroke-width="3" fill="none" stroke-linecap="round"/>'+
-  '<rect x="68" y="232" width="84" height="34" rx="12" fill="#f4f3ff" stroke="#cfcbee" stroke-width="2"/>'+
-  '<path d="M84 238v22M96 238v22M108 238v22M120 238v22M132 238v22M144 238v22" stroke="#cfcbee" stroke-width="2.4" stroke-linecap="round"/>'+
-  '<path d="M80 236L82 150H138L140 236Z" fill="url(#hfa)" stroke="#c9835f" stroke-width="3" stroke-linejoin="round"/>'+
-  '<path d="M48 108Q46 66 86 58H134Q174 66 172 108V132Q172 168 138 172H82Q48 168 48 132Z" fill="url(#hpm)" stroke="#c9835f" stroke-width="3"/>'+
-  '<g stroke="#c9835f" stroke-width="3" fill="url(#hfg)"><rect x="48" y="34" width="30" height="92" rx="15"/><rect x="77" y="24" width="31" height="100" rx="15.5"/><rect x="107" y="24" width="31" height="100" rx="15.5"/><rect x="137" y="36" width="30" height="88" rx="15"/></g>'+
-  '<g stroke="#c9835f" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M54 108Q63 118 72 108M83 106Q92 117 102 106M113 106Q122 117 132 106M143 108Q152 118 161 108"/></g>'+
-  '<g fill="#fff" fill-opacity=".5"><ellipse cx="58" cy="56" rx="3.4" ry="11"/><ellipse cx="88" cy="48" rx="3.4" ry="12"/><ellipse cx="118" cy="48" rx="3.4" ry="12"/><ellipse cx="147" cy="58" rx="3.4" ry="10"/></g>'+
-  '<path d="M52 150Q92 120 150 146" stroke="#c9835f" stroke-width="40" stroke-linecap="round" fill="none"/>'+
-  '<path d="M52 150Q92 120 150 146" stroke="url(#hfg)" stroke-width="34" stroke-linecap="round" fill="none"/>'+
-  '<path d="M60 142Q94 118 138 138" stroke="#fff" stroke-opacity=".5" stroke-width="5" stroke-linecap="round" fill="none"/>'+
-  '<ellipse cx="148" cy="147" rx="9" ry="6" fill="#fff" fill-opacity=".25"/></svg>';
+  '<linearGradient id="hfg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffe6d3"/><stop offset=".6" stop-color="#fcc9a8"/><stop offset="1" stop-color="#eda47f"/></linearGradient>'+
+  '<linearGradient id="hfa" x1="0" x2="1"><stop offset="0" stop-color="#e99a77"/><stop offset=".5" stop-color="#fbc6a5"/><stop offset="1" stop-color="#e08f6c"/></linearGradient>'+
+  '<linearGradient id="hsl" x1="0" x2="1"><stop offset="0" stop-color="#6d58e8"/><stop offset=".5" stop-color="#8f7cff"/><stop offset="1" stop-color="#5442cf"/></linearGradient>'+
+  '<radialGradient id="hpm" cx=".5" cy=".3" r=".8"><stop offset="0" stop-color="#fdd3b6"/><stop offset="1" stop-color="#e8987a"/></radialGradient></defs>'+
+  '<path d="M80 360Q82 300 70 262H150Q138 300 140 360Z" fill="url(#hsl)"/>'+
+  '<path d="M96 346Q100 306 92 272M124 346Q120 306 128 272" stroke="#3b2cb0" stroke-opacity=".3" stroke-width="3" fill="none" stroke-linecap="round"/>'+
+  '<rect x="66" y="238" width="88" height="32" rx="12" fill="#f4f3ff" stroke="#cfcbee" stroke-width="2"/>'+
+  '<path d="M82 244v20M94 244v20M106 244v20M118 244v20M130 244v20M142 244v20" stroke="#cfcbee" stroke-width="2.4" stroke-linecap="round"/>'+
+  '<path d="M84 242L86 190H134L136 242Z" fill="url(#hfa)" stroke="#c9835f" stroke-width="3" stroke-linejoin="round"/>'+
+  '<rect x="50" y="108" width="120" height="96" rx="38" fill="url(#hpm)" stroke="#c9835f" stroke-width="3"/>'+
+  '<text id="hit" x="110" y="104" text-anchor="middle" font-size="104" style="filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))"></text>'+
+  '<g stroke="#c9835f" stroke-width="3" fill="url(#hfg)"><rect x="50" y="88" width="30" height="86" rx="15"/><rect x="79" y="80" width="31" height="94" rx="15.5"/><rect x="109" y="80" width="31" height="94" rx="15.5"/><rect x="139" y="90" width="31" height="82" rx="15.5"/></g>'+
+  '<g stroke="#c9835f" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M56 150q9 8 18 0M85 150q9 8 19 0M115 150q9 8 19 0M145 150q9 8 19 0"/></g>'+
+  '<g fill="#fff" fill-opacity=".55"><ellipse cx="60" cy="108" rx="3.2" ry="9"/><ellipse cx="89" cy="102" rx="3.2" ry="10"/><ellipse cx="119" cy="102" rx="3.2" ry="10"/><ellipse cx="149" cy="110" rx="3.2" ry="9"/></g>'+
+  '<path d="M52 176Q60 150 98 142" stroke="#c9835f" stroke-width="34" stroke-linecap="round" fill="none"/>'+
+  '<path d="M52 176Q60 150 98 142" stroke="url(#hfg)" stroke-width="28" stroke-linecap="round" fill="none"/>'+
+  '<path d="M58 168Q68 150 92 146" stroke="#fff" stroke-opacity=".55" stroke-width="4" stroke-linecap="round" fill="none"/></svg>';
   function pick(){
     if(!order.length){order=G.map(function(_,i){return i});for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),x=order[i];order[i]=order[j];order[j]=x}
       if(order[order.length-1]===lastIdx)order.unshift(order.pop())}
@@ -1341,8 +1340,8 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   function show(){
     var g=pick(),lg=document.documentElement.lang,L=lg==='kk'?2:(lg==='en'?3:1);
     if(!hand){hand=document.createElement('div');hand.className='hand';document.body.appendChild(hand)}
-    hand.classList.remove('on');hand.innerHTML='<span class="cap"></span><span class="it"></span>'+SVG;
-    hand.querySelector('.it').textContent=g[0];hand.querySelector('.it').style.setProperty('--r',(Math.random()*24-12)+'deg');
+    hand.classList.remove('on');hand.innerHTML='<span class="cap"></span>'+SVG;
+    var ht=hand.querySelector('#hit');ht.textContent=g[0];ht.setAttribute('transform','rotate('+(Math.random()*24-12).toFixed(1)+' 110 62)');
     hand.querySelector('.cap').textContent=g[L];
     var gb=document.getElementById('gb'),r=gb.getBoundingClientRect(),W=Math.min(300,innerWidth*.78),H=W*360/220,cx=r.left+r.width/2,my=r.top+r.height*.45;
     hand.style.width=W+'px';hand.style.left=(cx+scrollX)+'px';hand.style.top=(my+scrollY)+'px';
@@ -1374,6 +1373,28 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
     var b=g.querySelector('b');busy2=1;
     peek(b).catch(function(){}).then(function(){busy2=0});
   });
+})();
+
+(function(){
+  if(matchMedia('(pointer:coarse)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var box=document.querySelector('.bars');if(!box)return;
+  var bs=[].slice.call(box.children),st=bs.map(function(){return{s:1,r:0}}),mx=-999,my=-999,run=0,R=64;
+  bs.forEach(function(b){b.style.transformOrigin='50% 100%'});
+  function tick(){
+    var busy=0;
+    bs.forEach(function(b,i){
+      var s=st[i],r=b.getBoundingClientRect(),w=r.width,cx=r.left+w/2,bot=r.bottom,h0=b.offsetHeight||1,dx=Math.abs(mx-cx);
+      var inf=Math.max(0,Math.min(1,1-(dx-w/2)/R)),ts=1,tr=0;
+      if(inf>0&&my<bot+10){var need=my+16,sc=Math.max(.14,Math.min(1,(bot-need)/h0));ts=1-(1-sc)*inf;tr=(mx<cx?1:-1)*inf*(1-sc)*7}
+      s.s+=(ts-s.s)*.22;s.r+=(tr-s.r)*.22;
+      b.style.scale='1 '+s.s.toFixed(3);b.style.rotate=s.r.toFixed(2)+'deg';
+      if(Math.abs(s.s-ts)>.003||Math.abs(s.r-tr)>.05)busy=1;
+    });
+    if(busy||mx>-900)requestAnimationFrame(tick);else run=0;
+  }
+  function go(){if(!run){run=1;requestAnimationFrame(tick)}}
+  document.addEventListener('pointermove',function(e){if(e.pointerType==='touch')return;mx=e.clientX;my=e.clientY;
+    var r=box.getBoundingClientRect();if(mx>r.left-100&&mx<r.right+100&&my>r.top-140&&my<r.bottom+100)go();else{mx=-999;my=-999}},{passive:true});
 })();
 </script>
 </body>
