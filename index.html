@@ -374,14 +374,23 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);fon
 .bg-doodlespace .b{inset:0;background:radial-gradient(50% 35% at 20% 20%,rgba(255,60,220,.3),transparent 70%),radial-gradient(50% 35% at 80% 80%,rgba(60,240,255,.3),transparent 70%);animation:bgDrift 14s ease-in-out infinite alternate}
 .bg-doodlespace .c{inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(4,2,16,.7))}
 .medals i{cursor:pointer;-webkit-tap-highlight-color:transparent}.medals i:active{scale:.88}.card.in .medals i.pop{animation:medPop .5s cubic-bezier(.2,1.6,.4,1) 0s 1}@keyframes medPop{0%{scale:1}35%{scale:1.3;rotate:-8deg}100%{scale:1;rotate:0deg}}.cf{position:fixed;left:0;top:0;width:8px;height:12px;border-radius:2px;pointer-events:none;z-index:9999;will-change:transform,opacity}
-.gifts b{cursor:pointer;-webkit-tap-highlight-color:transparent}
-.gifts b.shake{animation:gShake .5s ease}@keyframes gShake{0%,100%{rotate:0deg}20%{rotate:-12deg}40%{rotate:10deg}60%{rotate:-7deg}80%{rotate:4deg}}
+
+@keyframes gShake{0%,100%{rotate:0deg}20%{rotate:-12deg}40%{rotate:10deg}60%{rotate:-7deg}80%{rotate:4deg}}
 .hand{position:fixed;left:50%;bottom:0;width:min(360px,80vw);translate:-50% 105%;z-index:9998;pointer-events:none;transition:translate .55s cubic-bezier(.2,1.25,.35,1);will-change:translate}
 .hand.on{translate:-50% 6%}
 .hand svg{display:block;width:100%;height:auto;overflow:visible}
 .hand .it{position:absolute;left:50%;top:-4%;transform:translateX(-50%) rotate(var(--r,-8deg));font-size:clamp(84px,24vw,120px);line-height:1;filter:drop-shadow(0 10px 14px #0006)}
 .hand .cap{position:absolute;left:50%;top:-34%;translate:-50% 0;white-space:nowrap;background:var(--card,#16161d);color:var(--tx,#fff);border:1px solid var(--line,#ffffff22);padding:8px 16px;border-radius:999px;font-weight:800;font-size:14px;box-shadow:0 10px 30px #0005;opacity:0;transition:opacity .3s .35s}
 .hand.on .cap{opacity:1}
+.gifts i{pointer-events:none}.gifts b{position:relative;z-index:3;display:block;width:104px;height:104px;font-size:0;animation:none}
+.gifts b svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 16px 20px color-mix(in srgb,var(--b) 45%,transparent))}
+.gifts b .lid{transform-box:fill-box;transform-origin:15% 100%;transition:transform .38s cubic-bezier(.3,1.6,.5,1)}
+.gifts b.open .lid{transform:translate(-3px,-30px) rotate(-12deg)}
+.gifts b .eyes{transform-box:fill-box;transform-origin:50% 100%;opacity:0;transform:translateY(8px) scale(.5);transition:opacity .18s,transform .26s cubic-bezier(.3,1.7,.5,1)}
+.gifts b.eyes-on .eyes{opacity:1;transform:none}
+.gifts b .pup{transition:transform .13s ease-out}.gifts b.lr .pup{transform:translateX(5px)}.gifts b.ll .pup{transform:translateX(-5px)}
+.gifts b.shake{animation:gShake .5s ease}
+.gifts{cursor:pointer}
 .lang{position:relative}
 .lb{display:flex;align-items:center;gap:6px;height:40px;padding:0 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--tx);font:inherit;font-weight:800;font-size:13px;letter-spacing:.04em;cursor:pointer;transition:background .25s,border-color .25s}
 .lb:hover{border-color:color-mix(in srgb,var(--b) 60%,transparent)}
@@ -684,7 +693,11 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
       <div class="card rv d1 tilt"><div class="fv medals"><i style="--k:0">🏆</i><i style="--k:1">🔥</i><i style="--k:2">⚡</i><i style="--k:3">🎯</i></div><h3>Достижения</h3><p>Серии, рекорды, первые разы.</p></div>
       <div class="card rv tilt"><div class="fv frs"><div class="fav fr-flame" style="width:66px;height:66px;font-size:26px;margin:0"><div class="fi" style="background:url(img/u6.webp) center/cover"></div></div><div class="fav fr-sakura" style="width:66px;height:66px;font-size:26px;margin:0"><div class="fi" style="background:url(img/u9.webp) center/cover"></div></div><div class="fav fr-blackhole" style="width:66px;height:66px;font-size:26px;margin:0"><div class="fi" style="background:url(img/u8.webp) center/cover"></div></div></div><h3>Твой стиль</h3><p>Анимированные рамки, фоны, значки.</p></div>
       <div class="card rv d1 tilt"><div class="fv fa"><i style="background-image:url(img/u1.webp)"></i><i style="background-image:url(img/u2.webp)"></i><i style="background-image:url(img/u3.webp)"></i><i class="more">+3</i></div><h3>Друзья</h3><p>Видишь успехи друзей и подбадриваешь.</p></div>
-      <div class="card rv d2 tilt"><div class="fv gifts"><b>🎁</b><i style="--x:-52px;--y:-26px;--dl:-1s">🎉</i><i style="--x:54px;--y:-18px;--dl:-3s">💎</i><i style="--x:30px;--y:34px;--dl:-5s">✨</i></div><h3>Подарки</h3><p>Дари подарки и даже PRO.</p></div>
+      <div class="card rv d2 tilt"><div class="fv gifts"><b id="gb" aria-label="Подарок"><svg viewBox="0 0 120 120"><defs><linearGradient id="gbx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd24a"/><stop offset="1" stop-color="#f0a21c"/></linearGradient><linearGradient id="gld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffdd6a"/><stop offset="1" stop-color="#f4b02a"/></linearGradient></defs>
+<rect x="22" y="54" width="76" height="54" rx="9" fill="url(#gbx)"/><rect x="54" y="54" width="12" height="54" fill="#e8355a"/>
+<rect x="26" y="54" width="68" height="14" rx="4" fill="#3b1c06"/>
+<g class="eyes"><ellipse cx="46" cy="60" rx="10" ry="11" fill="#fff"/><ellipse cx="74" cy="60" rx="10" ry="11" fill="#fff"/><g class="pup"><circle cx="46" cy="61" r="4.6" fill="#1b1b22"/><circle cx="74" cy="61" r="4.6" fill="#1b1b22"/></g></g>
+<g class="lid"><rect x="14" y="36" width="92" height="24" rx="8" fill="url(#gld)"/><rect x="54" y="36" width="12" height="24" fill="#e8355a"/><ellipse cx="44" cy="30" rx="15" ry="9" fill="#ff4d73" transform="rotate(-18 44 30)"/><ellipse cx="76" cy="30" rx="15" ry="9" fill="#ff4d73" transform="rotate(18 76 30)"/><circle cx="60" cy="33" r="6.5" fill="#e8355a"/></g></svg></b><i style="--x:-52px;--y:-26px;--dl:-1s">🎉</i><i style="--x:54px;--y:-18px;--dl:-3s">💎</i><i style="--x:30px;--y:34px;--dl:-5s">✨</i></div><h3>Подарки</h3><p>Дари подарки и даже PRO.</p></div>
       <div class="card wide row rv tilt"><div class="ft"><h3>Итоги и статистика</h3><p>Кольца, календарь, рекорды. Без скучных таблиц.</p></div>
         <div class="fv bars"><i style="--h:46%"></i><i style="--h:72%"></i><i style="--h:38%"></i><i style="--h:86%"></i><i style="--h:60%"></i><i style="--h:100%"></i><i style="--h:68%"></i></div></div>
       <div class="card rv d1 tilt"><div class="fv hello"><b id="hw">Привет</b></div><h3>Твой язык</h3><p>Смена языка — маленькое шоу.</p></div>
@@ -1295,12 +1308,16 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   ['🦴','Косточка. Для друга','Сүйек. Досың үшін','A bone. For a friend'],
   ['🪑','Табуретка. Присаживайся','Орындық. Отыр','A stool. Have a seat']];
   var order=[],hand,tm=0,lastIdx=-1;
-  var SVG='<svg viewBox="0 0 200 340"><defs><linearGradient id="sk" x1="0" x2="1"><stop offset="0" stop-color="#f6c2a2"/><stop offset="1" stop-color="#e8a483"/></linearGradient></defs>'+
-  '<rect x="62" y="170" width="76" height="190" rx="10" fill="#6f5de0"/><rect x="58" y="160" width="84" height="26" rx="8" fill="#f4f4fb"/>'+
-  '<rect x="72" y="100" width="56" height="70" fill="url(#sk)"/>'+
-  '<rect x="46" y="22" width="108" height="100" rx="30" fill="url(#sk)"/>'+
-  '<path d="M52 52H148M52 76H148M56 99H144" stroke="#c98767" stroke-width="3.5" stroke-linecap="round" fill="none"/>'+
-  '<path d="M58 104c0-18 14-26 30-24l30 4c8 2 8 14 0 16l-36 2c-8 1-14 6-24 2z" fill="#f0b08e" stroke="#c98767" stroke-width="3"/></svg>';
+  var SVG='<svg viewBox="0 0 220 360"><defs><linearGradient id="sk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd8bd"/><stop offset="1" stop-color="#eba583"/></linearGradient><linearGradient id="sl" x1="0" x2="1"><stop offset="0" stop-color="#7a66ee"/><stop offset="1" stop-color="#5a47d4"/></linearGradient></defs>'+
+  '<path d="M58 360L70 238Q110 252 150 238L162 360Z" fill="url(#sl)"/><path d="M96 262q14 6 28 0" stroke="#fff" stroke-opacity=".25" stroke-width="3" fill="none" stroke-linecap="round"/>'+
+  '<rect x="64" y="214" width="92" height="36" rx="13" fill="#f7f7fc" stroke="#dcdcea" stroke-width="2"/>'+
+  '<path d="M80 224L83 142Q110 154 137 142L140 224Z" fill="url(#sk)" stroke="#cd8c6b" stroke-width="3" stroke-linejoin="round"/>'+
+  '<path d="M52 98Q50 62 86 58H134Q170 62 168 98V126Q168 158 136 164H84Q52 158 52 126Z" fill="url(#sk)" stroke="#cd8c6b" stroke-width="3"/>'+
+  '<g stroke="#cd8c6b" stroke-width="3" fill="url(#sk)"><rect x="52" y="30" width="29" height="72" rx="14.5"/><rect x="80" y="22" width="29" height="78" rx="14.5"/><rect x="108" y="22" width="29" height="78" rx="14.5"/><rect x="136" y="32" width="29" height="70" rx="14.5"/></g>'+
+  '<g stroke="#cd8c6b" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M58 70h17M86 66h17M114 66h17M142 72h17"/><path d="M60 92h13M88 90h13M116 90h13M144 94h13" stroke-opacity=".55"/></g>'+
+  '<path d="M60 134Q56 108 86 112L128 118Q150 122 142 140Q132 156 96 154Q66 156 60 134Z" fill="url(#sk)" stroke="#cd8c6b" stroke-width="3" stroke-linejoin="round"/>'+
+  '<path d="M72 124q22 -6 44 2" stroke="#fff" stroke-opacity=".45" stroke-width="4" stroke-linecap="round" fill="none"/>'+
+  '<ellipse cx="66" cy="50" rx="4" ry="9" fill="#fff" fill-opacity=".35"/><ellipse cx="94" cy="44" rx="4" ry="10" fill="#fff" fill-opacity=".35"/><ellipse cx="122" cy="44" rx="4" ry="10" fill="#fff" fill-opacity=".35"/></svg>';
   function pick(){
     if(!order.length){order=G.map(function(_,i){return i});for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),x=order[i];order[i]=order[j];order[j]=x}
       if(order[order.length-1]===lastIdx)order.unshift(order.pop())}
@@ -1315,9 +1332,24 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
     void hand.offsetWidth;hand.classList.add('on');
     clearTimeout(tm);tm=setTimeout(function(){hand.classList.remove('on')},3400);
   }
+  var busy2=0;
+  function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+  async function peek(b){
+    b.classList.add('open');await sleep(330);
+    b.classList.add('eyes-on');await sleep(260);
+    b.classList.add('lr');await sleep(330);
+    b.classList.remove('lr');b.classList.add('ll');await sleep(380);
+    b.classList.remove('ll');await sleep(230);
+    b.classList.remove('eyes-on');await sleep(180);
+    b.classList.remove('open');await sleep(1000);
+    b.classList.add('open');await sleep(380);
+    show();await sleep(3500);
+    b.classList.remove('open');
+  }
   document.addEventListener('click',function(e){
-    var b=e.target.closest&&e.target.closest('.gifts b');if(!b)return;
-    b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');show();
+    var g=e.target.closest&&e.target.closest('.gifts');if(!g||busy2)return;
+    var b=g.querySelector('b');busy2=1;
+    peek(b).catch(function(){}).then(function(){busy2=0});
   });
 })();
 </script>
