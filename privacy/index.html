@@ -53,17 +53,20 @@ html[data-lang=ru] .l.ru,html[data-lang=kk] .l.kk,html[data-lang=en] .l.en{displ
 .back .l.ru,.back .l.kk,.back .l.en{display:none}
 html[data-lang=ru] .back .l.ru,html[data-lang=kk] .back .l.kk,html[data-lang=en] .back .l.en{display:inline}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.lsw{display:inline-flex;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--card)}
+.lsw{position:relative;display:inline-flex;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--card);isolation:isolate}
+.lsi{position:absolute;left:0;top:0;height:0;width:0;border-radius:999px;background:var(--tx);z-index:-1;pointer-events:none;opacity:0;transition:transform .5s cubic-bezier(.3,1.05,.35,1),width .5s cubic-bezier(.3,1.05,.35,1),height .3s,opacity .25s}
 .lsw button{font-size:12.5px;font-weight:700;letter-spacing:.04em;padding:7px 13px;border-radius:999px;color:var(--mut);transition:color .2s,background .2s}
 .lsw button:hover{color:var(--tx)}
-.lsw button.on{background:var(--tx);color:var(--bg)}
+.lsw button{position:relative;transition:color .3s}
+.lsw button.on{color:var(--bg)}
+@media (prefers-reduced-motion:reduce){.lsi{transition:none}}
 footer{padding:26px 0 48px;border-top:1px solid var(--line);font-size:13px;color:var(--mut)}
 @media (max-width:640px){.sum{grid-template-columns:1fr}td:first-child{white-space:normal}.lead{font-size:16.5px}}
 </style>
 </head>
 <body>
 <header><div class="wrap bar"><a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg><span class="l ru">На главную</span><span class="l kk">Басты бетке</span><span class="l en">Back to home</span></a>
-<div class="lsw" role="group" aria-label="Language"><button type="button" data-lg="ru">RU</button><button type="button" data-lg="kk">ҚАЗ</button><button type="button" data-lg="en">EN</button></div></div></header>
+<div class="lsw" role="group" aria-label="Language"><i class="lsi" aria-hidden="true"></i><button type="button" data-lg="ru">RU</button><button type="button" data-lg="kk">ҚАЗ</button><button type="button" data-lg="en">EN</button></div></div></header>
 <div class="wrap">
   <div class="l ru">
   <div class="hero">
@@ -373,15 +376,24 @@ footer{padding:26px 0 48px;border-top:1px solid var(--line);font-size:13px;color
     var n=((navigator.language||"ru")+"").slice(0,2).toLowerCase();
     return n==="kk"?"kk":(n==="ru"||n==="be"||n==="uk")?"ru":"en";
   }
+  function slide(first){
+    var sw=document.querySelector(".lsw"),i=sw&&sw.querySelector(".lsi"),on=sw&&sw.querySelector("button.on"); if(!i||!on||!on.offsetWidth) return;
+    if(first){i.style.transition="none";}
+    i.style.width=on.offsetWidth+"px"; i.style.height=on.offsetHeight+"px"; i.style.transform="translate("+on.offsetLeft+"px,"+on.offsetTop+"px)"; i.style.opacity="1";
+    if(first){void i.offsetWidth; i.style.transition="";}
+  }
   function set(l,save){
     document.documentElement.setAttribute("data-lang",l); document.documentElement.lang=l;
     document.title=T[l][0]; var m=document.querySelector('meta[name=description]'); if(m) m.setAttribute("content",T[l][1]);
     document.querySelectorAll(".lsw button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-lg")===l)});
+    slide();
     if(save){try{localStorage.setItem("voob_lang",l)}catch(e){} try{history.replaceState(null,"","#"+l)}catch(e){}}
   }
   document.querySelectorAll(".lsw button").forEach(function(b){b.addEventListener("click",function(){set(b.getAttribute("data-lg"),true)})});
   window.addEventListener("hashchange",function(){var h=location.hash.replace("#","");if(T[h])set(h,false)});
-  set(pick(),false);
+  set(pick(),false); slide(true);
+  window.addEventListener('resize',function(){slide(true)});
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){slide(true)});
 })();
 </script>
 <script>try{document.getElementById("yr").textContent=new Date().getFullYear()}catch(e){}</script>
