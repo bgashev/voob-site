@@ -1270,16 +1270,22 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   var busy=0;
   function boom(x,y,em){
     if(busy>1||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))return;
-    busy++;var cl=COL[em]||COL['🏆'],f=document.createDocumentFragment(),n=22,els=[],i;
-    for(i=0;i<n;i++){var e=document.createElement('i');e.className='cf';e.style.background=cl[i%cl.length];f.appendChild(e);els.push(e)}
+    busy++;var cl=COL[em]||COL['🏆'],f=document.createDocumentFragment(),n=30,els=[],i;
+    for(i=0;i<n;i++){var e=document.createElement('i');e.className='cf';e.style.background=cl[i%cl.length];if(i%3===0){e.style.borderRadius='50%';e.style.width=e.style.height='8px'}f.appendChild(e);els.push(e)}
     document.body.appendChild(f);
     var done=0;
     els.forEach(function(e,k){
-      var a=-Math.PI/2+(Math.random()-.5)*2.6,s=90+Math.random()*150,dx=Math.cos(a)*s,dy=Math.sin(a)*s,r=(Math.random()-.5)*720;
-      var an=e.animate([{transform:'translate('+x+'px,'+y+'px) rotate(0)',opacity:1},
-        {transform:'translate('+(x+dx)+'px,'+(y+dy)+'px) rotate('+r*.5+'deg)',opacity:1,offset:.45},
-        {transform:'translate('+(x+dx*1.25)+'px,'+(y+dy+170)+'px) rotate('+r+'deg)',opacity:0}],
-        {duration:950+Math.random()*350,easing:'cubic-bezier(.2,.7,.4,1)',fill:'forwards'});
+      // физика: старт с импульсом вверх, сопротивление воздуха, плавное падение с покачиванием
+      var a=-Math.PI/2+(Math.random()-.5)*2.4,v=170+Math.random()*190,vx=Math.cos(a)*v,vy=Math.sin(a)*v,
+          D=2300+Math.random()*900,g=420+Math.random()*160,drag=2.1+Math.random()*.8,
+          sw=6+Math.random()*10,ph=Math.random()*6.28,rs=(Math.random()-.5)*900,fr=[],N=26,st,t,px,py;
+      for(st=0;st<=N;st++){
+        t=st/N*D/1000;var k1=1-Math.exp(-drag*t);
+        px=vx/drag*k1+Math.sin(t*5+ph)*sw*Math.min(1,t);
+        py=vy/drag*k1+g*(t-k1/drag)/drag;
+        fr.push({transform:'translate('+(x+px).toFixed(1)+'px,'+(y+py).toFixed(1)+'px) rotate('+(rs*t).toFixed(0)+'deg) scaleY('+(Math.cos(t*7+ph)).toFixed(2)+')',
+          opacity:st/N<.62?1:Math.max(0,1-(st/N-.62)/.38),offset:st/N})}
+      var an=e.animate(fr,{duration:D,easing:'linear',fill:'forwards'});
       an.onfinish=function(){e.remove();if(++done===n)busy--};
     });
   }
