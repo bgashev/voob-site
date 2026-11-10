@@ -1872,5 +1872,37 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
     var r=box.getBoundingClientRect();if(mx>r.left-100&&mx<r.right+100&&my>r.top-140&&my<r.bottom+100)go();else{mx=-999;my=-999}},{passive:true});
 })();
 </script>
+<script>
+/* переход в VOOB CORE: сайт растворяется, из графита проявляется та же заставка, что на core.voob.kz */
+(function(){
+  var a=document.querySelector("a.core");if(!a)return;
+  var busy=false,E="cubic-bezier(.7,0,.2,1)",EO="cubic-bezier(.22,1,.36,1)";
+  function arc(r,a0,sp){var t=function(q){q=q*Math.PI/180;return (50+r*Math.cos(q)).toFixed(2)+" "+(50-r*Math.sin(q)).toFixed(2)};return "M"+t(a0)+" A"+r+" "+r+" 0 "+(sp>180?1:0)+" 0 "+t(a0+sp)}
+  function mk(){return '<svg width="76" height="76" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="cxg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#262A33"/><stop offset="1" stop-color="#111317"/></linearGradient><radialGradient id="cxg2"><stop offset="0" stop-color="#EDEDF2" stop-opacity=".24"/><stop offset="1" stop-color="#EDEDF2" stop-opacity="0"/></radialGradient></defs><rect x="1" y="1" width="98" height="98" rx="28" fill="url(#cxg1)" stroke="#34343B" stroke-width="1.2"/><circle cx="50" cy="50" r="42" fill="url(#cxg2)" style="transform-origin:50px 50px;animation:cxgl 1.9s ease-in-out infinite"/><path d="'+arc(30,40,280)+'" fill="none" stroke="#EDEDF2" stroke-width="5.5" stroke-linecap="round" style="transform-origin:50px 50px;animation:cxsp 5s linear infinite reverse"/><path d="'+arc(20,220,250)+'" fill="none" stroke="#F7F7FA" stroke-width="4.5" stroke-linecap="round" style="transform-origin:50px 50px;animation:cxsp 3s linear infinite"/><circle cx="50" cy="50" r="7" fill="#F4F4F5" style="transform-origin:50px 50px;animation:cxcr .94s ease-in-out infinite"/></svg>'}
+  var ov=null;
+  function clean(){if(ov){ov.remove();ov=null}document.body.getAnimations().forEach(function(x){x.cancel()});busy=false}
+  window.addEventListener("pageshow",function(e){if(e.persisted)clean()});
+  a.addEventListener("click",function(e){
+    if(e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+    e.preventDefault();if(busy)return;busy=true;
+    var url=a.href;
+    if(matchMedia("(prefers-reduced-motion:reduce)").matches||!document.body.animate){location.href=url;return}
+    var st=document.createElement("style");
+    st.textContent="@keyframes cxsp{to{transform:rotate(360deg)}}@keyframes cxgl{50%{opacity:.5}}@keyframes cxcr{50%{transform:scale(1.16)}}@keyframes cxlb{from{left:-38%}to{left:100%}}";
+    ov=document.createElement("div");
+    ov.setAttribute("aria-hidden","true");
+    ov.style.cssText="position:fixed;inset:0;z-index:2147483000;background:#0B0B0D;display:grid;place-items:center;opacity:0;pointer-events:all;font-family:'Segoe UI Variable Text','Segoe UI',Inter,system-ui,sans-serif";
+    ov.innerHTML='<div style="width:min(448px,calc(100vw - 32px));background:#151518;border:1px solid #232328;border-radius:30px;padding:48px 44px 40px;text-align:center;display:grid;gap:10px;justify-items:center;color:#F4F4F5;opacity:0"><span style="display:inline-flex">'+mk()+'</span><div style="font:800 22px \'Segoe UI Variable Display\',\'Segoe UI\',Inter,system-ui,sans-serif;letter-spacing:.27em;padding-left:.27em;margin-top:12px">VOOB CORE</div><div style="font-size:12.5px;font-weight:500;color:#A1A1AA">панель создателя</div><div style="width:150px;height:3px;border-radius:2px;background:#232328;overflow:hidden;margin-top:14px;position:relative"><i style="position:absolute;top:0;bottom:0;width:38%;border-radius:2px;background:linear-gradient(90deg,transparent,#EDEDF2,transparent);animation:cxlb 1.5s linear infinite"></i></div><div style="font-size:12px;font-weight:500;color:#A1A1AA;min-height:18px">Запускаюсь…</div></div>';
+    ov.appendChild(st);
+    document.documentElement.appendChild(ov);
+    var card=ov.firstElementChild;
+    document.body.style.willChange="transform,filter,opacity";
+    document.body.animate([{transform:"scale(1)",filter:"blur(0)",opacity:1},{transform:"scale(.94)",filter:"blur(16px)",opacity:0}],{duration:700,easing:E,fill:"both"});
+    ov.animate([{opacity:0},{opacity:1}],{duration:700,easing:"ease-in-out",fill:"both"});
+    card.animate([{opacity:0,transform:"translateY(18px) scale(.95)",filter:"blur(8px)"},{opacity:1,transform:"none",filter:"none"}],{duration:520,delay:620,easing:EO,fill:"both"});
+    setTimeout(function(){location.href=url},1450);
+  });
+})();
+</script>
 </body>
 </html>
