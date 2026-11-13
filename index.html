@@ -18,17 +18,25 @@ var VM=(function(){
 (function(){
   if(!/[?&]f=c\b/.test(location.search))return;
   try{history.replaceState(null,"",location.pathname+location.hash)}catch(e){}
-  var ov=document.createElement("div");ov.id="cxarr";ov.style.cssText="position:fixed;inset:0;z-index:2147483000;background:#0B0B0D;display:grid;place-items:center;pointer-events:all";
-  var w=document.createElement("div");w.style.cssText="width:76px;height:76px;transform:scale(2.2)";w.appendChild(VM.make(76));ov.appendChild(w);
+  var S=167,ov=document.createElement("div");ov.id="cxarr";ov.style.cssText="position:fixed;inset:0;z-index:2147483000;background:#0B0B0D;pointer-events:all";
+  var w=document.createElement("div"),sv=VM.make(S);w.style.cssText="position:absolute;left:50%;top:50%;width:"+S+"px;height:"+S+"px;margin:"+(-S/2)+"px 0 0 "+(-S/2)+"px;will-change:transform,opacity";w.appendChild(sv);ov.appendChild(w);
   document.documentElement.appendChild(ov);
+  var hs=document.createElement("style");hs.textContent=".logo>svg:first-child{visibility:hidden}";document.head.appendChild(hs);   /* настоящий логотип в шапке прячем до посадки */
+  var started=false;
+  function done(){ov.remove();hs.remove()}
   function go(){
-    var d=document.body;d.style.willChange="transform,filter,opacity";
-    d.animate([{opacity:0,transform:"scale(.96)",filter:"blur(14px)"},{opacity:1,transform:"none",filter:"blur(0)"}],{duration:900,delay:250,easing:"cubic-bezier(.22,1,.36,1)",fill:"backwards"});
-    w.animate([{transform:"scale(2.2)",opacity:1},{transform:"scale(2.7)",opacity:0}],{duration:650,easing:"cubic-bezier(.4,0,.2,1)",fill:"forwards"});
-    ov.animate([{opacity:1},{opacity:0}],{duration:800,delay:250,easing:"ease-in-out",fill:"forwards"}).onfinish=function(){ov.remove();d.style.willChange=""};
+    var lg=document.querySelector(".logo>svg:first-child"),r=lg&&lg.getBoundingClientRect(),EO="cubic-bezier(.65,0,.2,1)";
+    if(!r||!r.width||r.bottom<0||r.top>innerHeight){ov.animate([{opacity:1},{opacity:0}],{duration:600,easing:"ease-in-out",fill:"forwards"}).onfinish=done;return}
+    var dx=r.left+r.width/2-innerWidth/2,dy=r.top+r.height/2-innerHeight/2,k=r.width/S,T=700;
+    var tx=getComputedStyle(document.documentElement).getPropertyValue("--tx").trim();var B=sv.querySelector(".B");if(tx){B.style.transition="stroke "+T+"ms ease";B.style.stroke=tx}
+    ov.animate([{opacity:1},{opacity:1,offset:.25},{opacity:0}],{duration:T,easing:"ease-in-out",fill:"forwards"});
+    w.animate([{transform:"translate(0,0) scale(1)"},{transform:"translate("+dx+"px,"+dy+"px) scale("+k+")"}],{duration:T,easing:EO,fill:"forwards"}).onfinish=function(){hs.remove();requestAnimationFrame(function(){ov.remove()})};
   }
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){setTimeout(go,180)});else setTimeout(go,180);
-  window.addEventListener("pageshow",function(e){if(e.persisted&&ov.parentNode)ov.remove()});
+  function ready(){if(started)return;started=true;requestAnimationFrame(function(){requestAnimationFrame(go)})}
+  function wait(){var f=document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve();Promise.race([f,new Promise(function(r){setTimeout(r,900)})]).then(function(){setTimeout(ready,160)})}
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",wait);else wait();
+  setTimeout(ready,2500);
+  window.addEventListener("pageshow",function(e){if(e.persisted&&ov.parentNode)done()});
 })();
 </script>
 <title>VOOB — трекер тренировок, в котором приятно жить</title>
@@ -1982,14 +1990,13 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
     var w=document.createElement("div");w.style.cssText="position:absolute;left:"+(sx-38)+"px;top:"+(sy-38)+"px;width:76px;height:76px;opacity:0;will-change:transform";
     var sv=VM.make(76);w.appendChild(sv);ov.appendChild(w);
     var dy0=innerHeight/2-sy,S0=2.2,put=function(s,dy){w.style.transform="translateY("+dy+"px) scale("+s+")"};put(S0,dy0);
-    document.body.style.willChange="transform,filter,opacity";
-    document.body.animate([{transform:"scale(1)",filter:"blur(0)",opacity:1},{transform:"scale(.94)",filter:"blur(16px)",opacity:0}],{duration:700,easing:"cubic-bezier(.7,0,.2,1)",fill:"both"});
+    try{fetch(a.href,{mode:"no-cors",credentials:"omit"})}catch(x){}
     ov.animate([{opacity:0},{opacity:1}],{duration:600,easing:"ease-in-out",fill:"both"});
     w.animate([{opacity:0},{opacity:1}],{duration:450,delay:250,fill:"both"});
     setTimeout(function(){VM.tw(1000,function(e){VM.set(sv,e);put(S0+(1-S0)*e,dy0*(1-e))})},900);
     card.animate([{opacity:0,transform:"translateY(14px) scale(.96)"},{opacity:1,transform:"none"}],{duration:700,delay:1050,easing:EO,fill:"both"});
     setTimeout(function(){slot.animate([{opacity:0},{opacity:1}],{duration:220,fill:"both"});w.animate([{opacity:1},{opacity:0}],{duration:220,fill:"both"})},1950);
-    setTimeout(function(){location.href=url},2350);
+    setTimeout(function(){location.href=url},2220);
   });
 })();
 </script>
