@@ -320,6 +320,25 @@ html[data-theme=light] footer{background:rgba(243,244,249,.55)}
 .fl{display:flex;flex-wrap:wrap;gap:10px}
 .fl a:hover{color:var(--tx)}
 .core{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 15px 0 11px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--mut);font-size:12.5px;letter-spacing:.09em;cursor:pointer;text-decoration:none;transition:border-color .2s,color .2s}.core:hover{border-color:color-mix(in srgb,var(--tx) 55%,transparent);color:var(--tx)}.core svg{width:17px;height:17px;color:currentColor}.core b{font-weight:700}
+
+/* кнопка VOOB CORE → ввод 4-значного кода */
+.core{overflow:hidden;transition:width .35s cubic-bezier(.2,.8,.2,1),border-color .2s,color .2s,box-shadow .3s}
+.core .cin{display:none;width:100%;height:100%;border:0;outline:0;background:transparent;color:var(--tx);text-align:center;font:700 16px/1 Inter,system-ui,sans-serif;letter-spacing:.7em;padding:0 0 0 .7em;caret-color:var(--a)}
+.core.ask{padding:0 8px;cursor:text;border-color:color-mix(in srgb,var(--a) 70%,transparent);box-shadow:0 0 0 4px color-mix(in srgb,var(--a) 18%,transparent)}
+.core.ask>svg,.core.ask>b{display:none}.core.ask .cin{display:block}
+.core.bad{animation:cshake .38s;border-color:#ef4444;box-shadow:0 0 0 4px rgba(239,68,68,.2)}
+.core.ok{border-color:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.22)}
+@keyframes cshake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+
+/* кнопка «наверх» */
+.totop{position:fixed;right:20px;bottom:22px;z-index:250;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 70%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);color:var(--tx);display:grid;place-items:center;cursor:pointer;padding:0;opacity:0;visibility:hidden;transform:translateY(14px) scale(.85);transition:opacity .3s,transform .35s cubic-bezier(.2,.9,.25,1.2),visibility .3s,background .25s,color .25s,border-color .25s;box-shadow:0 10px 30px -12px rgba(0,0,0,.35)}
+.totop.on{opacity:1;visibility:visible;transform:none}
+.totop svg{grid-area:1/1}.totop .ar{width:18px;height:18px;transition:transform .25s}
+.totop .rg{width:46px;height:46px;transform:rotate(-90deg);pointer-events:none}.totop .rg circle{fill:none;stroke-width:2.2}.totop .rg .t{stroke:transparent}.totop .rg .p{stroke:var(--a);stroke-linecap:round;stroke-dasharray:131.9;stroke-dashoffset:131.9}
+.totop:hover{background:linear-gradient(135deg,var(--a),var(--b));border-color:transparent;color:#fff}.totop:hover .ar{transform:translateY(-2px)}.totop:active{transform:scale(.93)}
+.totop:focus-visible{outline:2px solid var(--a);outline-offset:3px}
+@media(max-width:560px){.totop{right:14px;bottom:16px;width:42px;height:42px}.totop .rg{width:42px;height:42px}}
+@media(prefers-reduced-motion:reduce){.totop{transition:opacity .2s,visibility .2s}}
 .lg{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
 .lg span{display:inline-flex;align-items:center;gap:9px;cursor:default}
 .lg a{display:inline-flex;align-items:center;gap:9px;transition:color .2s}.lg a:hover{background:linear-gradient(135deg,#22d3ee,#8b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -1939,6 +1958,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   function clean(){if(ov){ov.remove();ov=null}document.body.getAnimations().forEach(function(x){x.cancel()});busy=false}
   window.addEventListener("pageshow",function(e){if(e.persisted)clean()});
   a.addEventListener("click",function(e){
+    if(!a.classList.contains("unlocked"))return;
     if(e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
     e.preventDefault();if(busy)return;busy=true;
     var url=a.href+(a.href.indexOf("?")<0?"?f=s":"&f=s");
@@ -1965,5 +1985,19 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   });
 })();
 </script>
+<script>(function(){var a=document.querySelector('a.core');if(!a)return;var CODE='7116',URL=a.href,w0=0,inp=document.createElement('input');
+inp.className='cin';inp.type='password';inp.inputMode='numeric';inp.pattern='[0-9]*';inp.maxLength=4;inp.autocomplete='off';inp.setAttribute('aria-label','Код доступа');a.appendChild(inp);
+function open(){w0=a.offsetWidth;a.style.width=w0+'px';a.classList.add('ask');requestAnimationFrame(function(){a.style.width='128px';inp.focus()})}
+function close(){a.classList.remove('ask','bad','ok');a.style.width=w0+'px';inp.value='';setTimeout(function(){a.style.width=''},360)}
+a.addEventListener('click',function(e){if(a.classList.contains('unlocked'))return;e.preventDefault();if(a.classList.contains('ask')){inp.focus();return}open()});
+inp.addEventListener('input',function(){inp.value=inp.value.replace(/\D/g,'').slice(0,4);a.classList.remove('bad');if(inp.value.length<4)return;
+ if(inp.value===CODE){a.classList.add('ok');a.classList.add('unlocked');setTimeout(function(){close();a.click()},380)}
+ else{a.classList.add('bad');setTimeout(function(){inp.value='';a.classList.remove('bad')},420)}});
+addEventListener('pageshow',function(e){if(e.persisted){a.classList.remove('unlocked');close()}});
+inp.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+inp.addEventListener('blur',function(){setTimeout(function(){if(a.classList.contains('ask')&&!a.classList.contains('ok'))close()},150)});
+})()</script>
+<button class="totop" type="button" aria-label="Наверх" title="Наверх"><svg class="rg" viewBox="0 0 46 46" aria-hidden="true"><circle class="t" cx="23" cy="23" r="21"/><circle class="p" cx="23" cy="23" r="21"/></svg><svg class="ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<script>(function(){var b=document.querySelector(".totop"),p=b.querySelector(".p"),L=131.9,t=0;function u(){t=0;var y=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-innerHeight;b.classList.toggle("on",y>500);p.style.strokeDashoffset=(L*(1-(h>0?Math.min(1,y/h):0))).toFixed(1)}addEventListener("scroll",function(){if(!t)t=requestAnimationFrame(u)},{passive:true});addEventListener("resize",u);u();b.addEventListener("click",function(){var r=matchMedia("(prefers-reduced-motion:reduce)").matches;scrollTo({top:0,behavior:r?"auto":"smooth"});b.blur()})})()</script>
 </body>
 </html>
