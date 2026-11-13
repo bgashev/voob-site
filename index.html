@@ -559,7 +559,8 @@ html[data-theme=light] footer{background:rgba(243,244,249,.55)}
 .lm button{display:block;width:100%;text-align:left;padding:10px 14px;border:0;border-radius:12px;background:none;color:var(--tx);font:inherit;font-weight:650;font-size:14px;cursor:pointer}
 .lm .lh{position:absolute;left:6px;right:6px;top:0;height:0;border-radius:12px;background:var(--hov);opacity:0;pointer-events:none;transition:transform .4s cubic-bezier(.3,1.2,.4,1),height .3s ease,opacity .25s ease;will-change:transform}
 .lm button{position:relative;z-index:1}
-.lm button.on{color:var(--b);background:rgba(255,255,255,.05)}
+.lm button.on{color:var(--b);background:rgba(255,255,255,.05);transition:background .25s}
+.lm:has(button:hover) button.on:not(:hover){background:transparent}
 @media(max-width:720px){.lb{height:36px;padding:0 10px;gap:5px}.lb svg{display:none}}
 @media(max-width:440px){.logo .lt{display:none}}
 .thb svg{position:absolute;transition:transform .5s cubic-bezier(.3,1.4,.5,1),opacity .35s}
