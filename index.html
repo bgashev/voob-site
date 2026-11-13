@@ -89,9 +89,9 @@ header.sc{border-color:var(--line)}
 .logo svg.lt{width:96px;height:20px;transition:none}.logo:hover svg.lt{transform:none}
 .navr{display:flex;align-items:center;gap:10px}
 .ig{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);transition:transform .25s,background .25s,border-color .25s}
-.ig:hover{transform:translateY(-2px) rotate(-6deg);background:linear-gradient(135deg,#f9a03f,#e1306c 55%,#833ab4);border-color:transparent}
+.ig:hover{transform:translateY(-2px);border-color:transparent}
 .ig svg{width:19px;height:19px}
-.ig.tgb:hover{background:linear-gradient(135deg,#37aee2,#1e96c8);transform:translateY(-2px) rotate(6deg)}
+
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:48px;padding:0 26px;border-radius:999px;font-weight:700;font-size:15px;border:1px solid var(--line);background:var(--card);transition:transform .25s,box-shadow .25s,background .25s;white-space:nowrap;will-change:transform}
 .btn:hover{background:var(--hov)}
 .btn.pri{border:0;color:#04121a;background:linear-gradient(110deg,var(--a),#7dd3fc 25%,var(--b) 50%,#7dd3fc 75%,var(--a));background-size:200% 100%;box-shadow:0 10px 40px -10px color-mix(in srgb,var(--a) 70%,transparent);animation:shine 5s linear infinite}
@@ -295,11 +295,24 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 .igc .ig{width:36px;height:36px;background:linear-gradient(135deg,#f9a03f,#e1306c 55%,#833ab4);border:0}
 .igc .ig.tgc{background:linear-gradient(135deg,#37aee2,#1e96c8)}
 .igc .ig.ytc{background:linear-gradient(135deg,#ff3d3d,#e00020);box-shadow:0 8px 18px -8px rgba(224,0,32,.6),inset 0 1px 0 rgba(255,255,255,.28)}
-.igc .ig.ttc{background:linear-gradient(135deg,#25f4ee,#111 45%,#fe2c55)}.igc .ig.thc{background:linear-gradient(135deg,#3a3a42,#0c0c10)}
-.ig.ytb:hover{background:linear-gradient(135deg,#ff3d3d,#e00020);color:#fff;transform:translateY(-2px) rotate(-6deg)}
-.igc .ig{color:#fff;box-shadow:0 8px 18px -8px rgba(225,48,108,.6),inset 0 1px 0 rgba(255,255,255,.28)}.igc .ig.tgc{box-shadow:0 8px 18px -8px rgba(30,150,200,.7),inset 0 1px 0 rgba(255,255,255,.28)}.igc .ig svg{width:18px;height:18px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}.igc:hover .ig{transform:rotate(-6deg) scale(1.06)}
+
+
+.igc .ig{color:#fff;box-shadow:0 8px 18px -8px rgba(225,48,108,.6),inset 0 1px 0 rgba(255,255,255,.28)}.igc .ig.tgc{box-shadow:0 8px 18px -8px rgba(30,150,200,.7),inset 0 1px 0 rgba(255,255,255,.28)}.igc .ig svg{width:18px;height:18px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}.igc:hover .ig svg{transform:rotate(-8deg) scale(1.1)}
 .igc b{display:block;font-size:14px;line-height:1.2;text-align:left}
 .igc small{color:var(--mut);font-size:12px;line-height:1.2;display:block;text-align:left}
+
+/* соцсети: фирменные цвета, без поворота кружка (углы не вылезают) */
+.ig{position:relative;overflow:hidden;isolation:isolate;--igb:radial-gradient(circle at 30% 107%,#fdf497 0,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285aeb 90%)}
+.ig::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--igb);opacity:0;transition:opacity .25s;z-index:-1;pointer-events:none}
+.ig svg{transition:transform .3s cubic-bezier(.2,.8,.2,1),filter .25s}
+.ig:hover::before{opacity:1}.ig:hover svg{transform:rotate(-8deg) scale(1.12)}
+.ig.tgb{--igb:linear-gradient(135deg,#37aee2,#1e96c8)}.ig.ytb{--igb:#ff0000}
+.ig.ttk,.igc .ig.ttc{--igb:#010101}.ig.thr,.igc .ig.thc{--igb:#000}
+.ig:hover,.ig:hover svg{color:#fff!important}.ig.thb:hover::before,.ig.don:hover::before{opacity:0}
+.ig.ttk:hover svg,.igc .ig.ttc svg{filter:drop-shadow(-1px -1px 0 #25f4ee) drop-shadow(1px 1px 0 #fe2c55)}
+.igc .ig{background:linear-gradient(0deg,transparent,transparent);position:relative;overflow:hidden}
+.igc .ig::before{opacity:1}
+.igc .ig.tgc{--igb:linear-gradient(135deg,#37aee2,#1e96c8)}.igc .ig.ytc{--igb:#ff0000}
 footer{position:relative;border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);font-size:14px;background:rgba(3,4,8,.5);-webkit-backdrop-filter:blur(26px) saturate(.85);backdrop-filter:blur(26px) saturate(.85)}
 html[data-theme=light] footer{background:rgba(243,244,249,.55)}
 .cpr{margin-top:22px;font-size:12px;letter-spacing:.01em;opacity:.65}
@@ -1079,10 +1092,10 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
     <div class="fl">
       <a class="ig tgb" href="https://t.me/voobkz_bot" target="_blank" rel="noopener" aria-label="Telegram-бот @voobkz_bot" title="Бот @voobkz_bot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="4"/><path d="M12 8V4.5"/><circle cx="12" cy="3.6" r="1"/><circle cx="9" cy="13.5" r="1" fill="currentColor"/><circle cx="15" cy="13.5" r="1" fill="currentColor"/><path d="M2 13v2M22 13v2"/></svg></a>
       <a class="ig tgb" href="https://t.me/voobkz" target="_blank" rel="noopener" aria-label="Telegram-канал @voobkz" title="Канал @voobkz"><svg><use href="#tgram"/></svg></a>
-      <a class="ig" href="https://www.instagram.com/voob.kz/" target="_blank" rel="noopener" aria-label="Instagram @voob.kz" title="Instagram @voob.kz"><svg><use href="#insta"/></svg></a>
+      <a class="ig igr" href="https://www.instagram.com/voob.kz/" target="_blank" rel="noopener" aria-label="Instagram @voob.kz" title="Instagram @voob.kz"><svg><use href="#insta"/></svg></a>
       <a class="ig ytb" href="https://www.youtube.com/@voobkz" target="_blank" rel="noopener" aria-label="YouTube @voobkz" title="YouTube @voobkz"><svg><use href="#yt"/></svg></a>
-      <a class="ig" href="https://www.tiktok.com/@voobkz" target="_blank" rel="noopener" aria-label="TikTok @voobkz" title="TikTok @voobkz"><svg><use href="#tiktok"/></svg></a>
-      <a class="ig" href="https://www.threads.com/@voob.kz" target="_blank" rel="noopener" aria-label="Threads @voob.kz" title="Threads @voob.kz"><svg><use href="#threads"/></svg></a>
+      <a class="ig ttk" href="https://www.tiktok.com/@voobkz" target="_blank" rel="noopener" aria-label="TikTok @voobkz" title="TikTok @voobkz"><svg><use href="#tiktok"/></svg></a>
+      <a class="ig thr" href="https://www.threads.com/@voob.kz" target="_blank" rel="noopener" aria-label="Threads @voob.kz" title="Threads @voob.kz"><svg><use href="#threads"/></svg></a>
     </div>
     <a class="core" href="https://core.voob.kz" target="_blank" rel="noopener" aria-label="VOOB CORE" title="VOOB CORE"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.4 3.1 8.1 7.5 9.5 4.4-1.4 7.5-5.1 7.5-9.5V6L12 3Z"/><path d="m9 12 2.2 2.2L15.2 10"/></svg><b><svg viewBox="0 0 44.9 10" role="img" aria-label="VOOB" style="display:inline-block;height:.727em;width:3.264em;fill:currentColor;overflow:visible;vertical-align:baseline;margin-right:.42em"><path d='M0 0H3.7L5.7 3.92L7.7 0H11.4L6.3 10H5.1Z'/><path transform='translate(11.9 0)' fill-rule='evenodd' d='M5.2-.2a5.2 5.2 0 1 0 0 10.4a5.2 5.2 0 1 0 0-10.4ZM5.2 3.2a1.8 1.8 0 1 1 0 3.6a1.8 1.8 0 1 1 0-3.6Z'/><path transform='translate(23.5 0)' fill-rule='evenodd' d='M5.2-.2a5.2 5.2 0 1 0 0 10.4a5.2 5.2 0 1 0 0-10.4ZM5.2 3.2a1.8 1.8 0 1 1 0 3.6a1.8 1.8 0 1 1 0-3.6Z'/><path transform='translate(35.1 0)' fill-rule='evenodd' d='M0 0H5.8C8 0 9.2 1.2 9.2 2.7C9.2 3.8 8.6 4.5 7.8 4.8C9 5.1 9.8 6 9.8 7.3C9.8 9 8.4 10 6.2 10H0ZM3.2 2.5H5.2Q6 2.5 6 3.35Q6 4.2 5.2 4.2H3.2ZM3.2 5.9H5.8Q6.9 5.9 6.9 6.7Q6.9 7.5 5.8 7.5H3.2Z'/></svg>CORE</b></a>
   </div>
