@@ -322,10 +322,16 @@ html[data-theme=light] footer{background:rgba(243,244,249,.55)}
 .core{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 15px 0 11px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--mut);font-size:12.5px;letter-spacing:.09em;cursor:pointer;text-decoration:none;transition:border-color .2s,color .2s}.core:hover{border-color:color-mix(in srgb,var(--tx) 55%,transparent);color:var(--tx)}.core svg{width:17px;height:17px;color:currentColor}.core b{font-weight:700}
 
 /* кнопка VOOB CORE → ввод 4-значного кода */
-.core{overflow:hidden;transition:width .35s cubic-bezier(.2,.8,.2,1),border-color .2s,color .2s,box-shadow .3s}
+.core{position:relative;overflow:hidden;transition:width .35s cubic-bezier(.2,.8,.2,1),border-color .2s,color .2s,box-shadow .3s}
 .core .cin{display:none;width:100%;height:100%;border:0;outline:0;background:transparent;color:var(--tx);text-align:center;font:700 16px/1 Inter,system-ui,sans-serif;letter-spacing:.7em;padding:0 0 0 .7em;caret-color:var(--a)}
 .core.ask{padding:0 8px;cursor:text;border-color:color-mix(in srgb,var(--a) 70%,transparent);box-shadow:0 0 0 4px color-mix(in srgb,var(--a) 18%,transparent)}
 .core.ask>svg,.core.ask>b{display:none}.core.ask .cin{display:block}
+.core .cin{color:transparent;caret-color:transparent;position:absolute;inset:0;z-index:2;letter-spacing:0;padding:0}
+.core .dots{display:none;position:absolute;inset:0;align-items:center;justify-content:center;gap:9px;pointer-events:none;z-index:1}.core.ask .dots{display:flex}
+.core .dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--tx) 35%,transparent);transition:background .2s,border-color .2s,transform .22s cubic-bezier(.3,1.7,.5,1),box-shadow .2s}
+.core .dots i.f{background:var(--tx);border-color:var(--tx);transform:scale(1.15)}
+.core .dots i.c{border-color:var(--a);box-shadow:0 0 0 3px color-mix(in srgb,var(--a) 22%,transparent)}
+.core.bad .dots i{background:#ef4444;border-color:#ef4444}.core.ok .dots i{background:#22c55e;border-color:#22c55e;box-shadow:0 0 8px #22c55e}
 .core.bad{animation:cshake .38s;border-color:#ef4444;box-shadow:0 0 0 4px rgba(239,68,68,.2)}
 .core.ok{border-color:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.22)}
 @keyframes cshake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
@@ -1961,7 +1967,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
     if(!a.classList.contains("unlocked"))return;
     if(e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
     e.preventDefault();if(busy)return;busy=true;
-    var url=a.href+(a.href.indexOf("?")<0?"?f=s":"&f=s");
+    var url=a.href+(a.href.indexOf("?")<0?"?f=s":"&f=s")+"&k=18cd369913e980fe70788d9fc378bbaaa139aa5ba39bc11b1a4dd60b4ebc57ac";
     if(matchMedia("(prefers-reduced-motion:reduce)").matches||!document.body.animate){location.href=url;return}
     var st=document.createElement("style");
     st.textContent="@keyframes cxsp{to{transform:rotate(360deg)}}@keyframes cxgl{50%{opacity:.5}}@keyframes cxcr{50%{transform:scale(1.16)}}@keyframes cxlb{from{left:-38%}to{left:100%}}";
@@ -1986,13 +1992,13 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
 })();
 </script>
 <script>(function(){var a=document.querySelector('a.core');if(!a)return;var CODE='7116',URL=a.href,w0=0,inp=document.createElement('input');
-inp.className='cin';inp.type='password';inp.inputMode='numeric';inp.pattern='[0-9]*';inp.maxLength=4;inp.autocomplete='off';inp.setAttribute('aria-label','Код доступа');a.appendChild(inp);
-function open(){w0=a.offsetWidth;a.style.width=w0+'px';a.classList.add('ask');requestAnimationFrame(function(){a.style.width='128px';inp.focus()})}
-function close(){a.classList.remove('ask','bad','ok');a.style.width=w0+'px';inp.value='';setTimeout(function(){a.style.width=''},360)}
+inp.className='cin';inp.type='password';inp.inputMode='numeric';inp.pattern='[0-9]*';inp.maxLength=4;inp.autocomplete='off';inp.setAttribute('aria-label','Код доступа');a.appendChild(inp);var dots=document.createElement('span');dots.className='dots';dots.innerHTML='<i></i><i></i><i></i><i></i>';a.appendChild(dots);function sync(){var n=inp.value.length;[].forEach.call(dots.children,function(d,i){d.className=i<n?'f':(i===n?'c':'')})}
+function open(){w0=a.offsetWidth;a.style.width=w0+'px';a.classList.add('ask');requestAnimationFrame(function(){a.style.width='128px';inp.focus();sync()})}
+function close(){a.classList.remove('ask','bad','ok');a.style.width=w0+'px';inp.value='';sync();setTimeout(function(){a.style.width=''},360)}
 a.addEventListener('click',function(e){if(a.classList.contains('unlocked'))return;e.preventDefault();if(a.classList.contains('ask')){inp.focus();return}open()});
-inp.addEventListener('input',function(){inp.value=inp.value.replace(/\D/g,'').slice(0,4);a.classList.remove('bad');if(inp.value.length<4)return;
+inp.addEventListener('input',function(){inp.value=inp.value.replace(/\D/g,'').slice(0,4);a.classList.remove('bad');sync();if(inp.value.length<4)return;
  if(inp.value===CODE){a.classList.add('ok');a.classList.add('unlocked');setTimeout(function(){close();a.click()},380)}
- else{a.classList.add('bad');setTimeout(function(){inp.value='';a.classList.remove('bad')},420)}});
+ else{a.classList.add('bad');setTimeout(function(){inp.value='';a.classList.remove('bad');sync()},520)}});
 addEventListener('pageshow',function(e){if(e.persisted){a.classList.remove('unlocked');close()}});
 inp.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
 inp.addEventListener('blur',function(){setTimeout(function(){if(a.classList.contains('ask')&&!a.classList.contains('ok'))close()},150)});
