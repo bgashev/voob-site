@@ -2143,7 +2143,7 @@ function draw(){raf=0;var r=c.getBoundingClientRect();x.clearRect(0,0,r.width,r.
  var now=performance.now();
  if(!drag&&n){ if(!idle)idle=now; if(now-idle>1400){var rm=Math.max(4,Math.ceil(n*.06));pts.splice(0,rm)} }
  if(n>MAX)pts.splice(0,n-MAX);
- if(!drag&&pts.length<2)pts.length=0;
+ if(!drag&&pts.length<2)pts.length=0;if(!pts.length)x.clearRect(0,0,r.width,r.height);
  if(drag||pts.length)raf=requestAnimationFrame(draw)}
 function kick(){if(!raf)raf=requestAnimationFrame(draw)}
 pen.addEventListener('pointerdown',function(e){e.preventDefault();pen.setPointerCapture(e.pointerId);drag=true;idle=0;i.classList.add('used');pen.classList.remove('bk');pen.classList.add('dr');
