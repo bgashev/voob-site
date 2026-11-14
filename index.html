@@ -593,7 +593,10 @@ html[data-theme=light] .thb .moon{opacity:0;transform:rotate(70deg) scale(.4)}
 /* смена темы: «Горизонт» */
 :root.thz-go *{transition:none!important}
 :root.thz-go::view-transition-old(root),:root.thz-go::view-transition-new(root){animation:none;mix-blend-mode:normal}
-:root.thz-go::view-transition-new(root){animation:thzMask 1600ms cubic-bezier(.5,.05,.25,1) both;-webkit-mask-image:linear-gradient(to top,#000 0,#000 40%,transparent 46%);mask-image:linear-gradient(to top,#000 0,#000 40%,transparent 46%);-webkit-mask-size:100% 300%;mask-size:100% 300%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+:root.thz-go::view-transition-old(root){animation:thzOld 1600ms cubic-bezier(.5,.05,.25,1) both}
+:root.thz-go::view-transition-new(root){animation:thzMask 1600ms cubic-bezier(.5,.05,.25,1) both,thzIn 1600ms cubic-bezier(.5,.05,.25,1) both;-webkit-mask-image:linear-gradient(to top,#000 0,#000 40%,transparent 46%);mask-image:linear-gradient(to top,#000 0,#000 40%,transparent 46%);-webkit-mask-size:100% 300%;mask-size:100% 300%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+@keyframes thzOld{from{transform:scale(1);filter:blur(0)}to{transform:scale(1.08);filter:blur(14px)}}
+@keyframes thzIn{from{transform:scale(.94);filter:blur(10px)}80%,to{transform:scale(1);filter:blur(0)}}
 @keyframes thzMask{from{-webkit-mask-position:0 32.5%;mask-position:0 32.5%}to{-webkit-mask-position:0 95%;mask-position:0 95%}}
 #thz{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:99999;opacity:0;filter:blur(7px)}
 #thz.dusk{background:linear-gradient(to bottom,rgba(255,206,140,0) 0,rgba(255,196,120,.8) 3%,rgba(255,98,142,.72) 11%,rgba(98,82,255,.55) 19%,transparent 27%)}
