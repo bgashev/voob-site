@@ -1865,8 +1865,8 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
   var COL={'🏆':['#FFD54A','#FFB300','#FFF3B0','#fff'],'🔥':['#FF5A1F','#FF9F1C','#FFD166','#FF3D2E'],'⚡':['#FFE600','#FFF27A','#7DD3FC','#fff'],'🎯':['#FF4D6D','#fff','#FF8FA3','#4CC9F0']};
   var busy=0;
   function boom(x,y,em){
-    if(busy>1||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))return;
-    busy++;var cl=COL[em]||COL['🏆'],f=document.createDocumentFragment(),n=30,els=[],i;
+    if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    var cl=COL[em]||COL['🏆'],f=document.createDocumentFragment(),n=busy>70?14:30,els=[],i;busy+=n;
     for(i=0;i<n;i++){var e=document.createElement('i');e.className='cf';e.style.background=cl[i%cl.length];if(i%3===0){e.style.borderRadius='50%';e.style.width=e.style.height='8px'}f.appendChild(e);els.push(e)}
     document.body.appendChild(f);
     var done=0;
@@ -1882,10 +1882,12 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
         fr.push({transform:'translate('+(x+px).toFixed(1)+'px,'+(y+py).toFixed(1)+'px) rotate('+(rs*t).toFixed(0)+'deg) scaleY('+(Math.cos(t*7+ph)).toFixed(2)+')',
           opacity:st/N<.62?1:Math.max(0,1-(st/N-.62)/.38),offset:st/N})}
       var an=e.animate(fr,{duration:D,easing:'linear',fill:'forwards'});
-      an.onfinish=function(){e.remove();if(++done===n)busy--};
+      var fin=function(){if(e.__x)return;e.__x=1;e.remove();busy=Math.max(0,busy-1)};an.onfinish=fin;an.oncancel=fin;
     });
   }
-  document.addEventListener('click',function(e){
+  /* pointerdown, а не click: карточка наклоняется за курсором, и между нажатием и отпусканием медаль уезжает из-под пальца, из-за чего click терялся */
+  document.addEventListener('pointerdown',function(e){
+    if(e.pointerType==='mouse'&&e.button!==0)return;
     var m=e.target.closest&&e.target.closest('.medals i');if(!m)return;
     var r=m.getBoundingClientRect();boom(r.left+r.width/2,r.top+r.height/2,m.textContent.trim());
     try{m.animate([{scale:1,rotate:'0deg'},{scale:1.3,rotate:'-8deg',offset:.35},{scale:1,rotate:'0deg'}],{duration:500,easing:'cubic-bezier(.2,1.6,.4,1)'})}catch(x){}
