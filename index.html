@@ -189,6 +189,15 @@ h2{font-size:clamp(30px,4.4vw,50px);line-height:1.06;font-weight:900;letter-spac
 .card h3{font-size:19px;font-weight:800;margin-bottom:8px}
 .card p{color:var(--mut);font-size:15px}
 .card.wide{grid-column:span 2}
+/* карточки «Что внутри» — стиль «Журнал» */
+.fgrid>.card:nth-child(1){--h:265}.fgrid>.card:nth-child(2){--h:38}.fgrid>.card:nth-child(3){--h:190}.fgrid>.card:nth-child(4){--h:325}.fgrid>.card:nth-child(5){--h:150}.fgrid>.card:nth-child(6){--h:18}.fgrid>.card:nth-child(8){--h:212}
+.fgrid>.card:not(.games){background:linear-gradient(0deg,hsl(var(--h) 80% 55%/.14),transparent 45%),var(--card);border-radius:30px}
+.fgrid>.card:not(.games)>h3{position:relative;padding-top:16px;margin-top:6px;font-size:clamp(26px,2.5vw,32px)}
+.fgrid>.card:not(.games)>h3::before{content:"";position:absolute;left:0;right:0;top:0;border-top:1px dashed hsl(var(--h) 80% 70%/.4)}
+.fgrid>.card:not(.games)>h3::after{content:"";position:absolute;left:0;top:-4px;width:9px;height:9px;border-radius:50%;background:hsl(var(--h) 95% 65%);box-shadow:0 0 0 4px hsl(var(--h) 95% 65%/.2),0 0 16px hsl(var(--h) 95% 65%)}
+.fgrid>.card.row.c1>.ft>h3{padding-top:0;margin-top:0}.fgrid>.card.row.c1>.ft>h3::before,.fgrid>.card.row.c1>.ft>h3::after{display:none}
+.fgrid>.card:not(.games)>.fv{filter:saturate(1.15)}
+
 
 /* ---------- конструктор стиля ---------- */
 .lab{display:grid;grid-template-columns:.9fr 1.1fr;gap:16px}
